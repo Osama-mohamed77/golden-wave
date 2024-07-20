@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1070442560483",
+    "project_id": "golden-wave",
+    "storage_bucket": "golden-wave.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070442560483:android:52d5c59ceb1d4580b1bed6",
+        "android_client_info": {
+          "package_name": "com.goldenwave.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqI8nYLUp6gb7SdBd3IKE2wrvMAMuF1dM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
