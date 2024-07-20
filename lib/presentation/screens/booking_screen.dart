@@ -193,7 +193,6 @@ class BookingScreen extends StatelessWidget {
                           },
                         ).show();
                       } catch (e) {
-                        print('Error: $e');
                         AwesomeDialog(
                           context: context,
                           dialogType: DialogType.error,
@@ -240,25 +239,25 @@ class BookingScreen extends StatelessWidget {
       calendarFormat: bookingProvider.format,
       currentDay: bookingProvider.currentDay,
       rowHeight: 48,
-      calendarStyle: CalendarStyle(
+      calendarStyle: const CalendarStyle(
         todayDecoration: BoxDecoration(
           color: MyColors.myYellow,
           shape: BoxShape.circle,
         ),
-        todayTextStyle: const TextStyle(
+        todayTextStyle: TextStyle(
           color: Colors.black,
         ),
         selectedDecoration: BoxDecoration(
           color: MyColors.myYellow,
           shape: BoxShape.circle,
         ),
-        selectedTextStyle: const TextStyle(
+        selectedTextStyle: TextStyle(
           color: Colors.black,
         ),
-        weekendTextStyle: const TextStyle(
+        weekendTextStyle: TextStyle(
           color: Colors.black,
         ),
-        defaultTextStyle: const TextStyle(
+        defaultTextStyle: TextStyle(
           color: Colors.black,
         ),
       ),

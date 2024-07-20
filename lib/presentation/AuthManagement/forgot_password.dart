@@ -73,7 +73,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       } else {
         errorMessage =
             'Failed to send reset link. Please check your email address and try again.';
-        print('*******************${e}');
       }
       AwesomeDialog(
         context: context,
@@ -229,5 +228,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ),
       ),
     );
-  }
+              }
+
 }

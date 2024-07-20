@@ -2,8 +2,6 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:golden_wave/constants/my_colors.dart';
-import 'package:golden_wave/presentation/AuthManagement/sign_in.dart';
-import 'package:golden_wave/presentation/widgets/nav_bar.dart';
 import 'package:golden_wave/provider/auth_provider.dart';
 import 'package:golden_wave/provider/booking_provider.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -231,9 +229,7 @@ class _SignUpState extends State<SignUp> {
               ).show();
             }
           } catch (e) {
-            // Handle error
-            print('Error: $e');
-          }
+return;          }
         },
         child: Container(
           decoration: const BoxDecoration(

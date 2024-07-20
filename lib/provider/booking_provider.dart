@@ -82,7 +82,7 @@ class BookingProvider with ChangeNotifier {
         fullName = documentSnapshot['fullName'];
       }
     } catch (e) {
-      print('Error fetching full name: $e');
+      return;
     }
     notifyListeners();
   }
@@ -103,7 +103,7 @@ class BookingProvider with ChangeNotifier {
       _reservedTimes = reserved;
       notifyListeners();
     } catch (e) {
-      print('Error fetching reserved times: $e');
+      return;
     }
   }
 
