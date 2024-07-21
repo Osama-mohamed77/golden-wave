@@ -12,67 +12,59 @@ import 'package:golden_wave/presentation/widgets/nav_bar.dart';
 import 'package:golden_wave/provider/auth_provider.dart';
 import 'package:golden_wave/provider/booking_provider.dart';
 import 'package:golden_wave/provider/home_provider.dart';
+import 'package:golden_wave/provider/language_provider.dart';
 import 'package:golden_wave/provider/page_index_provider.dart';
 import 'package:golden_wave/utils/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_localizations/flutter_localizations.dart'; // Add this import
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const GoldenWave());
-}
-
-class GoldenWave extends StatefulWidget {
-  const GoldenWave({super.key});
-
-  @override
-  State<GoldenWave> createState() => _GoldenWaveState();
-}
-
-class _GoldenWaveState extends State<GoldenWave> {
-  @override
-  void initState() {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        print('===========================Signed out');
-      } else {
-        print('===========================Signed in');
-      }
-    });
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
+  runApp(
+    MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => PageIndexProvider()),
         ChangeNotifierProvider(create: (_) => AuthProviderOS()),
         ChangeNotifierProvider(create: (_) => HomeProvider()),
         ChangeNotifierProvider(create: (_) => BookingProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageProvider()),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        routes: {
-          home.Home.id: (context) => const home.Home(),
-          SignIn.id: (context) => const SignIn(),
-          SignUp.id: (context) => const SignUp(),
-          NavBar.id: (context) => const NavBar(),
-          ForgotPassword.id: (context) => const ForgotPassword(),
-          booking_screen.BookingScreen.id: (context) =>
-              const booking_screen.BookingScreen(),
-        },
-        home: const SplashScreen(),
-      ),
+      child: const GoldenWave(),
+    ),
+  );
+}
+
+class GoldenWave extends StatelessWidget {
+  const GoldenWave({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<LanguageProvider>(
+      builder: (context, languageProvider, child) {
+        return MaterialApp(
+          locale: Locale(languageProvider.language),
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          routes: {
+            home.Home.id: (context) => const home.Home(),
+            SignIn.id: (context) => const SignIn(),
+            SignUp.id: (context) => const SignUp(),
+            NavBar.id: (context) => const NavBar(),
+            ForgotPassword.id: (context) => const ForgotPassword(),
+            booking_screen.BookingScreen.id: (context) =>
+                const booking_screen.BookingScreen(),
+          },
+          home: const SplashScreen(),
+        );
+      },
     );
   }
 }

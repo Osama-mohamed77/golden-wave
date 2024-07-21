@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:golden_wave/constants/my_colors.dart';
+import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/presentation/AuthManagement/sign_in.dart';
 import 'package:golden_wave/provider/auth_provider.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -48,7 +49,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
       if (querySnapshot.docs.isEmpty) {
         // Email does not exist in Firestore
-        throw Exception('Email not found');
+        throw Exception(S.of(context).notFound);
       }
 
       // Send password reset email
@@ -59,8 +60,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         context: context,
         dialogType: DialogType.success,
         animType: AnimType.rightSlide,
-        title: 'Success',
-        desc: 'Password reset link sent! Check your email',
+        title: S.of(context).Success,
+        desc: S.of(context).sendLink,
         btnOkOnPress: () {
           Navigator.pushNamed(context, SignIn.id);
         },
@@ -68,17 +69,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     } catch (e) {
       String errorMessage;
       if (e.toString().contains('Email not found')) {
-        errorMessage =
-            'Email not found in our database. Please check your email address and try again.';
+        errorMessage = S.of(context).emailNotFoundDes;
       } else {
-        errorMessage =
-            'Failed to send reset link. Please check your email address and try again.';
+        errorMessage = S.of(context).failedSendLink;
       }
       AwesomeDialog(
         context: context,
         dialogType: DialogType.error,
         animType: AnimType.rightSlide,
-        title: 'Error',
+        title: S.of(context).Error,
         desc: errorMessage,
         btnOkOnPress: () {},
       ).show();
@@ -109,10 +108,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   }
 
   Widget titleText() {
-    return const Text(
-      'Forgot\npassword',
-      textAlign: TextAlign.left,
-      style: TextStyle(
+    return Text(
+      S.of(context).forgotScreenTitel,
+      style: const TextStyle(
         fontFamily: 'AbhayaLibre',
         fontSize: 40,
       ),
@@ -120,10 +118,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   }
 
   Widget hintText() {
-    return const Text(
-      textAlign: TextAlign.left,
-      'Please enter your email address below, and we will send a password reset link to your inbox.',
-      style: TextStyle(
+    return Text(
+      S.of(context).fogotScreenDes,
+      style: const TextStyle(
         fontFamily: 'AbhayaLibre',
         fontSize: 20,
         color: MyColors.myGrey,
@@ -136,16 +133,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       child: TextFormField(
         validator: (value) {
           if (value!.isEmpty) {
-            return 'Enter Your Email';
+            return S.of(context).emptyEmail;
           } else if (!forgotpassword.hasMatch(value)) {
-            return 'Enter a valid email';
+            return S.of(context).validEmail;
           }
           return null;
         },
         controller: emailController,
         decoration: InputDecoration(
-          hintText: 'Enter Your Email',
-          labelText: 'Email',
+          hintText: S.of(context).hintEmail,
+          labelText: S.of(context).labelEmail,
           filled: true,
           fillColor: Colors.white70,
           border: OutlineInputBorder(
@@ -181,10 +178,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ),
         height: 50,
         width: 234,
-        child: const Center(
+        child: Center(
           child: Text(
-            'Send',
-            style: TextStyle(
+            S.of(context).sendText,
+            style: const TextStyle(
               fontFamily: 'AbhayaLibre',
               fontWeight: FontWeight.bold,
               fontSize: 32,
@@ -228,6 +225,5 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ),
       ),
     );
-              }
-
+  }
 }

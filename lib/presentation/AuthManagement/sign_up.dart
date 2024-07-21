@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:golden_wave/constants/my_colors.dart';
+import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/provider/auth_provider.dart';
 import 'package:golden_wave/provider/booking_provider.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -37,8 +38,6 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  String dropdownValue = 'Male';
-
   RegExp regexPassword =
       RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
   RegExp regexEmail = RegExp(
@@ -48,7 +47,6 @@ class _SignUpState extends State<SignUp> {
   static RegExp numberRegExp = RegExp('[0-9]');
   GlobalKey<FormState> formKey = GlobalKey();
   TextEditingController fullName = TextEditingController();
-  TextEditingController userName = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController confairmPassword = TextEditingController();
@@ -73,8 +71,7 @@ class _SignUpState extends State<SignUp> {
 
   Widget titelText() {
     return Text(
-      'Create new\nAccount',
-      textAlign: TextAlign.left,
+      S.of(context).signUpTitel,
       style: TextStyle(
         fontFamily: 'AbhayaLibre',
         fontSize: getResponsiveFontSize(context, 40),
@@ -84,8 +81,7 @@ class _SignUpState extends State<SignUp> {
 
   Widget hintText() {
     return Text(
-      'Please type full information below and we can create your account',
-      textAlign: TextAlign.left,
+      S.of(context).signUpHint,
       style: TextStyle(
         fontFamily: 'AbhayaLibre',
         fontSize: getResponsiveFontSize(context, 20),
@@ -99,10 +95,10 @@ class _SignUpState extends State<SignUp> {
       controller: fullName,
       validator: (value) {
         if (value!.isEmpty) {
-          return 'Enter Your Name';
+          return S.of(context).emptyName;
         }
         if (!nameRegExp.hasMatch(value) || numberRegExp.hasMatch(value)) {
-          return 'Enter a Valid Name';
+          return S.of(context).validName;
         }
         return null;
       },
@@ -112,7 +108,7 @@ class _SignUpState extends State<SignUp> {
         ),
         filled: true,
         fillColor: MyColors.myWhite,
-        labelText: 'Full name',
+        labelText: S.of(context).labelName,
         labelStyle: TextStyle(
           fontFamily: 'AbhayaLibre',
           fontSize: getResponsiveFontSize(context, 17),
@@ -127,9 +123,9 @@ class _SignUpState extends State<SignUp> {
       controller: email,
       validator: (value) {
         if (value!.isEmpty) {
-          return 'Enter Your Email';
+          return S.of(context).emptyEmail;
         } else if (!regexEmail.hasMatch(value)) {
-          return 'Enter a valid Email';
+          return S.of(context).validEmail;
         }
         return null;
       },
@@ -137,7 +133,7 @@ class _SignUpState extends State<SignUp> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        labelText: 'Email',
+        labelText: S.of(context).labelEmail,
         labelStyle: TextStyle(
           fontFamily: 'AbhayaLibre',
           fontSize: getResponsiveFontSize(context, 17),
@@ -154,10 +150,10 @@ class _SignUpState extends State<SignUp> {
       controller: password,
       validator: (value) {
         if (value!.isEmpty) {
-          return 'Enter your Password';
+          return S.of(context).emptyPassword;
         } else {
           if (!regexPassword.hasMatch(value)) {
-            return 'Enter a valid password';
+            return S.of(context).validPassword;
           }
           return null;
         }
@@ -169,7 +165,7 @@ class _SignUpState extends State<SignUp> {
         ),
         filled: true,
         fillColor: MyColors.myWhite,
-        labelText: 'Password',
+        labelText: S.of(context).labelPassword,
         labelStyle: TextStyle(
           fontFamily: 'AbhayaLibre',
           fontSize: getResponsiveFontSize(context, 17),
@@ -184,9 +180,9 @@ class _SignUpState extends State<SignUp> {
       controller: confairmPassword,
       validator: (value) {
         if (value!.isEmpty) {
-          return 'Enter Your Confirm Password';
+          return S.of(context).emptyConfirm;
         } else if (value != password.text) {
-          return 'Not match';
+          return S.of(context).notMatchConfirm;
         }
         return null;
       },
@@ -197,7 +193,7 @@ class _SignUpState extends State<SignUp> {
         ),
         filled: true,
         fillColor: MyColors.myWhite,
-        labelText: 'Confirm password',
+        labelText: S.of(context).labelConfirm,
         labelStyle: TextStyle(
           fontFamily: 'AbhayaLibre',
           fontSize: getResponsiveFontSize(context, 17),
@@ -223,13 +219,14 @@ class _SignUpState extends State<SignUp> {
                 context: context,
                 dialogType: DialogType.success,
                 animType: AnimType.rightSlide,
-                title: 'Verify account!',
-                desc: 'Please verify your account to log in!',
+                title: S.of(context).verifyTitel,
+                desc: S.of(context).verifyDes,
                 btnOkOnPress: () {},
               ).show();
             }
           } catch (e) {
-return;          }
+            return;
+          }
         },
         child: Container(
           decoration: const BoxDecoration(
@@ -242,7 +239,7 @@ return;          }
             child: authProvider.isLoading
                 ? const CircularProgressIndicator()
                 : Text(
-                    'Sign up',
+                    S.of(context).signUpText,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'AbhayaLibre',

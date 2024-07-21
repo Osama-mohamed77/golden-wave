@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:golden_wave/constants/my_colors.dart';
+import 'package:golden_wave/generated/l10n.dart';
 
 class CreativeWriting extends StatelessWidget {
   const CreativeWriting({super.key});
@@ -17,7 +18,7 @@ class CreativeWriting extends StatelessWidget {
                   screenWidth * 0.08; // Adjust this factor as needed
 
               return Text(
-                'Creative writing',
+                S.of(context).writingTitel,
                 style: TextStyle(
                   fontSize: responsiveFontSize,
                   fontFamily: 'inter',
@@ -44,12 +45,11 @@ class CreativeWriting extends StatelessWidget {
             child: SizedBox(
               width: screenWidth, // Adjust the width as needed
               child: Text(
-                'We strive to provide distinguished and engaging content that effectively delivers the intended message to the target audience. Our creative writing services include poetry and prose composition, scriptwriting, story and novel writing, biography writing, and ad writing.',
+                S.of(context).writingHint,
                 style: TextStyle(
                     fontSize: responsiveFontSize,
                     fontFamily: 'inter',
                     color: MyColors.myWhite),
-                textAlign: TextAlign.left,
               ),
             ),
           );

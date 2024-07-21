@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:golden_wave/constants/my_colors.dart';
+import 'package:golden_wave/generated/l10n.dart';
 
 class MusicWorkshop extends StatelessWidget {
   const MusicWorkshop({super.key});
@@ -17,7 +18,7 @@ class MusicWorkshop extends StatelessWidget {
                   screenWidth * 0.08; // Adjust this factor as needed
 
               return Text(
-                'Music workshop',
+                S.of(context).MusicTitel,
                 style: TextStyle(
                   fontSize: responsiveFontSize,
                   fontFamily: 'inter',
@@ -44,12 +45,11 @@ class MusicWorkshop extends StatelessWidget {
             child: SizedBox(
               width: screenWidth, // Adjust the width as needed
               child: Text(
-                "We view music education as an exciting and inspiring journey. Our team of experienced professionals provides expertise in various areas, from learning instruments to music production and arrangement. We are committed to offering a unique learning experience tailored to your individual needs. Whether you’re a beginner or have prior experience, our services are designed to help you achieve your musical goals. Our aim is to guide you in reaching your artistic aspirations.",
+                S.of(context).MusicHint,
                 style: TextStyle(
                     fontSize: responsiveFontSize,
                     fontFamily: 'inter',
                     color: MyColors.myWhite),
-                textAlign: TextAlign.left,
               ),
             ),
           );

@@ -3,10 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:golden_wave/constants/my_colors.dart';
+import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/presentation/AuthManagement/forgot_password.dart';
 import 'package:golden_wave/presentation/AuthManagement/sign_up.dart';
 import 'package:golden_wave/presentation/widgets/nav_bar.dart';
 import 'package:golden_wave/provider/auth_provider.dart';
+import 'package:golden_wave/provider/language_provider.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -24,11 +27,45 @@ class _SignInState extends State<SignIn> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   RegExp regexEmail = RegExp(
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   RegExp regex =
       RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
   GlobalKey<FormState> formKey = GlobalKey();
   bool _formSubmitted = false;
+
+  Widget languageIcon(languageProvider) {
+    return Row(
+      children: [
+        Column(
+          children: [
+            IconButton(
+              onPressed: () {
+                if (languageProvider.language == 'en') {
+                  languageProvider.setLanguageAr();
+                } else {
+                  languageProvider.setLanguageEn();
+                }
+              },
+              icon: const Icon(
+                Iconsax.language_square,
+                color: MyColors.myYellow,
+                size: 35,
+              ),
+            ),
+            Text(
+              languageProvider.language,
+              style: const TextStyle(
+                fontSize: 30,
+                color: MyColors.myYellow,
+                fontFamily: 'abhayaLibre',
+                height: .3,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 
   Widget logo(double screenWidth) {
     return Row(
@@ -50,7 +87,7 @@ class _SignInState extends State<SignIn> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Golden wave',
+              S.of(context).LogoTitel,
               style: TextStyle(
                 fontSize: screenWidth * 0.075,
                 fontFamily: 'AbhayaLibre',
@@ -58,7 +95,7 @@ class _SignInState extends State<SignIn> {
               ),
             ),
             Text(
-              'Media Innovators',
+              S.of(context).LogoHint,
               style: TextStyle(
                 fontSize: screenWidth * 0.05,
                 fontFamily: 'AbhayaLibre',
@@ -74,7 +111,7 @@ class _SignInState extends State<SignIn> {
 
   Widget textForLogin(double screenWidth) {
     return Text(
-      'Please login to use the app',
+      S.of(context).loginHint,
       style: TextStyle(
         fontFamily: 'AbhayaLibre',
         color: MyColors.myGrey,
@@ -89,17 +126,17 @@ class _SignInState extends State<SignIn> {
         validator: (value) {
           if (_formSubmitted) {
             if (value!.isEmpty) {
-              return 'Enter Your Email';
+              return S.of(context).emptyEmail;
             } else if (!regexEmail.hasMatch(value)) {
-              return 'Enter a valid email';
+              return S.of(context).validEmail;
             }
           }
           return null;
         },
         controller: _emailController,
         decoration: InputDecoration(
-          hintText: 'Enter Your Email',
-          labelText: 'Email',
+          hintText: S.of(context).hintEmail,
+          labelText: S.of(context).labelEmail,
           filled: true,
           fillColor: Colors.white70,
           border: OutlineInputBorder(
@@ -127,10 +164,10 @@ class _SignInState extends State<SignIn> {
         validator: (value) {
           if (_formSubmitted) {
             if (value!.isEmpty) {
-              return 'please enter your Password';
+              return S.of(context).emptyPassword;
             } else {
               if (!regex.hasMatch(value)) {
-                return 'Enter valid password';
+                return S.of(context).validPassword;
               }
             }
           }
@@ -153,8 +190,8 @@ class _SignInState extends State<SignIn> {
               borderRadius: BorderRadius.circular(15),
               borderSide: const BorderSide(color: MyColors.myYellow),
               gapPadding: 5),
-          hintText: 'Enter Your password',
-          labelText: 'Password',
+          hintText: S.of(context).hintPassword,
+          labelText: S.of(context).labelPassword,
         ),
       ),
     );
@@ -168,9 +205,9 @@ class _SignInState extends State<SignIn> {
           Navigator.pushNamed(context, ForgotPassword.id);
         },
         child: Text(
-          'Forgot password?',
+          S.of(context).forgotText,
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.red,
             fontFamily: 'AbhayaLibre',
             fontSize: screenWidth * 0.04,
           ),
@@ -201,8 +238,8 @@ class _SignInState extends State<SignIn> {
                 context: context,
                 dialogType: DialogType.warning,
                 animType: AnimType.rightSlide,
-                title: 'Verify account!',
-                desc: 'Please verify your account to log in!',
+                title: S.of(context).verifyTitel,
+                desc: S.of(context).verifyDes,
                 btnOkOnPress: () {},
               ).show();
             }
@@ -213,8 +250,8 @@ class _SignInState extends State<SignIn> {
                 context: context,
                 dialogType: DialogType.error,
                 animType: AnimType.rightSlide,
-                title: 'Sign-in Error',
-                desc: 'Wrong email or password',
+                title: S.of(context).signInErrorTitel,
+                desc: S.of(context).signInErrorDes,
                 btnOkOnPress: () {},
               ).show();
             }
@@ -229,9 +266,9 @@ class _SignInState extends State<SignIn> {
         ),
       ),
       child: Text(
-        'Sign in',
+        S.of(context).signInButton,
         style: TextStyle(
-          fontSize: screenWidth * 0.07,
+          fontSize: screenWidth * 0.05,
           color: Colors.black,
           fontFamily: 'AbhayaLibre',
         ),
@@ -244,7 +281,7 @@ class _SignInState extends State<SignIn> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Don't have an account?",
+          S.of(context).askForSignUp,
           style: TextStyle(
             fontFamily: 'AbhayaLibre',
             fontSize: screenWidth * 0.04,
@@ -256,7 +293,7 @@ class _SignInState extends State<SignIn> {
             Navigator.pushNamed(context, SignUp.id);
           },
           child: Text(
-            'Sign up',
+            S.of(context).signUpText,
             style: TextStyle(
               fontFamily: 'AbhayaLibre',
               fontSize: screenWidth * 0.04,
@@ -272,40 +309,53 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final authProvider = Provider.of<AuthProviderOS>(context);
-    return Scaffold(
-      backgroundColor: MyColors.myWhite,
-      body: Form(
-        key: formKey,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: ListView(
-            children: [
-              Gap(screenWidth * 0.2),
-              logo(screenWidth),
-              Gap(screenWidth * 0.2),
-              textForLogin(screenWidth),
-              Gap(screenWidth * 0.04),
-              emailTextFormField(screenWidth),
-              Gap(screenWidth * 0.04),
-              passwordTextFormField(screenWidth),
-              Gap(screenWidth * 0.04),
-              forgotPassword(screenWidth),
-              Gap(screenWidth * 0.05),
-              if (authProvider.isLoading)
-                Center(
-                  child: LoadingAnimationWidget.threeArchedCircle(
-                    color: Colors.black,
-                    size: 30,
-                  ),
-                )
-              else
-                signInButton(screenWidth, context),
-              Gap(screenWidth * 0.05),
-              signUpButton(screenWidth),
-            ],
+    return Consumer<LanguageProvider>(
+        builder: (context, languageProvider, child) {
+      return Scaffold(
+        backgroundColor: MyColors.myWhite,
+        body: Stack(children: [
+          Form(
+            key: formKey,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: ListView(
+                children: [
+                  languageIcon(languageProvider),
+                  Gap(screenWidth * 0.1),
+                  logo(screenWidth),
+                  Gap(screenWidth * 0.2),
+                  textForLogin(screenWidth),
+                  Gap(screenWidth * 0.04),
+                  emailTextFormField(screenWidth),
+                  Gap(screenWidth * 0.04),
+                  passwordTextFormField(screenWidth),
+                  Gap(screenWidth * 0.04),
+                  forgotPassword(screenWidth),
+                  Gap(screenWidth * 0.05),
+                  if (authProvider.isLoading)
+                    Center(
+                      child: LoadingAnimationWidget.threeArchedCircle(
+                        color: Colors.black,
+                        size: 30,
+                      ),
+                    )
+                  else
+                    signInButton(screenWidth, context),
+                  Gap(screenWidth * 0.05),
+                  signUpButton(screenWidth),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+          if (languageProvider.isLoading)
+            Center(
+              child: LoadingAnimationWidget.hexagonDots(
+                color: Colors.red,
+                size: 50,
+              ),
+            ),
+        ]),
+      );
+    });
   }
 }

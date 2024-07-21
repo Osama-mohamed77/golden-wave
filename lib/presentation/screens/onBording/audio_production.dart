@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:golden_wave/constants/my_colors.dart';
+import 'package:golden_wave/generated/l10n.dart';
 
 class AudioProduction extends StatelessWidget {
   const AudioProduction({super.key});
@@ -17,7 +18,7 @@ class AudioProduction extends StatelessWidget {
                   screenWidth * 0.08; // Adjust this factor as needed
 
               return Text(
-                'Audio production',
+                S.of(context).AudioTitel,
                 style: TextStyle(
                   fontSize: responsiveFontSize,
                   fontFamily: 'inter',
@@ -44,12 +45,11 @@ class AudioProduction extends StatelessWidget {
             child: SizedBox(
               width: screenWidth, // Adjust the width as needed
               child: Text(
-                'We ensure an exceptional audio experience with the best quality by using unique technologies and carefully selecting voice artists under specialized team supervision. Our services include audio engineering and effects, audiobook recording, poetry and prose recording, dubbing, podcast recording, music and artistic works recording, wedding zaffa recording, music distribution, voice-over, IVR, and composing cinematic music.',
+                S.of(context).AudioHint,
                 style: TextStyle(
                     fontSize: responsiveFontSize,
                     fontFamily: 'inter',
                     color: MyColors.myWhite),
-                textAlign: TextAlign.left,
               ),
             ),
           );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:golden_wave/constants/my_colors.dart';
+import 'package:golden_wave/generated/l10n.dart';
 
 class VideoProduction extends StatelessWidget {
   const VideoProduction({super.key});
@@ -16,7 +18,7 @@ class VideoProduction extends StatelessWidget {
                   screenWidth * 0.08; // Adjust this factor as needed
 
               return Text(
-                'Video production',
+                S.of(context).VideoTitel,
                 style: TextStyle(
                   fontSize: responsiveFontSize,
                   fontFamily: 'inter',
@@ -38,17 +40,15 @@ class VideoProduction extends StatelessWidget {
           double screenWidth = MediaQuery.of(context).size.width;
           double responsiveFontSize =
               screenWidth * 0.05; // Adjust this factor as needed
-
           return Center(
             child: SizedBox(
               width: screenWidth, // Adjust the width as needed
               child: Text(
-                'We provide comprehensive video production services, transforming clients visions into creative and engaging visual works with advanced talents and techniques. Our services include photography, video recording, editing, lighting, motion graphics, TV programs, commercials, visual effects, graphic design, and 2D/3D documentaries and films.',
+                S.of(context).VideoHint,
                 style: TextStyle(
                     fontSize: responsiveFontSize,
                     fontFamily: 'inter',
                     color: MyColors.myWhite),
-                textAlign: TextAlign.left,
               ),
             ),
           );

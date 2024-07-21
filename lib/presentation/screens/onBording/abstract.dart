@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:golden_wave/constants/my_colors.dart';
+import 'package:golden_wave/generated/l10n.dart';
 
 class Abstract extends StatelessWidget {
   const Abstract({super.key});
@@ -17,7 +18,7 @@ class Abstract extends StatelessWidget {
                   screenWidth * 0.08; // Adjust this factor as needed
 
               return Text(
-                'Abstract',
+                S.of(context).AbstractTitel,
                 style: TextStyle(
                   fontSize: responsiveFontSize,
                   fontFamily: 'inter',
@@ -44,13 +45,12 @@ class Abstract extends StatelessWidget {
             child: SizedBox(
               width: screenWidth, // Adjust the width as needed
               child: Text(
-                'We set out from the city of Dammam on 4/13/1440, determined to provide a high standard Of quality and excellence in the production of visual and audio media content through an elite team Specialized artists and technicians in the various artistic works industry, the most modern technological means to provide an innovative container and an implementer we implement the media projects with a way of custody. The needs of the targeted public, in which our projects are reflected',
+                S.of(context).AbstractHint,
                 style: TextStyle(
                   fontSize: responsiveFontSize,
                   fontFamily: 'inter',
                   color: MyColors.myWhite,
                 ),
-                textAlign: TextAlign.left,
               ),
             ),
           );
