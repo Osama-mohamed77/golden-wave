@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:golden_wave/generated/l10n.dart';
+import 'package:golden_wave/presentation/screens/onBording/overview.dart';
 import 'package:golden_wave/provider/language_provider.dart';
 import 'package:golden_wave/provider/page_index_provider.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/presentation/AuthManagement/sign_in.dart';
-import 'package:golden_wave/presentation/screens/onBording/Abstract.dart';
 import 'package:golden_wave/presentation/screens/onBording/audio_production.dart';
 import 'package:golden_wave/presentation/screens/onBording/creative_writing.dart';
 import 'package:golden_wave/presentation/screens/onBording/media_qualification.dart';
@@ -59,7 +59,7 @@ class ExplainScreens extends StatelessWidget {
                 Navigator.pushNamed(context, SignIn.id);
               },
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(
+                backgroundColor: WidgetStateProperty.all<Color>(
                   const Color(0xffD2B555),
                 ),
               ),
@@ -94,7 +94,7 @@ class ExplainScreens extends StatelessWidget {
                   context.read<PageIndexProvider>().setPageIndex(index);
                 },
                 children: const [
-                  Abstract(),
+                  Overview(),
                   AudioProduction(),
                   VideoProduction(),
                   CreativeWriting(),

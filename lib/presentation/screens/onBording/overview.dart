@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
 
-class Abstract extends StatelessWidget {
-  const Abstract({super.key});
+class Overview extends StatelessWidget {
+  const Overview({super.key});
 
   Widget title(BuildContext context) {
     return Padding(
@@ -18,7 +18,7 @@ class Abstract extends StatelessWidget {
                   screenWidth * 0.08; // Adjust this factor as needed
 
               return Text(
-                S.of(context).AbstractTitel,
+                S.of(context).Overview,
                 style: TextStyle(
                   fontSize: responsiveFontSize,
                   fontFamily: 'inter',
@@ -45,7 +45,7 @@ class Abstract extends StatelessWidget {
             child: SizedBox(
               width: screenWidth, // Adjust the width as needed
               child: Text(
-                S.of(context).AbstractHint,
+                S.of(context).overviewHint,
                 style: TextStyle(
                   fontSize: responsiveFontSize,
                   fontFamily: 'inter',

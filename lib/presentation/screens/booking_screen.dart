@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:golden_wave/constants/my_colors.dart';
+import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/provider/booking_provider.dart';
+import 'package:golden_wave/provider/language_provider.dart'; // Import LanguageProvider
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -15,6 +17,8 @@ class BookingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bookingProvider = Provider.of<BookingProvider>(context);
+    final languageProvider =
+        Provider.of<LanguageProvider>(context); // Get LanguageProvider
 
     // Ensure fullName and reserved times are fetched before using them
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -56,12 +60,13 @@ class BookingScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: 20),
                   _tableCalendar(bookingProvider),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 25),
                     child: Center(
                       child: Text(
-                        'Select Consultation Time',
-                        style: TextStyle(
+                        S.of(context).selectTime,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
@@ -79,9 +84,9 @@ class BookingScreen extends StatelessWidget {
                         vertical: 30,
                       ),
                       alignment: Alignment.center,
-                      child: const Text(
-                        'Weekend is not available, please select another date',
-                        style: TextStyle(
+                      child: Text(
+                        S.of(context).WeekendText,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.grey,
@@ -135,11 +140,13 @@ class BookingScreen extends StatelessWidget {
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              _formatTime(DateTime(
-                                  bookingProvider.currentDay.year,
-                                  bookingProvider.currentDay.month,
-                                  bookingProvider.currentDay.day,
-                                  index + 9)),
+                              _formatTime(
+                                  DateTime(
+                                      bookingProvider.currentDay.year,
+                                      bookingProvider.currentDay.month,
+                                      bookingProvider.currentDay.day,
+                                      index + 9),
+                                  languageProvider.language),
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: bookingProvider.currentIndex == index
@@ -166,16 +173,14 @@ class BookingScreen extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
                 child: Button(
                   width: double.infinity,
-                  title: 'Appointment confirmation',
+                  title: S.of(context).AppointmentButton,
                   onPressed: () async {
                     if (bookingProvider.currentIndex != null) {
-                      // Create DateTime based on the selected hour
                       DateTime selectedTime = DateTime(
                           bookingProvider.currentDay.year,
                           bookingProvider.currentDay.month,
                           bookingProvider.currentDay.day,
-                          bookingProvider.currentIndex! +
-                              9); // Add hours to 9 AM
+                          bookingProvider.currentIndex! + 9);
 
                       try {
                         await bookingProvider.bookAppointment(
@@ -186,8 +191,8 @@ class BookingScreen extends StatelessWidget {
                           context: context,
                           dialogType: DialogType.success,
                           animType: AnimType.rightSlide,
-                          title: 'Success',
-                          desc: 'Appointment booked successfully!',
+                          title: S.of(context).Success,
+                          desc: S.of(context).booked,
                           btnOkOnPress: () {
                             Navigator.pushNamed(context, NavBar.id);
                           },
@@ -197,9 +202,8 @@ class BookingScreen extends StatelessWidget {
                           context: context,
                           dialogType: DialogType.error,
                           animType: AnimType.rightSlide,
-                          title: 'Error',
-                          desc:
-                              'An error occurred while booking the appointment.',
+                          title: S.of(context).Error,
+                          desc: S.of(context).errorWhenBooking,
                           btnOkOnPress: () {},
                         ).show();
                       }
@@ -208,14 +212,14 @@ class BookingScreen extends StatelessWidget {
                         context: context,
                         dialogType: DialogType.warning,
                         animType: AnimType.rightSlide,
-                        title: 'Warning',
-                        desc: 'Please specify a time!',
+                        title: S.of(context).Warning,
+                        desc: S.of(context).specifyATime,
                         btnOkOnPress: () {},
                       ).show();
                     }
                   },
                   height: 50,
-                  text: 'Appointment confirmation',
+                  text: S.of(context).AppointmentButton,
                 ),
               ),
             ),
@@ -225,16 +229,24 @@ class BookingScreen extends StatelessWidget {
     );
   }
 
-  String _formatTime(DateTime dateTime) {
-    return '${dateTime.hour % 12 == 0 ? 12 : dateTime.hour % 12}:00 ${dateTime.hour >= 12 ? 'PM' : 'AM'}';
+  String _formatTime(DateTime dateTime, String language) {
+    if (language == 'en') {
+      return '${dateTime.hour % 12 == 0 ? 12 : dateTime.hour % 12}:00 ${dateTime.hour >= 12 ? 'PM' : 'AM'}';
+    } else if (language == 'ar') {
+      return '${dateTime.hour % 12 == 0 ? 12 : dateTime.hour % 12}:00 ${dateTime.hour >= 12 ? 'م' : 'ص'}';
+    }
+    return '${dateTime.hour % 12 == 0 ? 12 : dateTime.hour % 12}:00 ${dateTime.hour >= 12 ? 'PM' : 'AM'}'; // Default to 'en' if language is unknown
   }
 
   Widget _tableCalendar(BookingProvider bookingProvider) {
+    final now = DateTime.now();
+
     return TableCalendar(
-      focusedDay: bookingProvider.focusDay,
-      firstDay: DateTime.now().subtract(
-          const Duration(days: 365)), // Set the first day to a year before now
-      lastDay: DateTime.now().add(const Duration(
+      focusedDay: bookingProvider.focusDay.isBefore(now)
+          ? now
+          : bookingProvider.focusDay,
+      firstDay: now,
+      lastDay: now.add(const Duration(
           days: 365 * 2)), // Set the last day to two years from now
       calendarFormat: bookingProvider.format,
       currentDay: bookingProvider.currentDay,
@@ -272,6 +284,16 @@ class BookingScreen extends StatelessWidget {
         bookingProvider.updateCurrentDay(selectedDay);
         bookingProvider
             .updateCurrentIndex(null); // Reset selected index when date changes
+      },
+      onPageChanged: (focusedDay) {
+        final now = DateTime.now();
+        if (focusedDay.isBefore(now)) {
+          // Allow navigating to previous months
+          bookingProvider.updateFocusDay(focusedDay);
+        } else {
+          // Allow navigating to future months
+          bookingProvider.updateFocusDay(focusedDay);
+        }
       },
       calendarBuilders: CalendarBuilders(
         defaultBuilder: (context, date, focusedDay) {

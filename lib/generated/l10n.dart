@@ -50,21 +50,21 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Abstract`
-  String get AbstractTitel {
+  /// `Overview`
+  String get Overview {
     return Intl.message(
-      'Abstract',
-      name: 'AbstractTitel',
+      'Overview',
+      name: 'Overview',
       desc: '',
       args: [],
     );
   }
 
-  /// `We set out from the city of Dammam on 4/13/1440, determined to provide a high standard Of quality and excellence in the production of visual and audio media content through an elite team Specialized artists and technicians in the various artistic works industry, the most modern technological means to provide an innovative container and an implementer we implement the media projects with a way of custody. The needs of the targeted public, in which our projects are reflected`
-  String get AbstractHint {
+  /// `We set out from the city of Dammam on 4/13/1440, determined to provide a high standard of quality and excellence in the production of visual and audio media content through an elite team of specialized artists and technicians in various artistic fields, using the most modern technological means to provide innovative solutions and implement media projects with integrity. Our projects reflect the needs of the targeted audience.`
+  String get overviewHint {
     return Intl.message(
-      'We set out from the city of Dammam on 4/13/1440, determined to provide a high standard Of quality and excellence in the production of visual and audio media content through an elite team Specialized artists and technicians in the various artistic works industry, the most modern technological means to provide an innovative container and an implementer we implement the media projects with a way of custody. The needs of the targeted public, in which our projects are reflected',
-      name: 'AbstractHint',
+      'We set out from the city of Dammam on 4/13/1440, determined to provide a high standard of quality and excellence in the production of visual and audio media content through an elite team of specialized artists and technicians in various artistic fields, using the most modern technological means to provide innovative solutions and implement media projects with integrity. Our projects reflect the needs of the targeted audience.',
+      name: 'overviewHint',
       desc: '',
       args: [],
     );
@@ -100,10 +100,10 @@ class S {
     );
   }
 
-  /// `We provide comprehensive video production services, transforming clients visions into creative and engaging visual works with advanced talents and techniques. Our services include photography, video recording, editing, lighting, motion graphics, TV programs, commercials, visual effects, graphic design, and 2D/3D documentaries and films.`
+  /// `We provide comprehensive video production services, transforming clients’ visions into creative and engaging visual works with advanced talents and techniques. Our services include photography, video recording, editing, lighting, motion graphics, TV programs, commercials, visual effects, graphic design, and 2D/3D documentaries and films.`
   String get VideoHint {
     return Intl.message(
-      'We provide comprehensive video production services, transforming clients visions into creative and engaging visual works with advanced talents and techniques. Our services include photography, video recording, editing, lighting, motion graphics, TV programs, commercials, visual effects, graphic design, and 2D/3D documentaries and films.',
+      'We provide comprehensive video production services, transforming clients’ visions into creative and engaging visual works with advanced talents and techniques. Our services include photography, video recording, editing, lighting, motion graphics, TV programs, commercials, visual effects, graphic design, and 2D/3D documentaries and films.',
       name: 'VideoHint',
       desc: '',
       args: [],
@@ -160,10 +160,10 @@ class S {
     );
   }
 
-  /// `We understand that media plays a fundamental role in shaping society’s perspectives and influencing it. Therefore, we provide specialized training programs for individuals who wish to develop their media skills through our team of experts and academics in all media fields. We offer training courses covering various aspects of media production: Preparation, Presentation, Hosting, Editing, Audio Engineering, and Directing.`
+  /// `We understand that media plays a fundamental role in shaping society’s perspectives and influencing it. Therefore, we provide specialized training programs for individuals who wish to develop their media skills through our team of experts and academics in all media fields. We offer training courses covering various aspects of media production: preparation, presentation, hosting, editing, audio engineering, and directing.`
   String get MediaHint {
     return Intl.message(
-      'We understand that media plays a fundamental role in shaping society’s perspectives and influencing it. Therefore, we provide specialized training programs for individuals who wish to develop their media skills through our team of experts and academics in all media fields. We offer training courses covering various aspects of media production: Preparation, Presentation, Hosting, Editing, Audio Engineering, and Directing.',
+      'We understand that media plays a fundamental role in shaping society’s perspectives and influencing it. Therefore, we provide specialized training programs for individuals who wish to develop their media skills through our team of experts and academics in all media fields. We offer training courses covering various aspects of media production: preparation, presentation, hosting, editing, audio engineering, and directing.',
       name: 'MediaHint',
       desc: '',
       args: [],
@@ -220,10 +220,10 @@ class S {
     );
   }
 
-  /// `Enter Your email`
+  /// `Enter your email`
   String get emptyEmail {
     return Intl.message(
-      'Enter Your email',
+      'Enter your email',
       name: 'emptyEmail',
       desc: '',
       args: [],
@@ -240,10 +240,10 @@ class S {
     );
   }
 
-  /// `Enter Your email`
+  /// `Enter your email`
   String get hintEmail {
     return Intl.message(
-      'Enter Your email',
+      'Enter your email',
       name: 'hintEmail',
       desc: '',
       args: [],
@@ -260,30 +260,30 @@ class S {
     );
   }
 
-  /// `please enter your Password`
+  /// `Please enter your password`
   String get emptyPassword {
     return Intl.message(
-      'please enter your Password',
+      'Please enter your password',
       name: 'emptyPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `Enter valid password`
+  /// `Enter a valid password`
   String get validPassword {
     return Intl.message(
-      'Enter valid password',
+      'Enter a valid password',
       name: 'validPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `Enter Your password`
+  /// `Enter your password`
   String get hintPassword {
     return Intl.message(
-      'Enter Your password',
+      'Enter your password',
       name: 'hintPassword',
       desc: '',
       args: [],
@@ -520,10 +520,10 @@ class S {
     );
   }
 
-  /// `Enter Your Confirm Password`
+  /// `Enter your confirm password`
   String get emptyConfirm {
     return Intl.message(
-      'Enter Your Confirm Password',
+      'Enter your confirm password',
       name: 'emptyConfirm',
       desc: '',
       args: [],
@@ -545,6 +545,506 @@ class S {
     return Intl.message(
       'Confirm password',
       name: 'labelConfirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hi`
+  String get hi {
+    return Intl.message(
+      'Hi',
+      name: 'hi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Golden wave is ready to receive you at any time!`
+  String get appBarHint {
+    return Intl.message(
+      'Golden wave is ready to receive you at any time!',
+      name: 'appBarHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sections`
+  String get Sections {
+    return Intl.message(
+      'Sections',
+      name: 'Sections',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Audio production`
+  String get homeAudio {
+    return Intl.message(
+      'Audio production',
+      name: 'homeAudio',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video production`
+  String get homeVideo {
+    return Intl.message(
+      'Video production',
+      name: 'homeVideo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Creative writing`
+  String get homewriting {
+    return Intl.message(
+      'Creative writing',
+      name: 'homewriting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Music workshop`
+  String get homeMusic {
+    return Intl.message(
+      'Music workshop',
+      name: 'homeMusic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Media qualification`
+  String get homeMedia {
+    return Intl.message(
+      'Media qualification',
+      name: 'homeMedia',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Audio effects`
+  String get AudioEffects {
+    return Intl.message(
+      'Audio effects',
+      name: 'AudioEffects',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Audiobook recording`
+  String get AudiobookRecording {
+    return Intl.message(
+      'Audiobook recording',
+      name: 'AudiobookRecording',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dubbing`
+  String get Dubbing {
+    return Intl.message(
+      'Dubbing',
+      name: 'Dubbing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Music production`
+  String get MusicProduction {
+    return Intl.message(
+      'Music production',
+      name: 'MusicProduction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Soundtrack composing`
+  String get SoundtrackComposing {
+    return Intl.message(
+      'Soundtrack composing',
+      name: 'SoundtrackComposing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Music mixing`
+  String get MusicMixing {
+    return Intl.message(
+      'Music mixing',
+      name: 'MusicMixing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Music orchestration`
+  String get MusicOrchestration {
+    return Intl.message(
+      'Music orchestration',
+      name: 'MusicOrchestration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Voiceover`
+  String get voiceover {
+    return Intl.message(
+      'Voiceover',
+      name: 'voiceover',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `IVR`
+  String get IVR {
+    return Intl.message(
+      'IVR',
+      name: 'IVR',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Radio podcast`
+  String get RadioPodcast {
+    return Intl.message(
+      'Radio podcast',
+      name: 'RadioPodcast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photography`
+  String get Photography {
+    return Intl.message(
+      'Photography',
+      name: 'Photography',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video recording`
+  String get VideoRecording {
+    return Intl.message(
+      'Video recording',
+      name: 'VideoRecording',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Montage`
+  String get Montage {
+    return Intl.message(
+      'Montage',
+      name: 'Montage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lighting`
+  String get Lighting {
+    return Intl.message(
+      'Lighting',
+      name: 'Lighting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Motion graphics`
+  String get MotionGraphics {
+    return Intl.message(
+      'Motion graphics',
+      name: 'MotionGraphics',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TV programs`
+  String get TVPrograms {
+    return Intl.message(
+      'TV programs',
+      name: 'TVPrograms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2D/3D graphic designs`
+  String get GraphicDesigns {
+    return Intl.message(
+      '2D/3D graphic designs',
+      name: 'GraphicDesigns',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TV advertisements`
+  String get TVAdvertisements {
+    return Intl.message(
+      'TV advertisements',
+      name: 'TVAdvertisements',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Documents and films`
+  String get DocumentsAndFilms {
+    return Intl.message(
+      'Documents and films',
+      name: 'DocumentsAndFilms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Writing the scenario`
+  String get ScenarioWriting {
+    return Intl.message(
+      'Writing the scenario',
+      name: 'ScenarioWriting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Story crafting`
+  String get StoryCrafting {
+    return Intl.message(
+      'Story crafting',
+      name: 'StoryCrafting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Poetry and thoughts`
+  String get PoetryAndThoughts {
+    return Intl.message(
+      'Poetry and thoughts',
+      name: 'PoetryAndThoughts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Writing autobiographies`
+  String get Autobiographies {
+    return Intl.message(
+      'Writing autobiographies',
+      name: 'Autobiographies',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Services within`
+  String get ServicesWithin {
+    return Intl.message(
+      'Services within',
+      name: 'ServicesWithin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Writing advertisements`
+  String get AdWriting {
+    return Intl.message(
+      'Writing advertisements',
+      name: 'AdWriting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preparation`
+  String get Preparation {
+    return Intl.message(
+      'Preparation',
+      name: 'Preparation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Public speaking`
+  String get PublicSpeaking {
+    return Intl.message(
+      'Public speaking',
+      name: 'PublicSpeaking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Presentation`
+  String get Presentation {
+    return Intl.message(
+      'Presentation',
+      name: 'Presentation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Editing`
+  String get Editing {
+    return Intl.message(
+      'Editing',
+      name: 'Editing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sound engineering`
+  String get SoundEngineering {
+    return Intl.message(
+      'Sound engineering',
+      name: 'SoundEngineering',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Directing`
+  String get Directing {
+    return Intl.message(
+      'Directing',
+      name: 'Directing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select the section to view our services`
+  String get titelForSelectSection {
+    return Intl.message(
+      'Please select the section to view our services',
+      name: 'titelForSelectSection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a section above`
+  String get hintForSelectSection {
+    return Intl.message(
+      'Please select a section above',
+      name: 'hintForSelectSection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Appointment confirmation`
+  String get AppointmentButton {
+    return Intl.message(
+      'Appointment confirmation',
+      name: 'AppointmentButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error occurred while booking the appointment.`
+  String get errorWhenBooking {
+    return Intl.message(
+      'An error occurred while booking the appointment.',
+      name: 'errorWhenBooking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Appointment booked successfully!`
+  String get booked {
+    return Intl.message(
+      'Appointment booked successfully!',
+      name: 'booked',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Warning`
+  String get Warning {
+    return Intl.message(
+      'Warning',
+      name: 'Warning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please specify a time!`
+  String get specifyATime {
+    return Intl.message(
+      'Please specify a time!',
+      name: 'specifyATime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weekend is not available, please select another date`
+  String get WeekendText {
+    return Intl.message(
+      'Weekend is not available, please select another date',
+      name: 'WeekendText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Booking Time`
+  String get selectTime {
+    return Intl.message(
+      'Select Booking Time',
+      name: 'selectTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number`
+  String get labelPhone {
+    return Intl.message(
+      'Phone number',
+      name: 'labelPhone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter Your Phone Number`
+  String get emptyPhone {
+    return Intl.message(
+      'Enter Your Phone Number',
+      name: 'emptyPhone',
       desc: '',
       args: [],
     );

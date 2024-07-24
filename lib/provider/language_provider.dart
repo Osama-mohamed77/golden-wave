@@ -1,24 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageProvider with ChangeNotifier {
-  String language = 'en'; // Default language
-  bool isLoading = false;
+  static const _languageKey = 'language_code';
+  String _language = 'en'; // Default language
+  bool _isLoading = false;
+  
 
-  void setLanguageAr() async {
-    isLoading = true;
-    notifyListeners();
-    await Future.delayed(Duration(milliseconds: 2000)); // Simulate a delay
-    language = 'ar';
-    isLoading = false;
+  String get language => _language;
+  bool get isLoading => _isLoading;
+
+  LanguageProvider() {
+    _loadLanguage(); // Load language when provider is initialized
+  }
+
+  Future<void> _loadLanguage() async {
+    final prefs = await SharedPreferences.getInstance();
+    _language =
+        prefs.getString(_languageKey) ?? 'en'; // Default to 'en' if no value
     notifyListeners();
   }
 
-  void setLanguageEn() async {
-    isLoading = true;
+  Future<void> setLanguageAr() async {
+    _isLoading = true;
     notifyListeners();
-    await Future.delayed(Duration(milliseconds: 2000)); // Simulate a delay
-    language = 'en';
-    isLoading = false;
+    await Future.delayed(const Duration(milliseconds: 2000)); 
+    _language = 'ar';
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_languageKey, _language);
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> setLanguageEn() async {
+    _isLoading = true;
+    notifyListeners();
+    await Future.delayed(const Duration(milliseconds: 2000)); 
+    _language = 'en';
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_languageKey, _language);
+    _isLoading = false;
     notifyListeners();
   }
 }

@@ -1,10 +1,13 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/provider/auth_provider.dart';
 import 'package:golden_wave/provider/booking_provider.dart';
+import 'package:golden_wave/provider/language_provider.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -50,23 +53,26 @@ class _SignUpState extends State<SignUp> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController confairmPassword = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
+  PhoneNumber? _phoneNumber;
   Widget backIcon() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        IconButton(
-          padding: EdgeInsets.only(right: getResponsiveWidth(context, 30)),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            size: getResponsiveFontSize(context, 35),
-          ),
+    final languageProvider = Provider.of<LanguageProvider>(context);
+    return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      IconButton(
+        padding: EdgeInsets.only(
+          right: languageProvider.language == 'en' ? 30.0 : 0.0,
+          left: languageProvider.language == 'ar' ? 30.0 : 0.0,
         ),
-      ],
-    );
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: Icon(
+          Icons.arrow_back,
+          size: getResponsiveFontSize(context, 35),
+        ),
+      ),
+    ]);
   }
 
   Widget titelText() {
@@ -114,6 +120,52 @@ class _SignUpState extends State<SignUp> {
           fontSize: getResponsiveFontSize(context, 17),
           color: MyColors.myGrey,
         ),
+      ),
+    );
+  }
+
+  Widget phoneNumber() {
+    final PhoneNumber initialPhoneNumber = PhoneNumber(
+      isoCode: 'SA',
+      dialCode: '+966',
+    );
+
+    return SizedBox(
+      height: 65,
+      child: InternationalPhoneNumberInput(
+        onInputChanged: (PhoneNumber number) {
+          _phoneNumber =
+              number; 
+        },
+        onInputValidated: (bool value) {
+          // Handle input validation if needed
+        },
+        selectorConfig: const SelectorConfig(
+          selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+          showFlags: true,
+        ),
+        ignoreBlank: false,
+        autoValidateMode: AutovalidateMode.onUserInteraction,
+        textFieldController: phoneController,
+        formatInput: false,
+        keyboardType:
+            const TextInputType.numberWithOptions(signed: true, decimal: true),
+        inputDecoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          filled: true,
+          fillColor: Colors.white70,
+          labelText: S.of(context).labelPhone,
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return S.of(context).emptyPhone;
+          }
+          return null;
+        },
+        initialValue: initialPhoneNumber, 
+        countrySelectorScrollControlled: true,
       ),
     );
   }
@@ -210,9 +262,9 @@ class _SignUpState extends State<SignUp> {
         onTap: () async {
           try {
             if (formKey.currentState!.validate()) {
-              await authProvider.signUp(
-                  email.text, password.text, fullName.text);
-              await bookingProvider.fetchFullName(); // Corrected method call
+              await authProvider.signUp(email.text, phoneController.text as int,
+                  password.text, fullName.text);
+              await bookingProvider.fetchFullName();
               Provider.of<AuthProviderOS>(context, listen: false)
                   .verifyAccount();
               AwesomeDialog(
@@ -243,7 +295,7 @@ class _SignUpState extends State<SignUp> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'AbhayaLibre',
-                      fontSize: getResponsiveFontSize(context, 32),
+                      fontSize: getResponsiveFontSize(context, 30),
                       color: Colors.black,
                     ),
                   ),
@@ -257,6 +309,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProviderOS>(context);
     final bookingProvider = Provider.of<BookingProvider>(context);
+
     return Scaffold(
       backgroundColor: const Color(0xffF0F0F0),
       body: Form(
@@ -266,7 +319,9 @@ class _SignUpState extends State<SignUp> {
             horizontal: getResponsiveWidth(context, 20),
           ),
           child: ListView(
+            padding: EdgeInsets.zero,
             children: [
+              Gap(getResponsiveHeight(context, 30)),
               backIcon(),
               Gap(getResponsiveHeight(context, 40)),
               titelText(),
@@ -274,6 +329,8 @@ class _SignUpState extends State<SignUp> {
               hintText(),
               Gap(getResponsiveHeight(context, 30)),
               fullNameField(),
+              Gap(getResponsiveHeight(context, 10)),
+              phoneNumber(),
               Gap(getResponsiveHeight(context, 10)),
               emailField(),
               Gap(getResponsiveHeight(context, 10)),
@@ -290,7 +347,7 @@ class _SignUpState extends State<SignUp> {
                 )
               else
                 signUpButton(authProvider, bookingProvider),
-              Gap(getResponsiveHeight(context, 10)),
+              SizedBox(height: getResponsiveHeight(context, 10)),
             ],
           ),
         ),

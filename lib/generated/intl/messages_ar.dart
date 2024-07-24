@@ -22,28 +22,81 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "AbstractHint": MessageLookupByLibrary.simpleMessage(
-            "انطلقنا من مدينة الدمام في 13/4/1440، عازمين على تقديم مستوى عالٍ من الجودة والتميز في إنتاج المحتوى الإعلامي المرئي والمسموع من خلال فريق نخبة من الفنانين والفنيين المتخصصين في مختلف صناعات الأعمال الفنية، باستخدام أحدث الوسائل التكنولوجية لتوفير وعاء مبتكر وتنفيذ المشاريع الإعلامية بطريقة أمانة. وتلبية احتياجات الجمهور المستهدف، التي تعكسها مشاريعنا."),
-        "AbstractTitel": MessageLookupByLibrary.simpleMessage("ملخص"),
+        "AdWriting": MessageLookupByLibrary.simpleMessage("كتابة الإعلانات"),
+        "AppointmentButton":
+            MessageLookupByLibrary.simpleMessage("تأكيد الحجز"),
+        "AudioEffects": MessageLookupByLibrary.simpleMessage("تأثيرات الصوت"),
         "AudioHint": MessageLookupByLibrary.simpleMessage(
             "نضمن تجربة صوتية استثنائية بأفضل جودة باستخدام تقنيات فريدة واختيار الفنانين الصوتيين بعناية تحت إشراف فريق متخصص. تشمل خدماتنا هندسة الصوت والمؤثرات، تسجيل الكتب الصوتية، تسجيل الشعر والنثر، الدبلجة، تسجيل البودكاست، تسجيل الموسيقى والأعمال الفنية، تسجيل الزفة الموسيقية، توزيع الموسيقى، التعليق الصوتي، نظام الاستجابة الصوتية التفاعلي (IVR)، وتلحين الموسيقى السينمائية."),
-        "AudioTitel": MessageLookupByLibrary.simpleMessage("إنتاج الصوت"),
+        "AudioTitel": MessageLookupByLibrary.simpleMessage("اﻹﻧﺘـﺎج اﻟﺼـﻮﺗـﻲ"),
+        "AudiobookRecording":
+            MessageLookupByLibrary.simpleMessage("تسجيل الكتب الصوتية"),
+        "Autobiographies":
+            MessageLookupByLibrary.simpleMessage("كتابة السيرة الذاتية"),
+        "Directing": MessageLookupByLibrary.simpleMessage("الإخراج"),
+        "DocumentsAndFilms":
+            MessageLookupByLibrary.simpleMessage("الوثائق والأفلام"),
+        "Dubbing": MessageLookupByLibrary.simpleMessage("الدبلجة"),
+        "Editing": MessageLookupByLibrary.simpleMessage("التحرير"),
         "Error": MessageLookupByLibrary.simpleMessage("خطأ"),
         "GetStarted": MessageLookupByLibrary.simpleMessage("ابدأ الآن"),
+        "GraphicDesigns": MessageLookupByLibrary.simpleMessage(
+            "تصاميم الجرافيك ثلاثية وثنائية الأبعاد"),
+        "IVR": MessageLookupByLibrary.simpleMessage("الرد الآلي"),
+        "Lighting": MessageLookupByLibrary.simpleMessage("الإضاءة"),
         "LogoHint": MessageLookupByLibrary.simpleMessage("مبتكرو الإعلام"),
         "LogoTitel": MessageLookupByLibrary.simpleMessage("الموجة الذهبية"),
         "MediaHint": MessageLookupByLibrary.simpleMessage(
             "ندرك أن الإعلام يلعب دورًا أساسيًا في تشكيل وجهات نظر المجتمع وتأثيره. لذلك، نقدم برامج تدريبية متخصصة للأفراد الذين يرغبون في تطوير مهاراتهم الإعلامية من خلال فريقنا من الخبراء والأكاديميين في جميع المجالات الإعلامية. نقدم دورات تدريبية تغطي جوانب مختلفة من إنتاج الإعلام: التحضير، التقديم، الاستضافة، التحرير، هندسة الصوت، والإخراج."),
         "MediaTitel": MessageLookupByLibrary.simpleMessage("التأهيل الإعلامي"),
+        "Montage": MessageLookupByLibrary.simpleMessage("المونتاج"),
+        "MotionGraphics":
+            MessageLookupByLibrary.simpleMessage("الرسوم المتحركة"),
         "MusicHint": MessageLookupByLibrary.simpleMessage(
             "نعتبر تعليم الموسيقى رحلة ممتعة وملهمة. يقدم فريقنا من المحترفين ذوي الخبرة خبرات في مختلف المجالات، بدءًا من تعلم الآلات الموسيقية إلى إنتاج الموسيقى وترتيبها. نحن ملتزمون بتقديم تجربة تعليمية فريدة مصممة خصيصًا لتلبية احتياجاتك الفردية. سواء كنت مبتدئًا أو لديك خبرة سابقة، فإن خدماتنا مصممة لمساعدتك على تحقيق أهدافك الموسيقية. هدفنا هو إرشادك في الوصول إلى تطلعاتك الفنية."),
+        "MusicMixing": MessageLookupByLibrary.simpleMessage("مزج الموسيقى"),
+        "MusicOrchestration":
+            MessageLookupByLibrary.simpleMessage("تنسيق الموسيقى"),
+        "MusicProduction":
+            MessageLookupByLibrary.simpleMessage("إنتاج الموسيقى"),
         "MusicTitel": MessageLookupByLibrary.simpleMessage("ورشة الموسيقى"),
+        "Overview": MessageLookupByLibrary.simpleMessage("نظرة عامة"),
+        "Photography":
+            MessageLookupByLibrary.simpleMessage("التصوير الفوتوغرافي"),
+        "PoetryAndThoughts":
+            MessageLookupByLibrary.simpleMessage("الشعر والأفكار"),
+        "Preparation": MessageLookupByLibrary.simpleMessage("التحضير"),
+        "Presentation": MessageLookupByLibrary.simpleMessage("التقديم"),
+        "PublicSpeaking":
+            MessageLookupByLibrary.simpleMessage("التحدث أمام الجمهور"),
+        "RadioPodcast":
+            MessageLookupByLibrary.simpleMessage("البودكاست الإذاعي"),
+        "ScenarioWriting":
+            MessageLookupByLibrary.simpleMessage("كتابة السيناريو"),
+        "Sections": MessageLookupByLibrary.simpleMessage("الأقسام"),
+        "ServicesWithin": MessageLookupByLibrary.simpleMessage("الخدمات داخل"),
         "Skip": MessageLookupByLibrary.simpleMessage("تخطي"),
+        "SoundEngineering":
+            MessageLookupByLibrary.simpleMessage("الهندسة الصوتية"),
+        "SoundtrackComposing":
+            MessageLookupByLibrary.simpleMessage("تأليف الموسيقى التصويرية"),
+        "StoryCrafting": MessageLookupByLibrary.simpleMessage("صياغة القصص"),
         "Success": MessageLookupByLibrary.simpleMessage("نجاح"),
+        "TVAdvertisements":
+            MessageLookupByLibrary.simpleMessage("الإعلانات التلفزيونية"),
+        "TVPrograms":
+            MessageLookupByLibrary.simpleMessage("البرامج التلفزيونية"),
         "VideoHint": MessageLookupByLibrary.simpleMessage(
             "نقدم خدمات إنتاج الفيديو الشاملة، نحول رؤى العملاء إلى أعمال مرئية إبداعية وجذابة مع مواهب وتقنيات متقدمة. تشمل خدماتنا التصوير، تسجيل الفيديو، التحرير، الإضاءة، الرسوم المتحركة، البرامج التلفزيونية، الإعلانات التجارية، المؤثرات البصرية، التصميم الجرافيكي، والأفلام الوثائقية ثنائية الأبعاد وثلاثية الأبعاد."),
-        "VideoTitel": MessageLookupByLibrary.simpleMessage("إنتاج الفيديو"),
+        "VideoRecording": MessageLookupByLibrary.simpleMessage("تسجيل الفيديو"),
+        "VideoTitel": MessageLookupByLibrary.simpleMessage("اﻹﻧﺘﺎج اﻟﻤﺮﺋﻲ"),
+        "Warning": MessageLookupByLibrary.simpleMessage("تحذير"),
+        "WeekendText": MessageLookupByLibrary.simpleMessage(
+            "عطلة غير متاح، يرجى اختيار تاريخ آخر"),
+        "appBarHint": MessageLookupByLibrary.simpleMessage(
+            "الموجة الذهبية جاهزة لاستقبالكم في أي وقت!"),
         "askForSignUp": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
+        "booked": MessageLookupByLibrary.simpleMessage("تم حجز الموعد بنجاح"),
         "emailNotFoundDes": MessageLookupByLibrary.simpleMessage(
             "البريد الإلكتروني غير موجود. يرجى التحقق من عنوان بريدك الإلكتروني والمحاولة مرة أخرى."),
         "emptyConfirm":
@@ -53,6 +106,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "emptyName": MessageLookupByLibrary.simpleMessage("أدخل اسمك"),
         "emptyPassword":
             MessageLookupByLibrary.simpleMessage("الرجاء إدخال كلمة المرور"),
+        "emptyPhone": MessageLookupByLibrary.simpleMessage("أدخل رقم هاتفك"),
+        "errorWhenBooking":
+            MessageLookupByLibrary.simpleMessage("حدث خطأ أثناء حجز الموعد"),
         "failedSendLink": MessageLookupByLibrary.simpleMessage(
             "فشل إرسال رابط إعادة التعيين. يرجى التحقق من عنوان بريدك الإلكتروني والمحاولة مرة أخرى."),
         "fogotScreenDes": MessageLookupByLibrary.simpleMessage(
@@ -60,20 +116,33 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotScreenTitel":
             MessageLookupByLibrary.simpleMessage("نسيت\nكلمة المرور"),
         "forgotText": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
+        "hi": MessageLookupByLibrary.simpleMessage("مرحبا"),
         "hintEmail":
             MessageLookupByLibrary.simpleMessage("أدخل بريدك الإلكتروني"),
+        "hintForSelectSection":
+            MessageLookupByLibrary.simpleMessage("يرجي اختيار قسم من الاعلي"),
         "hintPassword":
             MessageLookupByLibrary.simpleMessage("أدخل كلمة المرور"),
+        "homeAudio": MessageLookupByLibrary.simpleMessage("اﻹﻧﺘـﺎج اﻟﺼـﻮﺗـﻲ"),
+        "homeMedia": MessageLookupByLibrary.simpleMessage("التأهيل الإعلامي"),
+        "homeMusic": MessageLookupByLibrary.simpleMessage("ورشة الموسيقى"),
+        "homeVideo": MessageLookupByLibrary.simpleMessage("اﻹﻧﺘﺎج اﻟﻤﺮﺋﻲ"),
+        "homewriting":
+            MessageLookupByLibrary.simpleMessage("الكتابة الإبداعية"),
         "labelConfirm":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "labelEmail": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
         "labelName": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
         "labelPassword": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "labelPhone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
         "loginHint": MessageLookupByLibrary.simpleMessage(
             "يرجى تسجيل الدخول لاستخدام التطبيق"),
         "notFound":
             MessageLookupByLibrary.simpleMessage("البريد الإلكتروني غير موجود"),
         "notMatchConfirm": MessageLookupByLibrary.simpleMessage("غير متطابقة"),
+        "overviewHint": MessageLookupByLibrary.simpleMessage(
+            "انطلقنا من مدينة الدمام في 13/4/1440، عازمين على تقديم مستوى عالٍ من الجودة والتميز في إنتاج المحتوى الإعلامي المرئي والمسموع من خلال فريق نخبة من الفنانين والفنيين المتخصصين في مختلف صناعات الأعمال الفنية، باستخدام أحدث الوسائل التكنولوجية لتوفير وعاء مبتكر وتنفيذ المشاريع الإعلامية بطريقة أمانة. وتلبية احتياجات الجمهور المستهدف، التي تعكسها مشاريعنا."),
+        "selectTime": MessageLookupByLibrary.simpleMessage("اختر وقت الحجز"),
         "sendLink": MessageLookupByLibrary.simpleMessage(
             "تم إرسال رابط إعادة تعيين كلمة المرور! تحقق من بريدك الإلكتروني"),
         "sendText": MessageLookupByLibrary.simpleMessage("إرسال"),
@@ -85,7 +154,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUpHint": MessageLookupByLibrary.simpleMessage(
             "يرجى كتابة المعلومات الكاملة أدناه حتى نتمكن من إنشاء حسابك"),
         "signUpText": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
-        "signUpTitel": MessageLookupByLibrary.simpleMessage("إنشاء حساب جديد"),
+        "signUpTitel":
+            MessageLookupByLibrary.simpleMessage("إنشاء\n حساب جديد"),
+        "specifyATime": MessageLookupByLibrary.simpleMessage("يرجى تحديد وقت"),
+        "titelForSelectSection": MessageLookupByLibrary.simpleMessage(
+            "يرجى اختيار القسم لعرض خدماتنا"),
         "validEmail": MessageLookupByLibrary.simpleMessage(
             "أدخل بريدًا إلكترونيًا صالحًا"),
         "validName": MessageLookupByLibrary.simpleMessage("أدخل اسمًا صالحًا"),
@@ -94,8 +167,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verifyDes": MessageLookupByLibrary.simpleMessage(
             "يرجى التحقق من حسابك لتسجيل الدخول!"),
         "verifyTitel": MessageLookupByLibrary.simpleMessage("تحقق من الحساب!"),
-        "writingHint": MessageLookupByLibrary.simpleMessage(
-            "نسعى لتقديم محتوى مميز وجذاب ينقل الرسالة المقصودة بفاعلية إلى الجمهور المستهدف. تشمل خدمات الكتابة الإبداعية لدينا تأليف الشعر والنثر، كتابة السيناريو، كتابة القصص والروايات، كتابة السيرة الذاتية، وكتابة الإعلانات."),
+        "voiceover": MessageLookupByLibrary.simpleMessage("التعليق الصوتي"),
         "writingTitel":
             MessageLookupByLibrary.simpleMessage("الكتابة الإبداعية")
       };

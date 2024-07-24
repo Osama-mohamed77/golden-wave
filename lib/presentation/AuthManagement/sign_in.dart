@@ -260,15 +260,12 @@ class _SignInState extends State<SignIn> {
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: MyColors.myYellow, // Golden color
-        padding: EdgeInsets.symmetric(
-          horizontal: screenWidth * 0.3,
-          vertical: screenWidth * 0.02,
-        ),
       ),
       child: Text(
+        textAlign: TextAlign.center,
         S.of(context).signInButton,
         style: TextStyle(
-          fontSize: screenWidth * 0.05,
+          fontSize: screenWidth * 0.06,
           color: Colors.black,
           fontFamily: 'AbhayaLibre',
         ),

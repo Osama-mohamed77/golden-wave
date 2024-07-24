@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:golden_wave/firebase_options.dart';
 import 'package:golden_wave/generated/l10n.dart';
@@ -22,6 +21,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // Initialize LanguageProvider
+  final languageProvider = LanguageProvider();
+
   runApp(
     MultiProvider(
       providers: [
@@ -29,7 +32,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AuthProviderOS()),
         ChangeNotifierProvider(create: (_) => HomeProvider()),
         ChangeNotifierProvider(create: (_) => BookingProvider()),
-        ChangeNotifierProvider(create: (_) => LanguageProvider()),
+        ChangeNotifierProvider.value(value: languageProvider),
       ],
       child: const GoldenWave(),
     ),

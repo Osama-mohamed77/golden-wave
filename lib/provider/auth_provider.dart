@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:golden_wave/utils/my_user.dart';
 
 class AuthProviderOS with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -13,13 +14,21 @@ class AuthProviderOS with ChangeNotifier {
   bool isUsernameTaken = false;
   bool isCheckingUsername = false;
   String errorMessage = '';
+
   Future<void> signIn(String email, String password) async {
     errorMessage = '';
     isLoading = true;
     notifyListeners();
 
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+
+      User? user = userCredential.user;
+
+      if (user != null) {
+        await MyUser().getUserProfile();
+      }
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'user-not-found':
@@ -48,7 +57,8 @@ class AuthProviderOS with ChangeNotifier {
     }
   }
 
-  Future<void> signUp(String email, String password, String fullName) async {
+  Future<void> signUp(
+      String email, int phoneNumber, String password, String fullName) async {
     errorMessage = '';
     isLoading = true;
     notifyListeners();
@@ -62,6 +72,7 @@ class AuthProviderOS with ChangeNotifier {
           'uid': userCredential.user!.uid,
           'fullName': fullName,
           'email': email,
+          'phoneNumber': phoneNumber
         },
       );
     } on FirebaseAuthException catch (e) {
@@ -79,7 +90,7 @@ class AuthProviderOS with ChangeNotifier {
   }
 
   Future<void> verifyAccount() async {
-    _auth.currentUser!.sendEmailVerification();
+    await _auth.currentUser!.sendEmailVerification();
   }
 
   Future<void> signOut() async {

@@ -33,6 +33,10 @@ dependencies:
   flutter_localization: ^0.2.0
   flutter_localizations:
     sdk: flutter
+  dio: ^5.5.0+1
+  flutter_inappwebview: ^6.0.0
+  flutter_stripe: ^10.2.0
+  intl_phone_number_input: ^0.7.4
 
 dev_dependencies:
   flutter_test:

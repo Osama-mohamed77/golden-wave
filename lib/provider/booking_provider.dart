@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:golden_wave/utils/user_const.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 
@@ -40,6 +41,12 @@ class BookingProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void updateSelectedDay(DateTime selectedDay) {
+    _currentDay = selectedDay;
+    _isWeekend = selectedDay.weekday == 6 || selectedDay.weekday == 7;
+    notifyListeners();
+  }
+
   void updateCurrentIndex(int? index) {
     _currentIndex = index;
     notifyListeners();
@@ -61,7 +68,8 @@ class BookingProvider with ChangeNotifier {
         'Booking time': formattedTime,
         'date': currentDateTime, // Store current time in UTC
         'appointmentDate': dateTime.toUtc(), // Store appointment date in UTC
-        'fullName': fullName,
+        'fullName': UserConst.fullName,
+        'phoneNumber': UserConst.phoneNumber,
         'service name': title
       });
       _reservedTimes.add(dateTime.toUtc()); // Ensure reserved times are in UTC
@@ -89,20 +97,23 @@ class BookingProvider with ChangeNotifier {
 
   Future<void> fetchReservedTimes() async {
     try {
-      QuerySnapshot querySnapshot =
-          await _firestore.collection('appointments').get();
+      QuerySnapshot querySnapshot = await _firestore
+          .collection('appointments')
+          .where('service name',
+              isEqualTo: title) // Use isEqualTo for equality check
+          .get();
+
       Set<DateTime> reserved = {};
 
       for (var doc in querySnapshot.docs) {
         Timestamp timestamp = doc['appointmentDate'];
-        reserved.add(timestamp
-            .toDate()
-            .toLocal()); // Convert to local time for comparison
+        reserved.add(timestamp.toDate().toLocal());
       }
 
       _reservedTimes = reserved;
       notifyListeners();
     } catch (e) {
+      print('Error fetching reserved times: $e'); // Optionally log the error
       return;
     }
   }
@@ -113,11 +124,10 @@ class BookingProvider with ChangeNotifier {
   }
 
   bool isAllSlotsBooked(DateTime date) {
-    // Assuming 10 time slots per day (from 9 AM to 6 PM)
     for (int i = 0; i < 10; i++) {
       final time = DateTime(date.year, date.month, date.day, i + 9);
       if (!_reservedTimes.contains(time.toUtc())) {
-        return false; // If any slot is not booked, return false
+        return false;
       }
     }
     return true; // All slots are booked
