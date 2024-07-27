@@ -113,7 +113,6 @@ class BookingProvider with ChangeNotifier {
       _reservedTimes = reserved;
       notifyListeners();
     } catch (e) {
-      print('Error fetching reserved times: $e'); // Optionally log the error
       return;
     }
   }

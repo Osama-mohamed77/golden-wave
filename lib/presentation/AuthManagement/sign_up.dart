@@ -1,6 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
@@ -55,7 +54,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController confairmPassword = TextEditingController();
   TextEditingController phoneController = TextEditingController();
 
-  PhoneNumber? _phoneNumber;
+  PhoneNumber? phoneNumber;
   Widget backIcon() {
     final languageProvider = Provider.of<LanguageProvider>(context);
     return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -124,7 +123,7 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Widget phoneNumber() {
+  Widget phoneNumberForm() {
     final PhoneNumber initialPhoneNumber = PhoneNumber(
       isoCode: 'SA',
       dialCode: '+966',
@@ -134,8 +133,7 @@ class _SignUpState extends State<SignUp> {
       height: 65,
       child: InternationalPhoneNumberInput(
         onInputChanged: (PhoneNumber number) {
-          _phoneNumber =
-              number; 
+          phoneNumber = number;
         },
         onInputValidated: (bool value) {
           // Handle input validation if needed
@@ -164,7 +162,7 @@ class _SignUpState extends State<SignUp> {
           }
           return null;
         },
-        initialValue: initialPhoneNumber, 
+        initialValue: initialPhoneNumber,
         countrySelectorScrollControlled: true,
       ),
     );
@@ -330,7 +328,7 @@ class _SignUpState extends State<SignUp> {
               Gap(getResponsiveHeight(context, 30)),
               fullNameField(),
               Gap(getResponsiveHeight(context, 10)),
-              phoneNumber(),
+              phoneNumberForm(),
               Gap(getResponsiveHeight(context, 10)),
               emailField(),
               Gap(getResponsiveHeight(context, 10)),

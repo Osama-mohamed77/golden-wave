@@ -2,7 +2,7 @@
     package="com.goldenwave.app">
     <application
         android:label="golden_wave"
-        android:name="${applicationName}"
+        android:name="${golden_wave}"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
