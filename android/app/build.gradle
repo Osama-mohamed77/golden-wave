@@ -5,6 +5,13 @@ plugins {
     id "com.google.firebase.crashlytics"
 }
 
+// Define the flutterRoot variable directly in this file
+def flutterRoot = System.getenv("FLUTTER_ROOT") ?: "C:/src/flutter"
+
+// Print flutterRoot for debugging
+println "flutterRoot: $flutterRoot"
+
+// Apply the flutter.gradle script using the flutterRoot property
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
@@ -23,7 +30,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-        manifestPlaceholders = [ applicationName: "com.goldenwave.app.MyApplication" ]
+        manifestPlaceholders = [ golden_wave: "com.goldenwave.app.MyApplication" ] // Provide the correct value here
     }
 
     buildTypes {
