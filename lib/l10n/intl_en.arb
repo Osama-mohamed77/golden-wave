@@ -157,6 +157,8 @@
     "ScenarioWriting": "Writing the scenario",
     "@ScenarioWriting": {},
     "StoryCrafting": "Story crafting",
+    "exists":"Email already exists",
+    "@exists": {},
     "@StoryCrafting": {},
     "PoetryAndThoughts": "Poetry and thoughts",
     "@PoetryAndThoughts": {},
@@ -182,7 +184,7 @@
     "@titelForSelectSection": {},
     "hintForSelectSection": "Please select a section above",
     "@hintForSelectSection": {},
-    "AppointmentButton": "Appointment confirmation",
+    "AppointmentButton": "Pay Now",
     "@AppointmentButton": {},
     "errorWhenBooking": "An error occurred while booking the appointment.",
     "@errorWhenBooking": {},
@@ -200,4 +202,5 @@
     "@labelPhone": {},
     "emptyPhone": "Enter Your Phone Number",
     "@emptyPhone": {}
+   
 }

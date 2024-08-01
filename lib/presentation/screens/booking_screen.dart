@@ -1,32 +1,50 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
+import 'package:golden_wave/presentation/widgets/error_message.dart';
 import 'package:golden_wave/provider/booking_provider.dart';
 import 'package:golden_wave/provider/language_provider.dart'; // Import LanguageProvider
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:golden_wave/presentation/widgets/nav_bar.dart';
 import 'package:golden_wave/utils/button.dart';
 
-class BookingScreen extends StatelessWidget {
+class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key});
   static const String id = 'BookingScreen';
 
   @override
-  Widget build(BuildContext context) {
-    final bookingProvider = Provider.of<BookingProvider>(context);
-    final languageProvider =
-        Provider.of<LanguageProvider>(context); // Get LanguageProvider
+  _BookingScreenState createState() => _BookingScreenState();
+}
 
-    // Ensure fullName and reserved times are fetched before using them
+class _BookingScreenState extends State<BookingScreen> {
+  bool _initialized = false;
+  bool _loading = true;
+
+  @override
+  void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (FirebaseAuth.instance.currentUser != null) {
-        await bookingProvider.fetchFullName();
-        await bookingProvider.fetchReservedTimes(); // Fetch reserved times
+        final bookingProvider = Provider.of<BookingProvider>(context, listen: false);
+        await bookingProvider.fetchReservedTimes();
+        if (!_initialized) {
+          bookingProvider.updateCurrentIndex(null); // Reset current index to null only once
+          setState(() {
+            _initialized = true;
+            _loading = false; // Set loading to false once data is fetched
+          });
+        }
       }
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final bookingProvider = Provider.of<BookingProvider>(context);
+    final languageProvider = Provider.of<LanguageProvider>(context);
 
     return Scaffold(
       backgroundColor: MyColors.myWhite,
@@ -53,179 +71,213 @@ class BookingScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        child: CustomScrollView(
-          slivers: <Widget>[
-            SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  _tableCalendar(bookingProvider),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 25),
-                    child: Center(
-                      child: Text(
-                        S.of(context).selectTime,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+        child: _loading
+            ? _buildShimmer()
+            : CustomScrollView(
+                slivers: <Widget>[
+                  SliverToBoxAdapter(
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        _tableCalendar(bookingProvider),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 25),
+                          child: Center(
+                            child: Text(
+                              S.of(context).selectTime,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
                         ),
+                      ],
+                    ),
+                  ),
+                  bookingProvider.isWeekend
+                      ? SliverToBoxAdapter(
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 30,
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              S.of(context).WeekendText,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ),
+                        )
+                      : SliverGrid(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              final time = DateTime(
+                                  bookingProvider.currentDay.year,
+                                  bookingProvider.currentDay.month,
+                                  bookingProvider.currentDay.day,
+                                  index + 9);
+
+                              final bool isReserved = bookingProvider.reservedTimes
+                                  .any((reservedTime) =>
+                                      reservedTime.year == time.year &&
+                                      reservedTime.month == time.month &&
+                                      reservedTime.day == time.day &&
+                                      reservedTime.hour == time.hour);
+
+                              final now = DateTime.now();
+                              final bool isPastHour =
+                                  bookingProvider.currentDay.isAtSameMomentAs(now) &&
+                                      time.isBefore(now);
+
+                              return InkWell(
+                                splashColor: Colors.transparent,
+                                onTap: isReserved || isPastHour
+                                    ? null
+                                    : () {
+                                        bookingProvider.updateCurrentIndex(index);
+                                      },
+                                child: Container(
+                                  margin: const EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: bookingProvider.currentIndex == index
+                                          ? Colors.white
+                                          : MyColors.myYellow,
+                                    ),
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: isReserved || isPastHour
+                                        ? Colors.grey
+                                        : (bookingProvider.currentIndex == index
+                                            ? MyColors.myYellow
+                                            : null),
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    _formatTime(
+                                        DateTime(
+                                            bookingProvider.currentDay.year,
+                                            bookingProvider.currentDay.month,
+                                            bookingProvider.currentDay.day,
+                                            index + 9),
+                                        languageProvider.language),
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: bookingProvider.currentIndex == index
+                                          ? Colors.white
+                                          : (isReserved || isPastHour
+                                              ? Colors.black54
+                                              : null),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                            childCount: 10,
+                          ),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 4,
+                            childAspectRatio: 1.5,
+                          ),
+                        ),
+                  SliverToBoxAdapter(
+                    child: Container(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
+                      child: Button(
+                        width: double.infinity,
+                        title: S.of(context).AppointmentButton,
+                        onPressed: () async {
+                          if (bookingProvider.currentIndex != null) {
+                            DateTime selectedTime = DateTime(
+                                bookingProvider.currentDay.year,
+                                bookingProvider.currentDay.month,
+                                bookingProvider.currentDay.day,
+                                bookingProvider.currentIndex! + 9);
+
+                            try {
+                              await bookingProvider.bookAppointment(
+                                  FirebaseAuth.instance.currentUser!.uid,
+                                  selectedTime);
+
+                              showMessage(context,
+                                  title: S.of(context).Success,
+                                  desText: S.of(context).booked,
+                                  icon: Icons.done_all_outlined,
+                                  iconColor: Colors.green,
+                                  backgroundColor: MyColors.myGrey,
+                                  textColor: Colors.black,
+                                  alignment: Alignment.topLeft);
+
+                              Navigator.pushNamed(context, NavBar.id);
+                            } catch (e) {
+                              showMessage(context,
+                                  title: S.of(context).Error,
+                                  desText: S.of(context).errorWhenBooking,
+                                  icon: Icons.error,
+                                  iconColor: Colors.red,
+                                  backgroundColor: MyColors.myGrey,
+                                  textColor: Colors.black,
+                                  alignment: Alignment.topCenter);
+                            }
+                          } else {
+                            showMessage(context,
+                                title: S.of(context).Error,
+                                desText: S.of(context).specifyATime,
+                                icon: Icons.info,
+                                iconColor: Colors.black,
+                                backgroundColor: MyColors.myYellow,
+                                textColor: Colors.black,
+                                alignment: Alignment.topCenter);
+                          }
+                        },
+                        height: 50,
+                        text: S.of(context).AppointmentButton,
                       ),
                     ),
                   ),
                 ],
               ),
-            ),
-            bookingProvider.isWeekend
-                ? SliverToBoxAdapter(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 30,
-                      ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        S.of(context).WeekendText,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                  )
-                : SliverGrid(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        final time = DateTime(
-                            bookingProvider.currentDay.year,
-                            bookingProvider.currentDay.month,
-                            bookingProvider.currentDay.day,
-                            index + 9);
-
-                        final bool isReserved = bookingProvider.reservedTimes
-                            .any((reservedTime) =>
-                                reservedTime.year == time.year &&
-                                reservedTime.month == time.month &&
-                                reservedTime.day == time.day &&
-                                reservedTime.hour == time.hour);
-
-                        // Check if the current time is past the available time slots on the current day
-                        final now = DateTime.now();
-                        final bool isPastHour =
-                            bookingProvider.currentDay.isAtSameMomentAs(now) &&
-                                time.isBefore(now);
-
-                        return InkWell(
-                          splashColor: Colors.transparent,
-                          onTap: isReserved || isPastHour
-                              ? null
-                              : () {
-                                  bookingProvider.updateCurrentIndex(index);
-                                },
-                          child: Container(
-                            margin: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: bookingProvider.currentIndex == index
-                                    ? Colors.white
-                                    : MyColors.myYellow,
-                              ),
-                              borderRadius: BorderRadius.circular(15),
-                              color: isReserved || isPastHour
-                                  ? Colors.grey
-                                  : (bookingProvider.currentIndex == index
-                                      ? MyColors.myYellow
-                                      : null),
-                            ),
-                            alignment: Alignment.center,
-                            child: Text(
-                              _formatTime(
-                                  DateTime(
-                                      bookingProvider.currentDay.year,
-                                      bookingProvider.currentDay.month,
-                                      bookingProvider.currentDay.day,
-                                      index + 9),
-                                  languageProvider.language),
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: bookingProvider.currentIndex == index
-                                    ? Colors.white
-                                    : (isReserved || isPastHour
-                                        ? Colors.black54
-                                        : null),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                      childCount: 10,
-                    ),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4,
-                      childAspectRatio: 1.5,
-                    ),
-                  ),
-            SliverToBoxAdapter(
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
-                child: Button(
-                  width: double.infinity,
-                  title: S.of(context).AppointmentButton,
-                  onPressed: () async {
-                    if (bookingProvider.currentIndex != null) {
-                      DateTime selectedTime = DateTime(
-                          bookingProvider.currentDay.year,
-                          bookingProvider.currentDay.month,
-                          bookingProvider.currentDay.day,
-                          bookingProvider.currentIndex! + 9);
-
-                      try {
-                        await bookingProvider.bookAppointment(
-                            FirebaseAuth.instance.currentUser!.uid,
-                            selectedTime);
-
-                        AwesomeDialog(
-                          context: context,
-                          dialogType: DialogType.success,
-                          animType: AnimType.rightSlide,
-                          title: S.of(context).Success,
-                          desc: S.of(context).booked,
-                          btnOkOnPress: () {
-                            Navigator.pushNamed(context, NavBar.id);
-                          },
-                        ).show();
-                      } catch (e) {
-                        AwesomeDialog(
-                          context: context,
-                          dialogType: DialogType.error,
-                          animType: AnimType.rightSlide,
-                          title: S.of(context).Error,
-                          desc: S.of(context).errorWhenBooking,
-                          btnOkOnPress: () {},
-                        ).show();
-                      }
-                    } else {
-                      AwesomeDialog(
-                        context: context,
-                        dialogType: DialogType.warning,
-                        animType: AnimType.rightSlide,
-                        title: S.of(context).Warning,
-                        desc: S.of(context).specifyATime,
-                        btnOkOnPress: () {},
-                      ).show();
-                    }
-                  },
-                  height: 50,
-                  text: S.of(context).AppointmentButton,
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
+    );
+  }
+
+  Widget _buildShimmer() {
+    return ListView(
+      children: [
+        Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            height: 200,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 20),
+        Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            height: 50,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 20),
+        Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            height: 50,
+            color: Colors.white,
+          ),
+        ),
+      ],
     );
   }
 
@@ -282,8 +334,10 @@ class BookingScreen extends StatelessWidget {
       onDaySelected: (selectedDay, focusedDay) {
         bookingProvider.updateFocusDay(focusedDay);
         bookingProvider.updateCurrentDay(selectedDay);
-        bookingProvider
-            .updateCurrentIndex(null); // Reset selected index when date changes
+        // Reset selected index only if it is not initialized
+        if (_initialized) {
+          bookingProvider.updateCurrentIndex(null);
+        }
       },
       onPageChanged: (focusedDay) {
         final now = DateTime.now();

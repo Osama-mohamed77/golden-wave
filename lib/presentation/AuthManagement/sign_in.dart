@@ -1,4 +1,3 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -6,6 +5,7 @@ import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/presentation/AuthManagement/forgot_password.dart';
 import 'package:golden_wave/presentation/AuthManagement/sign_up.dart';
+import 'package:golden_wave/presentation/widgets/error_message.dart';
 import 'package:golden_wave/presentation/widgets/nav_bar.dart';
 import 'package:golden_wave/provider/auth_provider.dart';
 import 'package:golden_wave/provider/language_provider.dart';
@@ -222,39 +222,36 @@ class _SignInState extends State<SignIn> {
       onPressed: () async {
         _formSubmitted = true;
 
-        if (formKey.currentState!.validate()) {
+        if (formKey.currentState != null && formKey.currentState!.validate()) {
           try {
             // Attempt to sign in
             await authProvider.signIn(
                 _emailController.text, _passwordController.text);
 
             // Check if the email is verified
-            if (FirebaseAuth.instance.currentUser != null &&
-                FirebaseAuth.instance.currentUser!.emailVerified) {
-              Navigator.pushNamed(context, NavBar.id);
+            final user = FirebaseAuth.instance.currentUser;
+            if (user != null) {
+              if (user.emailVerified) {
+                Navigator.pushNamed(context, NavBar.id);
+              } else {
+                showMessage(context,
+                    title: S.of(context).verifyTitel,
+                    desText: S.of(context).verifyDes,
+                    icon: Iconsax.info_circle,
+                    iconColor: Colors.blue,backgroundColor: MyColors.myYellow ,textColor: Colors.black,alignment: Alignment.topLeft);
+              }
             } else {
-              // Show a dialog if email is not verified
-              AwesomeDialog(
-                context: context,
-                dialogType: DialogType.warning,
-                animType: AnimType.rightSlide,
-                title: S.of(context).verifyTitel,
-                desc: S.of(context).verifyDes,
-                btnOkOnPress: () {},
-              ).show();
+              print('User is null after sign-in.');
             }
           } catch (e) {
-            // Handle sign-in errors
             if (authProvider.errorMessage.isNotEmpty) {
-              AwesomeDialog(
-                context: context,
-                dialogType: DialogType.error,
-                animType: AnimType.rightSlide,
-                title: S.of(context).signInErrorTitel,
-                desc: S.of(context).signInErrorDes,
-                btnOkOnPress: () {},
-              ).show();
+              showMessage(context,
+                  title: S.of(context).signInErrorTitel,
+                  desText: S.of(context).signInErrorDes,
+                  icon: Iconsax.close_circle,
+                  iconColor: Colors.red,backgroundColor: Colors.red,textColor: Colors.white,alignment: Alignment.topLeft);
             }
+            print('Sign-in error: $e');
           }
         }
       },

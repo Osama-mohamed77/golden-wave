@@ -5,6 +5,8 @@ import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/presentation/widgets/section_tabs.dart';
 import 'package:golden_wave/presentation/widgets/service_list.dart';
 import 'package:golden_wave/provider/home_provider.dart';
+import 'package:golden_wave/provider/language_provider.dart';
+import 'package:golden_wave/utils/user_const.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +22,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
-  Future<void>? _fetchDataFuture;
 
   @override
   void initState() {
@@ -30,20 +31,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       vsync: this,
     );
     _animation = Tween<double>(begin: 0, end: 1).animate(_animationController);
-
-    _fetchDataFuture = _fetchData().then((_) {
-      if (mounted) {
-        _animationController.forward();
-      }
-    });
+    _animationController.forward();
   }
 
-  Future<void> _fetchData() async {
-    try {
-      await Provider.of<HomeProvider>(context, listen: false).fetchData();
-    } catch (e) {
-      // Handle error if needed
-    }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final languageProvider = Provider.of<LanguageProvider>(context);
+    final homeProvider = Provider.of<HomeProvider>(context);
+
+    // Reset selection on language change
+    languageProvider.addListener(() {
+      homeProvider.resetSelection();
+    });
   }
 
   @override
@@ -51,6 +51,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     _animationController.dispose();
     super.dispose();
   }
+
 
   Widget lineSections() {
     return Row(
@@ -171,54 +172,30 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             automaticallyImplyLeading: false,
             backgroundColor: MyColors.myYellow,
             toolbarHeight: 103,
-            title: FutureBuilder<void>(
-              future: _fetchDataFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Row(
-                    children: [
-                      const Gap(30),
-                      const Spacer(flex: 1),
-                      Center(
-                          child: LoadingAnimationWidget.threeArchedCircle(
-                        color: Colors.black,
-                        size: 30,
-                      )),
-                      const Spacer(flex: 1),
-                    ],
-                  );
-                }
-
-                return FadeTransition(
-                  opacity: _animation,
-                  child: Consumer<HomeProvider>(
-                    builder: (context, provider, child) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${S.of(context).hi}, ${provider.firstName} 🎶',
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                              fontFamily: 'inter',
-                            ),
-                          ),
-                          Text(
-                            S.of(context).appBarHint,
-                            style: const TextStyle(
-                                fontSize: 14,
-                                color: MyColors.myGrey,
-                                fontFamily: 'inter',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      );
-                    },
+            title: FadeTransition(
+              opacity: _animation,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${S.of(context).hi}, ${UserConst.fullName.split(' ').first} 🎶',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontFamily: 'inter',
+                    ),
                   ),
-                );
-              },
+                  Text(
+                    S.of(context).appBarHint,
+                    style: const TextStyle(
+                        fontSize: 14,
+                        color: MyColors.myGrey,
+                        fontFamily: 'inter',
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
             actions: [
               IconButton(
@@ -232,7 +209,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ),
       ),
       backgroundColor: Colors.white,
-      ////////////////////////////////////////////////////////////
       body: ListView(
         children: [
           const Gap(20),
@@ -240,7 +216,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           const Gap(10),
           const SectionTabs(),
           const Gap(20),
-          services()
+          services(),
         ],
       ),
     );

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:golden_wave/utils/user_const.dart';
@@ -8,7 +7,6 @@ import 'package:intl/intl.dart';
 class BookingProvider with ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   String title = '';
-  String fullName = '';
 
   CalendarFormat _format = CalendarFormat.month;
   DateTime _focusDay = DateTime.now();
@@ -60,47 +58,30 @@ class BookingProvider with ChangeNotifier {
   Future<void> bookAppointment(String userId, DateTime dateTime) async {
     String formattedTime = getFormattedDateTime(dateTime);
     DateTime currentDateTime =
-        DateTime.now().toUtc(); // Current date and time in UTC
+        DateTime.now().toUtc(); // Store in UTC for consistency
 
     try {
-      await _firestore.collection('appointments').doc(userId).set({
+      await _firestore.collection('appointments').add({
         'userId': userId,
         'Booking time': formattedTime,
-        'date': currentDateTime, // Store current time in UTC
-        'appointmentDate': dateTime.toUtc(), // Store appointment date in UTC
+        'date': currentDateTime, // Store the booking time
+        'appointmentDate': dateTime.toUtc(), // Store in UTC
         'fullName': UserConst.fullName,
         'phoneNumber': UserConst.phoneNumber,
         'service name': title
       });
-      _reservedTimes.add(dateTime.toUtc()); // Ensure reserved times are in UTC
+      _reservedTimes.add(dateTime.toUtc());
       notifyListeners();
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<void> fetchFullName() async {
-    try {
-      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-          .collection('Users')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .get();
-
-      if (documentSnapshot.exists) {
-        fullName = documentSnapshot['fullName'];
-      }
-    } catch (e) {
-      return;
-    }
-    notifyListeners();
-  }
-
   Future<void> fetchReservedTimes() async {
     try {
       QuerySnapshot querySnapshot = await _firestore
           .collection('appointments')
-          .where('service name',
-              isEqualTo: title) // Use isEqualTo for equality check
+          .where('service name', isEqualTo: title) // Filter by service name
           .get();
 
       Set<DateTime> reserved = {};

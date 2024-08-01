@@ -30,26 +30,10 @@ class AuthProviderOS with ChangeNotifier {
         await MyUser().getUserProfile();
       }
     } on FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case 'user-not-found':
-          errorMessage =
-              'No account found with that email address. Please check your email or sign up.';
-          break;
-        case 'wrong-password':
-          errorMessage = 'Incorrect password. Please try again.';
-          break;
-        case 'invalid-email':
-          errorMessage =
-              'The email address is malformed. Please enter a valid email address.';
-          break;
-        case 'user-disabled':
-          errorMessage =
-              'This user account has been disabled. Contact support for help.';
-          break;
-        default:
-          errorMessage =
-              e.message ?? 'An unknown error occurred. Please try again later.';
-      }
+      errorMessage =
+          e.message ?? 'An unknown error occurred. Please try again later.';
+      print(e.message);
+
       throw Exception(errorMessage);
     } finally {
       isLoading = false;
@@ -57,8 +41,8 @@ class AuthProviderOS with ChangeNotifier {
     }
   }
 
-  Future<void> signUp(
-      String email, int phoneNumber, String password, String fullName) async {
+  Future<void> signUp(String email, String phoneNumber, String password,
+      String fullName) async {
     errorMessage = '';
     isLoading = true;
     notifyListeners();
@@ -76,13 +60,10 @@ class AuthProviderOS with ChangeNotifier {
         },
       );
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'email-already-in-use') {
-        errorMessage =
-            'The email address is already in use by another account.';
-      } else {
+      
         errorMessage = e.message ?? 'An error occurred. Please try again.';
-      }
-      throw Exception(errorMessage);
+      
+      
     } finally {
       isLoading = false;
       notifyListeners();

@@ -1,16 +1,18 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
+import 'package:golden_wave/presentation/AuthManagement/sign_in.dart';
+import 'package:golden_wave/presentation/widgets/error_message.dart';
 import 'package:golden_wave/provider/auth_provider.dart';
 import 'package:golden_wave/provider/booking_provider.dart';
 import 'package:golden_wave/provider/language_provider.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
-// Responsive utility functions
 double getResponsiveFontSize(BuildContext context, double baseSize) {
   double screenWidth = MediaQuery.of(context).size.width;
   double screenHeight = MediaQuery.of(context).size.height;
@@ -124,11 +126,6 @@ class _SignUpState extends State<SignUp> {
   }
 
   Widget phoneNumberForm() {
-    final PhoneNumber initialPhoneNumber = PhoneNumber(
-      isoCode: 'SA',
-      dialCode: '+966',
-    );
-
     return SizedBox(
       height: 65,
       child: InternationalPhoneNumberInput(
@@ -162,8 +159,6 @@ class _SignUpState extends State<SignUp> {
           }
           return null;
         },
-        initialValue: initialPhoneNumber,
-        countrySelectorScrollControlled: true,
       ),
     );
   }
@@ -260,22 +255,25 @@ class _SignUpState extends State<SignUp> {
         onTap: () async {
           try {
             if (formKey.currentState!.validate()) {
-              await authProvider.signUp(email.text, phoneController.text as int,
+              await authProvider.signUp(email.text, phoneController.text,
                   password.text, fullName.text);
-              await bookingProvider.fetchFullName();
+           
               Provider.of<AuthProviderOS>(context, listen: false)
                   .verifyAccount();
-              AwesomeDialog(
-                context: context,
-                dialogType: DialogType.success,
-                animType: AnimType.rightSlide,
-                title: S.of(context).verifyTitel,
-                desc: S.of(context).verifyDes,
-                btnOkOnPress: () {},
-              ).show();
+              showMessage(context,
+                  title: S.of(context).verifyTitel,
+                  desText: S.of(context).verifyDes,
+                  icon: Iconsax.info_circle,
+                  iconColor: Colors.blue,backgroundColor: MyColors.myYellow,textColor: Colors.black,alignment: Alignment.topLeft);
+              Navigator.pushNamed(context, SignIn.id);
             }
-          } catch (e) {
-            return;
+          }  catch (e) {
+           
+              //  errorMessage(context,
+              //     title: S.of(context).Error,
+              //     desText: S.of(context).exists,
+              //     icon: Iconsax.info_circle,
+              //     iconColor: Colors.blue);
           }
         },
         child: Container(
