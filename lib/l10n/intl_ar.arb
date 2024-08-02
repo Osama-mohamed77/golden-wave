@@ -52,7 +52,7 @@
     "@forgotText": {},
     "verifyTitel": "!تحقق من الحساب",
     "@verifyTitel": {},
-    "verifyDes": "!يرجى التحقق من حسابك لتسجيل الدخول",
+    "verifyDes":"يرجى التوجه الي رسائل البريد الالكتروني لتأكيد حسابك",
     "@verifyDes": {},
     "signInErrorTitel": "خطأ في تسجيل الدخول",
     "@signInErrorTitel": {},

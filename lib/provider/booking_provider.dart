@@ -58,14 +58,14 @@ class BookingProvider with ChangeNotifier {
   Future<void> bookAppointment(String userId, DateTime dateTime) async {
     String formattedTime = getFormattedDateTime(dateTime);
     DateTime currentDateTime =
-        DateTime.now().toUtc(); // Store in UTC for consistency
+        DateTime.now().toUtc(); 
 
     try {
       await _firestore.collection('appointments').add({
         'userId': userId,
         'Booking time': formattedTime,
-        'date': currentDateTime, // Store the booking time
-        'appointmentDate': dateTime.toUtc(), // Store in UTC
+        'date': currentDateTime, 
+        'appointmentDate': dateTime.toUtc(), 
         'fullName': UserConst.fullName,
         'phoneNumber': UserConst.phoneNumber,
         'service name': title
@@ -81,7 +81,7 @@ class BookingProvider with ChangeNotifier {
     try {
       QuerySnapshot querySnapshot = await _firestore
           .collection('appointments')
-          .where('service name', isEqualTo: title) // Filter by service name
+          .where('service name', isEqualTo: title) 
           .get();
 
       Set<DateTime> reserved = {};
@@ -110,6 +110,6 @@ class BookingProvider with ChangeNotifier {
         return false;
       }
     }
-    return true; // All slots are booked
+    return true; 
   }
 }

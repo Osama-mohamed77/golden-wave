@@ -249,7 +249,7 @@ class _SignInState extends State<SignIn> {
                   title: S.of(context).signInErrorTitel,
                   desText: S.of(context).signInErrorDes,
                   icon: Iconsax.close_circle,
-                  iconColor: Colors.red,backgroundColor: Colors.red,textColor: Colors.white,alignment: Alignment.topLeft);
+                  iconColor: Colors.red,backgroundColor: MyColors.myGrey,textColor: Colors.red,alignment: Alignment.topLeft);
             }
             print('Sign-in error: $e');
           }

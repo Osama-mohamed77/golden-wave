@@ -28,13 +28,15 @@ class _BookingScreenState extends State<BookingScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (FirebaseAuth.instance.currentUser != null) {
-        final bookingProvider = Provider.of<BookingProvider>(context, listen: false);
+        final bookingProvider =
+            Provider.of<BookingProvider>(context, listen: false);
         await bookingProvider.fetchReservedTimes();
         if (!_initialized) {
-          bookingProvider.updateCurrentIndex(null); // Reset current index to null only once
+          bookingProvider.updateCurrentIndex(
+              null); 
           setState(() {
             _initialized = true;
-            _loading = false; // Set loading to false once data is fetched
+            _loading = false; 
           });
         }
       }
@@ -117,38 +119,44 @@ class _BookingScreenState extends State<BookingScreen> {
                       : SliverGrid(
                           delegate: SliverChildBuilderDelegate(
                             (context, index) {
+                              final now = DateTime.now();
+                              final selectedDay = bookingProvider.currentDay;
                               final time = DateTime(
-                                  bookingProvider.currentDay.year,
-                                  bookingProvider.currentDay.month,
-                                  bookingProvider.currentDay.day,
+                                  selectedDay.year,
+                                  selectedDay.month,
+                                  selectedDay.day,
                                   index + 9);
 
-                              final bool isReserved = bookingProvider.reservedTimes
+                              final bool isReserved = bookingProvider
+                                  .reservedTimes
                                   .any((reservedTime) =>
                                       reservedTime.year == time.year &&
                                       reservedTime.month == time.month &&
                                       reservedTime.day == time.day &&
                                       reservedTime.hour == time.hour);
 
-                              final now = DateTime.now();
                               final bool isPastHour =
-                                  bookingProvider.currentDay.isAtSameMomentAs(now) &&
-                                      time.isBefore(now);
+                                  (selectedDay.year == now.year &&
+                                      selectedDay.month == now.month &&
+                                      selectedDay.day == now.day &&
+                                      time.isBefore(now));
 
                               return InkWell(
                                 splashColor: Colors.transparent,
                                 onTap: isReserved || isPastHour
                                     ? null
                                     : () {
-                                        bookingProvider.updateCurrentIndex(index);
+                                        bookingProvider
+                                            .updateCurrentIndex(index);
                                       },
                                 child: Container(
                                   margin: const EdgeInsets.all(5),
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                      color: bookingProvider.currentIndex == index
-                                          ? Colors.white
-                                          : MyColors.myYellow,
+                                      color:
+                                          bookingProvider.currentIndex == index
+                                              ? Colors.white
+                                              : MyColors.myYellow,
                                     ),
                                     borderRadius: BorderRadius.circular(15),
                                     color: isReserved || isPastHour
@@ -160,19 +168,18 @@ class _BookingScreenState extends State<BookingScreen> {
                                   alignment: Alignment.center,
                                   child: Text(
                                     _formatTime(
-                                        DateTime(
-                                            bookingProvider.currentDay.year,
-                                            bookingProvider.currentDay.month,
-                                            bookingProvider.currentDay.day,
-                                            index + 9),
-                                        languageProvider.language),
+                                        time, languageProvider.language),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: bookingProvider.currentIndex == index
-                                          ? Colors.white
-                                          : (isReserved || isPastHour
-                                              ? Colors.black54
-                                              : null),
+                                      color:
+                                          bookingProvider.currentIndex == index
+                                              ? Colors.white
+                                              : (isReserved || isPastHour
+                                                  ? MyColors.myWhite
+                                                  : null),
+                                      decoration: isReserved || isPastHour
+                                          ? TextDecoration.lineThrough
+                                          : TextDecoration.none,
                                     ),
                                   ),
                                 ),
@@ -188,8 +195,8 @@ class _BookingScreenState extends State<BookingScreen> {
                         ),
                   SliverToBoxAdapter(
                     child: Container(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 10, vertical: 40),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 40),
                       child: Button(
                         width: double.infinity,
                         title: S.of(context).AppointmentButton,
@@ -298,8 +305,7 @@ class _BookingScreenState extends State<BookingScreen> {
           ? now
           : bookingProvider.focusDay,
       firstDay: now,
-      lastDay: now.add(const Duration(
-          days: 365 * 2)), // Set the last day to two years from now
+      lastDay: now.add(const Duration(days: 365 * 2)),
       calendarFormat: bookingProvider.format,
       currentDay: bookingProvider.currentDay,
       rowHeight: 48,
