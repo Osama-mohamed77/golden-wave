@@ -36,9 +36,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     if (!formKey.currentState!.validate()) {
       return;
     }
-    setState(() {
+   
       isLoading = true;
-    });
+  
 
     try {
       // Check if the email exists in Firestore

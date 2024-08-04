@@ -201,6 +201,18 @@
     "labelPhone": "Phone number",
     "@labelPhone": {},
     "emptyPhone": "Enter Your Phone Number",
-    "@emptyPhone": {}
+    "@emptyPhone": {},
+    "bookingHistory":"Booking history",
+    "@bookingHistory": {},
+    "bookingDate":"Booking Date",
+    "@bookingDate": {},
+    "serviceName":"Service name",
+    "@serviceName": {},
+    "phoneNumber":"Phone number",
+    "@phoneNumber": {},
+    "home":"Home",
+    "@home": {},
+    "profile":"Profile",
+    "@profile": {}
    
 }

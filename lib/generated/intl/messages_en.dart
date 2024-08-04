@@ -24,8 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AdWriting":
             MessageLookupByLibrary.simpleMessage("Writing advertisements"),
-        "AppointmentButton":
-            MessageLookupByLibrary.simpleMessage("Appointment confirmation"),
+        "AppointmentButton": MessageLookupByLibrary.simpleMessage("Pay Now"),
         "AudioEffects": MessageLookupByLibrary.simpleMessage("Audio effects"),
         "AudioHint": MessageLookupByLibrary.simpleMessage(
             "We ensure an exceptional audio experience with the best quality by using unique technologies and carefully selecting voice artists under specialized team supervision. Our services include audio engineering and effects, audiobook recording, poetry and prose recording, dubbing, podcast recording, music and artistic works recording, wedding zaffa recording, music distribution, voice-over, IVR, and composing cinematic music."),
@@ -100,6 +99,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don’t have an account?"),
         "booked": MessageLookupByLibrary.simpleMessage(
             "Appointment booked successfully!"),
+        "bookingDate": MessageLookupByLibrary.simpleMessage("Booking Date"),
+        "bookingHistory":
+            MessageLookupByLibrary.simpleMessage("Booking history"),
         "emailNotFoundDes": MessageLookupByLibrary.simpleMessage(
             "Email not found. Please check your email address and try again."),
         "emptyConfirm":
@@ -112,6 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter Your Phone Number"),
         "errorWhenBooking": MessageLookupByLibrary.simpleMessage(
             "An error occurred while booking the appointment."),
+        "exists": MessageLookupByLibrary.simpleMessage("Email already exists"),
         "failedSendLink": MessageLookupByLibrary.simpleMessage(
             "Failed to send reset link. Please check your email address and try again."),
         "fogotScreenDes": MessageLookupByLibrary.simpleMessage(
@@ -125,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please select a section above"),
         "hintPassword":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
         "homeAudio": MessageLookupByLibrary.simpleMessage("Audio production"),
         "homeMedia":
             MessageLookupByLibrary.simpleMessage("Media qualification"),
@@ -143,11 +147,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "notMatchConfirm": MessageLookupByLibrary.simpleMessage("Not match"),
         "overviewHint": MessageLookupByLibrary.simpleMessage(
             "We set out from the city of Dammam on 4/13/1440, determined to provide a high standard of quality and excellence in the production of visual and audio media content through an elite team of specialized artists and technicians in various artistic fields, using the most modern technological means to provide innovative solutions and implement media projects with integrity. Our projects reflect the needs of the targeted audience."),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "selectTime":
             MessageLookupByLibrary.simpleMessage("Select Booking Time"),
         "sendLink": MessageLookupByLibrary.simpleMessage(
             "Password reset link sent! Check your email"),
         "sendText": MessageLookupByLibrary.simpleMessage("Send"),
+        "serviceName": MessageLookupByLibrary.simpleMessage("Service name"),
         "signInButton": MessageLookupByLibrary.simpleMessage("Sign in"),
         "signInErrorDes":
             MessageLookupByLibrary.simpleMessage("Wrong email or password"),

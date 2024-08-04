@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:golden_wave/stripe_payment/payment_manager.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
@@ -32,11 +33,10 @@ class _BookingScreenState extends State<BookingScreen> {
             Provider.of<BookingProvider>(context, listen: false);
         await bookingProvider.fetchReservedTimes();
         if (!_initialized) {
-          bookingProvider.updateCurrentIndex(
-              null); 
+          bookingProvider.updateCurrentIndex(null);
           setState(() {
             _initialized = true;
-            _loading = false; 
+            _loading = false;
           });
         }
       }
@@ -51,7 +51,15 @@ class _BookingScreenState extends State<BookingScreen> {
     return Scaffold(
       backgroundColor: MyColors.myWhite,
       appBar: AppBar(
-        backgroundColor: MyColors.myYellow,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [MyColors.myGrey,MyColors.myYellow, ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
         title: Consumer<BookingProvider>(
           builder: (context, value, child) => Row(
             children: [
@@ -60,7 +68,7 @@ class _BookingScreenState extends State<BookingScreen> {
                 value.title,
                 style: const TextStyle(
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: 23,
                     fontFamily: 'inter',
                     fontWeight: FontWeight.bold),
               ),
@@ -209,6 +217,9 @@ class _BookingScreenState extends State<BookingScreen> {
                                 bookingProvider.currentIndex! + 9);
 
                             try {
+                              await PaymentManager.makePayment(100,
+                                  'SAR');
+
                               await bookingProvider.bookAppointment(
                                   FirebaseAuth.instance.currentUser!.uid,
                                   selectedTime);
@@ -218,7 +229,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                   desText: S.of(context).booked,
                                   icon: Icons.done_all_outlined,
                                   iconColor: Colors.green,
-                                  backgroundColor: MyColors.myGrey,
+                                  backgroundColor: MyColors.myWhite,
                                   textColor: Colors.black,
                                   alignment: Alignment.topLeft);
 

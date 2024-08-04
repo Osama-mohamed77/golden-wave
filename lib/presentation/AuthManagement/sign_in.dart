@@ -241,7 +241,6 @@ class _SignInState extends State<SignIn> {
                     iconColor: Colors.blue,backgroundColor: MyColors.myYellow ,textColor: Colors.black,alignment: Alignment.topLeft);
               }
             } else {
-              print('User is null after sign-in.');
             }
           } catch (e) {
             if (authProvider.errorMessage.isNotEmpty) {
@@ -251,7 +250,6 @@ class _SignInState extends State<SignIn> {
                   icon: Iconsax.close_circle,
                   iconColor: Colors.red,backgroundColor: MyColors.myGrey,textColor: Colors.red,alignment: Alignment.topLeft);
             }
-            print('Sign-in error: $e');
           }
         }
       },

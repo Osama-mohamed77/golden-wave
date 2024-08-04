@@ -169,8 +169,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             bottomRight: Radius.circular(20),
           ),
           child: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: MyColors.myYellow,
+           automaticallyImplyLeading: false,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [MyColors.myGrey,MyColors.myYellow, ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
             toolbarHeight: 103,
             title: FadeTransition(
               opacity: _animation,

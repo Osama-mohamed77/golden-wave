@@ -840,6 +840,16 @@ class S {
     );
   }
 
+  /// `Email already exists`
+  String get exists {
+    return Intl.message(
+      'Email already exists',
+      name: 'exists',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Poetry and thoughts`
   String get PoetryAndThoughts {
     return Intl.message(
@@ -960,10 +970,10 @@ class S {
     );
   }
 
-  /// `Appointment confirmation`
+  /// `Pay Now`
   String get AppointmentButton {
     return Intl.message(
-      'Appointment confirmation',
+      'Pay Now',
       name: 'AppointmentButton',
       desc: '',
       args: [],
@@ -1045,6 +1055,66 @@ class S {
     return Intl.message(
       'Enter Your Phone Number',
       name: 'emptyPhone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking history`
+  String get bookingHistory {
+    return Intl.message(
+      'Booking history',
+      name: 'bookingHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking Date`
+  String get bookingDate {
+    return Intl.message(
+      'Booking Date',
+      name: 'bookingDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service name`
+  String get serviceName {
+    return Intl.message(
+      'Service name',
+      name: 'serviceName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number`
+  String get phoneNumber {
+    return Intl.message(
+      'Phone number',
+      name: 'phoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get home {
+    return Intl.message(
+      'Home',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message(
+      'Profile',
+      name: 'profile',
       desc: '',
       args: [],
     );

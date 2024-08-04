@@ -24,7 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "AdWriting": MessageLookupByLibrary.simpleMessage("كتابة الإعلانات"),
         "AppointmentButton":
-            MessageLookupByLibrary.simpleMessage("تأكيد الحجز"),
+            MessageLookupByLibrary.simpleMessage("الانتقال للدفع"),
         "AudioEffects": MessageLookupByLibrary.simpleMessage("تأثيرات الصوت"),
         "AudioHint": MessageLookupByLibrary.simpleMessage(
             "نضمن تجربة صوتية استثنائية بأفضل جودة باستخدام تقنيات فريدة واختيار الفنانين الصوتيين بعناية تحت إشراف فريق متخصص. تشمل خدماتنا هندسة الصوت والمؤثرات، تسجيل الكتب الصوتية، تسجيل الشعر والنثر، الدبلجة، تسجيل البودكاست، تسجيل الموسيقى والأعمال الفنية، تسجيل الزفة الموسيقية، توزيع الموسيقى، التعليق الصوتي، نظام الاستجابة الصوتية التفاعلي (IVR)، وتلحين الموسيقى السينمائية."),
@@ -94,11 +94,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "WeekendText": MessageLookupByLibrary.simpleMessage(
             "عطلة غير متاح، يرجى اختيار تاريخ آخر"),
         "appBarHint": MessageLookupByLibrary.simpleMessage(
-            "الموجة الذهبية جاهزة لاستقبالكم في أي وقت!"),
+            "!الموجة الذهبية جاهزة لاستقبالكم في أي وقت"),
         "askForSignUp": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
         "booked": MessageLookupByLibrary.simpleMessage("تم حجز الموعد بنجاح"),
+        "bookingDate": MessageLookupByLibrary.simpleMessage("معاد الحجز"),
+        "bookingHistory":
+            MessageLookupByLibrary.simpleMessage("تاريخ الحجوزات"),
         "emailNotFoundDes": MessageLookupByLibrary.simpleMessage(
-            "البريد الإلكتروني غير موجود. يرجى التحقق من عنوان بريدك الإلكتروني والمحاولة مرة أخرى."),
+            "البريد الإلكتروني غير موجود. يرجى التحقق من عنوان بريدك الإلكتروني والمحاولة مرة أخرى"),
         "emptyConfirm":
             MessageLookupByLibrary.simpleMessage("أدخل تأكيد كلمة المرور"),
         "emptyEmail":
@@ -109,10 +112,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "emptyPhone": MessageLookupByLibrary.simpleMessage("أدخل رقم هاتفك"),
         "errorWhenBooking":
             MessageLookupByLibrary.simpleMessage("حدث خطأ أثناء حجز الموعد"),
+        "exists": MessageLookupByLibrary.simpleMessage(
+            "البريد الالكتروني موجود بالفعل"),
         "failedSendLink": MessageLookupByLibrary.simpleMessage(
-            "فشل إرسال رابط إعادة التعيين. يرجى التحقق من عنوان بريدك الإلكتروني والمحاولة مرة أخرى."),
+            "فشل إرسال رابط إعادة التعيين. يرجى التحقق من عنوان بريدك الإلكتروني والمحاولة مرة أخرى"),
         "fogotScreenDes": MessageLookupByLibrary.simpleMessage(
-            "يرجى إدخال عنوان بريدك الإلكتروني أدناه، وسنرسل رابط إعادة تعيين كلمة المرور إلى صندوق الوارد الخاص بك."),
+            "يرجى إدخال عنوان بريدك الإلكتروني أدناه، وسنرسل رابط إعادة تعيين كلمة المرور إلى صندوق الوارد الخاص بك"),
         "forgotScreenTitel":
             MessageLookupByLibrary.simpleMessage("نسيت\nكلمة المرور"),
         "forgotText": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
@@ -123,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("يرجي اختيار قسم من الاعلي"),
         "hintPassword":
             MessageLookupByLibrary.simpleMessage("أدخل كلمة المرور"),
+        "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "homeAudio": MessageLookupByLibrary.simpleMessage("اﻹﻧﺘـﺎج اﻟﺼـﻮﺗـﻲ"),
         "homeMedia": MessageLookupByLibrary.simpleMessage("التأهيل الإعلامي"),
         "homeMusic": MessageLookupByLibrary.simpleMessage("ورشة الموسيقى"),
@@ -142,10 +148,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "notMatchConfirm": MessageLookupByLibrary.simpleMessage("غير متطابقة"),
         "overviewHint": MessageLookupByLibrary.simpleMessage(
             "انطلقنا من مدينة الدمام في 13/4/1440، عازمين على تقديم مستوى عالٍ من الجودة والتميز في إنتاج المحتوى الإعلامي المرئي والمسموع من خلال فريق نخبة من الفنانين والفنيين المتخصصين في مختلف صناعات الأعمال الفنية، باستخدام أحدث الوسائل التكنولوجية لتوفير وعاء مبتكر وتنفيذ المشاريع الإعلامية بطريقة أمانة. وتلبية احتياجات الجمهور المستهدف، التي تعكسها مشاريعنا."),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "profile": MessageLookupByLibrary.simpleMessage("الحساب"),
         "selectTime": MessageLookupByLibrary.simpleMessage("اختر وقت الحجز"),
         "sendLink": MessageLookupByLibrary.simpleMessage(
             "تم إرسال رابط إعادة تعيين كلمة المرور! تحقق من بريدك الإلكتروني"),
         "sendText": MessageLookupByLibrary.simpleMessage("إرسال"),
+        "serviceName": MessageLookupByLibrary.simpleMessage("اسم الخدمة"),
         "signInButton": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "signInErrorDes": MessageLookupByLibrary.simpleMessage(
             "البريد الإلكتروني أو كلمة المرور خاطئة"),
@@ -165,8 +174,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "validPassword":
             MessageLookupByLibrary.simpleMessage("أدخل كلمة مرور صالحة"),
         "verifyDes": MessageLookupByLibrary.simpleMessage(
-            "يرجى التحقق من حسابك لتسجيل الدخول!"),
-        "verifyTitel": MessageLookupByLibrary.simpleMessage("تحقق من الحساب!"),
+            "يرجى التوجه الي رسائل البريد الالكتروني لتأكيد حسابك"),
+        "verifyTitel": MessageLookupByLibrary.simpleMessage("!تحقق من الحساب"),
         "voiceover": MessageLookupByLibrary.simpleMessage("التعليق الصوتي"),
         "writingTitel":
             MessageLookupByLibrary.simpleMessage("الكتابة الإبداعية")

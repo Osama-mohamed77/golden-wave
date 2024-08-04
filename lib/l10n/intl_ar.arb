@@ -202,5 +202,17 @@
     "labelPhone": "رقم الهاتف",
     "@labelPhone": {},
     "emptyPhone": "أدخل رقم هاتفك",
-    "@emptyPhone": {}
+    "@emptyPhone": {} ,
+    "bookingHistory":"تاريخ الحجوزات",
+    "@bookingHistory": {},
+    "bookingDate":"معاد الحجز",
+    "@bookingDate": {},
+    "serviceName":"اسم الخدمة",
+    "@serviceName": {},
+    "phoneNumber":"رقم الهاتف",
+    "@phoneNumber": {},
+    "home":"الرئيسية",
+    "@home": {},
+    "profile":"الحساب",
+    "@profile": {}
 }

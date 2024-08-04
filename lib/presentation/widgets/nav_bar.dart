@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:golden_wave/constants/my_colors.dart';
+import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/presentation/screens/history.dart';
 import 'package:golden_wave/presentation/screens/home.dart';
 import 'package:golden_wave/presentation/screens/profile.dart';
@@ -42,24 +43,24 @@ class _NavBarState extends State<NavBar> {
             tabBackgroundColor: const Color(0xff424242),
             gap: 5,
             padding: const EdgeInsets.all(11),
-            tabs: const [
+            tabs:  [
               GButton(
                 icon: Icons.home,
                 iconColor: MyColors.myWhite,
                 iconSize: 25,
-                text: 'Home',
+                text: S.of(context).home,
               ),
               GButton(
                 icon: Icons.history,
                 iconColor: MyColors.myWhite,
                 iconSize: 25,
-                text: 'History ',
+                text: S.of(context).bookingHistory,
               ),
               GButton(
                 icon: Icons.person,
                 iconColor: MyColors.myWhite,
                 iconSize: 25,
-                text: 'Profile',
+                text: S.of(context).profile,
               ),
             ],
           ),

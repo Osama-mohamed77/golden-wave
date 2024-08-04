@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:golden_wave/firebase_options.dart';
 import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/presentation/AuthManagement/forgot_password.dart';
@@ -10,19 +11,21 @@ import 'package:golden_wave/presentation/screens/home.dart' as home;
 import 'package:golden_wave/presentation/widgets/nav_bar.dart';
 import 'package:golden_wave/provider/auth_provider.dart';
 import 'package:golden_wave/provider/booking_provider.dart';
+import 'package:golden_wave/provider/history_provider.dart';
 import 'package:golden_wave/provider/home_provider.dart';
 import 'package:golden_wave/provider/language_provider.dart';
 import 'package:golden_wave/provider/page_index_provider.dart';
+import 'package:golden_wave/stripe_payment/stripe_keys.dart';
 import 'package:golden_wave/utils/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
+  Stripe.publishableKey = ApiKeys.pusblishablKeys;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  
   final languageProvider = LanguageProvider();
 
   runApp(
@@ -33,6 +36,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => HomeProvider()),
         ChangeNotifierProvider(create: (_) => BookingProvider()),
         ChangeNotifierProvider.value(value: languageProvider),
+        ChangeNotifierProvider(create: (_) => HistoryProvider()),
       ],
       child: const GoldenWave(),
     ),
