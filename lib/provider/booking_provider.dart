@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:golden_wave/provider/fetch_data_provider.dart';
 import 'package:golden_wave/utils/user_const.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 
@@ -55,17 +57,20 @@ class BookingProvider with ChangeNotifier {
     return formatter.format(dateTime);
   }
 
-  Future<void> bookAppointment(String userId, DateTime dateTime) async {
+  Future<void> bookAppointment(
+      String userId, DateTime dateTime, context) async {
     DateTime currentDateTime = DateTime.now().toUtc();
 
     try {
       await _firestore.collection('appointments').add({
         'userId': userId,
-       
+
         'date': currentDateTime, // Store the booking time
         'appointmentDate': dateTime.toUtc(),
-        'fullName': UserConst.fullName,
-        'phoneNumber': UserConst.phoneNumber,
+        'fullName':
+            Provider.of<FetchDataProvider>(context, listen: false).fullName,
+        'phoneNumber':
+            Provider.of<FetchDataProvider>(context, listen: false).phoneNumber,
         'service name': title,
       });
       _reservedTimes.add(dateTime.toUtc());
@@ -79,7 +84,8 @@ class BookingProvider with ChangeNotifier {
     try {
       QuerySnapshot querySnapshot = await _firestore
           .collection('appointments')
-          .where('service name', isEqualTo: title).get();
+          .where('service name', isEqualTo: title)
+          .get();
 
       Set<DateTime> reserved = {};
 

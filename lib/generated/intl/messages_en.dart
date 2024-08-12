@@ -27,7 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "AppointmentButton": MessageLookupByLibrary.simpleMessage("Pay Now"),
         "AudioEffects": MessageLookupByLibrary.simpleMessage("Audio effects"),
         "AudioHint": MessageLookupByLibrary.simpleMessage(
-            "We ensure an exceptional audio experience with the best quality by using unique technologies and carefully selecting voice artists under specialized team supervision. Our services include audio engineering and effects, audiobook recording, poetry and prose recording, dubbing, podcast recording, music and artistic works recording, wedding zaffa recording, music distribution, voice-over, IVR, and composing cinematic music."),
+            "We deliver top-quality audio experiences through unique technologies and expert voice artists. Our services cover audio engineering, audiobook and poetry recording, dubbing, podcasting, music and artistic recordings, wedding zaffa, voice-over, IVR, and cinematic music composition."),
         "AudioTitel": MessageLookupByLibrary.simpleMessage("Audio production"),
         "AudiobookRecording":
             MessageLookupByLibrary.simpleMessage("Audiobook recording"),
@@ -39,6 +39,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dubbing": MessageLookupByLibrary.simpleMessage("Dubbing"),
         "Editing": MessageLookupByLibrary.simpleMessage("Editing"),
         "Error": MessageLookupByLibrary.simpleMessage("Error"),
+        "ErrorDes": MessageLookupByLibrary.simpleMessage(
+            "An error occurred while creating the account"),
         "GetStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "GraphicDesigns":
             MessageLookupByLibrary.simpleMessage("2D/3D graphic designs"),
@@ -47,14 +49,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "LogoHint": MessageLookupByLibrary.simpleMessage("Media innovators"),
         "LogoTitel": MessageLookupByLibrary.simpleMessage("Golden wave"),
         "MediaHint": MessageLookupByLibrary.simpleMessage(
-            "We understand that media plays a fundamental role in shaping society’s perspectives and influencing it. Therefore, we provide specialized training programs for individuals who wish to develop their media skills through our team of experts and academics in all media fields. We offer training courses covering various aspects of media production: preparation, presentation, hosting, editing, audio engineering, and directing."),
+            "We recognize the impact of media on shaping society. Our specialized training programs, led by experts and academics, help individuals develop media skills in areas like preparation, presentation, hosting, editing, audio engineering, and directing."),
         "MediaTitel":
             MessageLookupByLibrary.simpleMessage("Media qualification"),
         "Montage": MessageLookupByLibrary.simpleMessage("Montage"),
         "MotionGraphics":
             MessageLookupByLibrary.simpleMessage("Motion graphics"),
         "MusicHint": MessageLookupByLibrary.simpleMessage(
-            "We view music education as an exciting and inspiring journey. Our team of experienced professionals provides expertise in various areas, from learning instruments to music production and arrangement. We are committed to offering a unique learning experience tailored to your individual needs. Whether you’re a beginner or have prior experience, our services are designed to help you achieve your musical goals. Our aim is to guide you in reaching your artistic aspirations."),
+            "We see music education as an inspiring journey. Our skilled professionals offer personalized instruction in instrument learning, music production, and arrangement. Whether you’re a beginner or experienced, we aim to help you achieve your musical goals and artistic aspirations."),
         "MusicMixing": MessageLookupByLibrary.simpleMessage("Music mixing"),
         "MusicOrchestration":
             MessageLookupByLibrary.simpleMessage("Music orchestration"),
@@ -93,15 +95,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "Warning": MessageLookupByLibrary.simpleMessage("Warning"),
         "WeekendText": MessageLookupByLibrary.simpleMessage(
             "Weekend is not available, please select another date"),
+        "account": MessageLookupByLibrary.simpleMessage("Account"),
+        "accountDetails":
+            MessageLookupByLibrary.simpleMessage("Account details"),
         "appBarHint": MessageLookupByLibrary.simpleMessage(
             "Golden wave is ready to receive you at any time!"),
         "askForSignUp":
             MessageLookupByLibrary.simpleMessage("Don’t have an account?"),
+        "askToLogOut":
+            MessageLookupByLibrary.simpleMessage("Do you want to log out"),
         "booked": MessageLookupByLibrary.simpleMessage(
             "Appointment booked successfully!"),
         "bookingDate": MessageLookupByLibrary.simpleMessage("Booking Date"),
         "bookingHistory":
             MessageLookupByLibrary.simpleMessage("Booking history"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "changesDone": MessageLookupByLibrary.simpleMessage(
+            "Changes have been saved successfully"),
         "emailNotFoundDes": MessageLookupByLibrary.simpleMessage(
             "Email not found. Please check your email address and try again."),
         "emptyConfirm":
@@ -122,6 +132,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotScreenTitel":
             MessageLookupByLibrary.simpleMessage("Forgot\npassword"),
         "forgotText": MessageLookupByLibrary.simpleMessage("Forgot password?"),
+        "help": MessageLookupByLibrary.simpleMessage("Help"),
         "hi": MessageLookupByLibrary.simpleMessage("Hi"),
         "hintEmail": MessageLookupByLibrary.simpleMessage("Enter your email"),
         "hintForSelectSection": MessageLookupByLibrary.simpleMessage(
@@ -141,20 +152,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "labelName": MessageLookupByLibrary.simpleMessage("Full name"),
         "labelPassword": MessageLookupByLibrary.simpleMessage("Password"),
         "labelPhone": MessageLookupByLibrary.simpleMessage("Phone number"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
         "loginHint":
             MessageLookupByLibrary.simpleMessage("Please login to use the app"),
+        "logout": MessageLookupByLibrary.simpleMessage("log out"),
         "notFound": MessageLookupByLibrary.simpleMessage("Email not found"),
         "notMatchConfirm": MessageLookupByLibrary.simpleMessage("Not match"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
+        "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "overviewHint": MessageLookupByLibrary.simpleMessage(
-            "We set out from the city of Dammam on 4/13/1440, determined to provide a high standard of quality and excellence in the production of visual and audio media content through an elite team of specialized artists and technicians in various artistic fields, using the most modern technological means to provide innovative solutions and implement media projects with integrity. Our projects reflect the needs of the targeted audience."),
+            "We started from Dammam on 4/13/1440 with a commitment to high-quality visual and audio media production. Our elite team uses modern technology to deliver innovative solutions and execute media projects with integrity, tailored to the needs of our audience."),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
-        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
         "selectTime":
             MessageLookupByLibrary.simpleMessage("Select Booking Time"),
         "sendLink": MessageLookupByLibrary.simpleMessage(
             "Password reset link sent! Check your email"),
         "sendText": MessageLookupByLibrary.simpleMessage("Send"),
         "serviceName": MessageLookupByLibrary.simpleMessage("Service name"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signInButton": MessageLookupByLibrary.simpleMessage("Sign in"),
         "signInErrorDes":
             MessageLookupByLibrary.simpleMessage("Wrong email or password"),

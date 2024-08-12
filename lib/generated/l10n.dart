@@ -60,10 +60,10 @@ class S {
     );
   }
 
-  /// `We set out from the city of Dammam on 4/13/1440, determined to provide a high standard of quality and excellence in the production of visual and audio media content through an elite team of specialized artists and technicians in various artistic fields, using the most modern technological means to provide innovative solutions and implement media projects with integrity. Our projects reflect the needs of the targeted audience.`
+  /// `We started from Dammam on 4/13/1440 with a commitment to high-quality visual and audio media production. Our elite team uses modern technology to deliver innovative solutions and execute media projects with integrity, tailored to the needs of our audience.`
   String get overviewHint {
     return Intl.message(
-      'We set out from the city of Dammam on 4/13/1440, determined to provide a high standard of quality and excellence in the production of visual and audio media content through an elite team of specialized artists and technicians in various artistic fields, using the most modern technological means to provide innovative solutions and implement media projects with integrity. Our projects reflect the needs of the targeted audience.',
+      'We started from Dammam on 4/13/1440 with a commitment to high-quality visual and audio media production. Our elite team uses modern technology to deliver innovative solutions and execute media projects with integrity, tailored to the needs of our audience.',
       name: 'overviewHint',
       desc: '',
       args: [],
@@ -80,10 +80,10 @@ class S {
     );
   }
 
-  /// `We ensure an exceptional audio experience with the best quality by using unique technologies and carefully selecting voice artists under specialized team supervision. Our services include audio engineering and effects, audiobook recording, poetry and prose recording, dubbing, podcast recording, music and artistic works recording, wedding zaffa recording, music distribution, voice-over, IVR, and composing cinematic music.`
+  /// `We deliver top-quality audio experiences through unique technologies and expert voice artists. Our services cover audio engineering, audiobook and poetry recording, dubbing, podcasting, music and artistic recordings, wedding zaffa, voice-over, IVR, and cinematic music composition.`
   String get AudioHint {
     return Intl.message(
-      'We ensure an exceptional audio experience with the best quality by using unique technologies and carefully selecting voice artists under specialized team supervision. Our services include audio engineering and effects, audiobook recording, poetry and prose recording, dubbing, podcast recording, music and artistic works recording, wedding zaffa recording, music distribution, voice-over, IVR, and composing cinematic music.',
+      'We deliver top-quality audio experiences through unique technologies and expert voice artists. Our services cover audio engineering, audiobook and poetry recording, dubbing, podcasting, music and artistic recordings, wedding zaffa, voice-over, IVR, and cinematic music composition.',
       name: 'AudioHint',
       desc: '',
       args: [],
@@ -140,10 +140,10 @@ class S {
     );
   }
 
-  /// `We view music education as an exciting and inspiring journey. Our team of experienced professionals provides expertise in various areas, from learning instruments to music production and arrangement. We are committed to offering a unique learning experience tailored to your individual needs. Whether you’re a beginner or have prior experience, our services are designed to help you achieve your musical goals. Our aim is to guide you in reaching your artistic aspirations.`
+  /// `We see music education as an inspiring journey. Our skilled professionals offer personalized instruction in instrument learning, music production, and arrangement. Whether you’re a beginner or experienced, we aim to help you achieve your musical goals and artistic aspirations.`
   String get MusicHint {
     return Intl.message(
-      'We view music education as an exciting and inspiring journey. Our team of experienced professionals provides expertise in various areas, from learning instruments to music production and arrangement. We are committed to offering a unique learning experience tailored to your individual needs. Whether you’re a beginner or have prior experience, our services are designed to help you achieve your musical goals. Our aim is to guide you in reaching your artistic aspirations.',
+      'We see music education as an inspiring journey. Our skilled professionals offer personalized instruction in instrument learning, music production, and arrangement. Whether you’re a beginner or experienced, we aim to help you achieve your musical goals and artistic aspirations.',
       name: 'MusicHint',
       desc: '',
       args: [],
@@ -160,10 +160,10 @@ class S {
     );
   }
 
-  /// `We understand that media plays a fundamental role in shaping society’s perspectives and influencing it. Therefore, we provide specialized training programs for individuals who wish to develop their media skills through our team of experts and academics in all media fields. We offer training courses covering various aspects of media production: preparation, presentation, hosting, editing, audio engineering, and directing.`
+  /// `We recognize the impact of media on shaping society. Our specialized training programs, led by experts and academics, help individuals develop media skills in areas like preparation, presentation, hosting, editing, audio engineering, and directing.`
   String get MediaHint {
     return Intl.message(
-      'We understand that media plays a fundamental role in shaping society’s perspectives and influencing it. Therefore, we provide specialized training programs for individuals who wish to develop their media skills through our team of experts and academics in all media fields. We offer training courses covering various aspects of media production: preparation, presentation, hosting, editing, audio engineering, and directing.',
+      'We recognize the impact of media on shaping society. Our specialized training programs, led by experts and academics, help individuals develop media skills in areas like preparation, presentation, hosting, editing, audio engineering, and directing.',
       name: 'MediaHint',
       desc: '',
       args: [],
@@ -455,6 +455,16 @@ class S {
     return Intl.message(
       'Error',
       name: 'Error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error occurred while creating the account`
+  String get ErrorDes {
+    return Intl.message(
+      'An error occurred while creating the account',
+      name: 'ErrorDes',
       desc: '',
       args: [],
     );
@@ -1110,11 +1120,121 @@ class S {
     );
   }
 
-  /// `Profile`
-  String get profile {
+  /// `Settings`
+  String get settings {
     return Intl.message(
-      'Profile',
-      name: 'profile',
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Help`
+  String get help {
+    return Intl.message(
+      'Help',
+      name: 'help',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get account {
+    return Intl.message(
+      'Account',
+      name: 'account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account details`
+  String get accountDetails {
+    return Intl.message(
+      'Account details',
+      name: 'accountDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `log out`
+  String get logout {
+    return Intl.message(
+      'log out',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to log out`
+  String get askToLogOut {
+    return Intl.message(
+      'Do you want to log out',
+      name: 'askToLogOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get ok {
+    return Intl.message(
+      'Ok',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Changes have been saved successfully`
+  String get changesDone {
+    return Intl.message(
+      'Changes have been saved successfully',
+      name: 'changesDone',
       desc: '',
       args: [],
     );

@@ -6,9 +6,10 @@ showMessage(context,
     required String desText,
     required IconData icon,
     required Color iconColor,
-    required Color backgroundColor,required Color textColor,
-    required Alignment alignment
-    }) {
+    required Color backgroundColor,
+    required Color textColor,
+    required Alignment alignment,
+    required Color titelColor}) {
   toastification.show(
     context: context,
     type: ToastificationType.error,
@@ -18,7 +19,7 @@ showMessage(context,
     description: RichText(
       text: TextSpan(
         text: desText,
-        style:  TextStyle(color: textColor),
+        style: TextStyle(color: textColor),
       ),
     ),
     alignment: alignment,
@@ -34,7 +35,7 @@ showMessage(context,
     showIcon: true,
     primaryColor: iconColor,
     backgroundColor: backgroundColor,
-    foregroundColor: Colors.black,
+    foregroundColor: titelColor,
     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
     margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     borderRadius: BorderRadius.circular(12),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 
 class Button extends StatelessWidget {
@@ -27,8 +28,8 @@ class Button extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           title,
-          style: const TextStyle(
-              fontSize: 18, fontWeight: FontWeight.bold, fontFamily: 'inter'),
+          style:  TextStyle(
+              fontSize: 18.sp, fontWeight: FontWeight.bold, fontFamily: 'inter'),
         ),
       ),
     );

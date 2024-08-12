@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:golden_wave/firebase_options.dart';
 import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/presentation/AuthManagement/forgot_password.dart';
 import 'package:golden_wave/presentation/AuthManagement/sign_in.dart';
 import 'package:golden_wave/presentation/AuthManagement/sign_up.dart';
+import 'package:golden_wave/presentation/screens/account_details.dart';
 import 'package:golden_wave/presentation/screens/booking_screen.dart'
     as booking_screen;
+import 'package:golden_wave/presentation/screens/help.dart';
 import 'package:golden_wave/presentation/screens/home.dart' as home;
+import 'package:golden_wave/presentation/screens/settings.dart';
 import 'package:golden_wave/presentation/widgets/nav_bar.dart';
 import 'package:golden_wave/provider/auth_provider.dart';
 import 'package:golden_wave/provider/booking_provider.dart';
+import 'package:golden_wave/provider/fetch_data_provider.dart';
 import 'package:golden_wave/provider/history_provider.dart';
 import 'package:golden_wave/provider/home_provider.dart';
 import 'package:golden_wave/provider/language_provider.dart';
@@ -37,6 +42,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => BookingProvider()),
         ChangeNotifierProvider.value(value: languageProvider),
         ChangeNotifierProvider(create: (_) => HistoryProvider()),
+        ChangeNotifierProvider(create: (_) => FetchDataProvider()),
       ],
       child: const GoldenWave(),
     ),
@@ -50,28 +56,39 @@ class GoldenWave extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<LanguageProvider>(
       builder: (context, languageProvider, child) {
-        return MaterialApp(
-          locale: Locale(languageProvider.language),
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-          routes: {
-            home.Home.id: (context) => const home.Home(),
-            SignIn.id: (context) => const SignIn(),
-            SignUp.id: (context) => const SignUp(),
-            NavBar.id: (context) => const NavBar(),
-            ForgotPassword.id: (context) => const ForgotPassword(),
-            booking_screen.BookingScreen.id: (context) =>
-                const booking_screen.BookingScreen(),
-          },
-          home: const SplashScreen(),
-        );
+        return ScreenUtilInit(
+            designSize: const Size(393, 852),
+            minTextAdapt: true,
+            splitScreenMode: true,
+            builder: (BuildContext context, child) {
+              return MaterialApp(
+                locale: Locale(languageProvider.language),
+                debugShowCheckedModeBanner: false,
+                localizationsDelegates: const [
+                  S.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: S.delegate.supportedLocales,
+                routes: {
+                  home.Home.id: (context) => const home.Home(),
+                  SignIn.id: (context) => const SignIn(),
+                  SignUp.id: (context) => const SignUp(),
+                  NavBar.id: (context) => const NavBar(),
+                  ForgotPassword.id: (context) => const ForgotPassword(),
+                  booking_screen.BookingScreen.id: (context) =>
+                      const booking_screen.BookingScreen(),
+                  Help.id: (context) => const Help(),
+                  Settings.id:  (context) => const Settings(),
+                  AccountDetails.id :  (context) => const AccountDetails()
+                },
+                home: const SplashScreen(),
+              );
+            });
       },
     );
   }
 }
+
+

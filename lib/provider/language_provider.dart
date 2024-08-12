@@ -11,13 +11,13 @@ class LanguageProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
 
   LanguageProvider() {
-    _loadLanguage(); // Load language when provider is initialized
+    _loadLanguage(); 
   }
 
   Future<void> _loadLanguage() async {
     final prefs = await SharedPreferences.getInstance();
     _language =
-        prefs.getString(_languageKey) ?? 'en'; // Default to 'en' if no value
+        prefs.getString(_languageKey) ?? 'en'; 
     notifyListeners();
   }
 

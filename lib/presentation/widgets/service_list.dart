@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/presentation/widgets/service_card.dart';
 
@@ -68,12 +69,12 @@ class ServiceList extends StatelessWidget {
 
     return GridView.builder(
       shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      physics:  const NeverScrollableScrollPhysics(),
+      gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 3,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
+        childAspectRatio: 3.r,
+        crossAxisSpacing: 10.r,
+        mainAxisSpacing: 10.r,
       ),
       itemCount: services.length,
       itemBuilder: (context, index) {

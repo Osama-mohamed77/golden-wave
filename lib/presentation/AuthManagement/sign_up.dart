@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
-import 'package:golden_wave/presentation/AuthManagement/sign_in.dart';
 import 'package:golden_wave/presentation/widgets/error_message.dart';
 import 'package:golden_wave/provider/auth_provider.dart';
 import 'package:golden_wave/provider/booking_provider.dart';
@@ -12,26 +10,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
-
-double getResponsiveFontSize(BuildContext context, double baseSize) {
-  double screenWidth = MediaQuery.of(context).size.width;
-  double screenHeight = MediaQuery.of(context).size.height;
-  double scale = (screenWidth + screenHeight) /
-      2 /
-      720; // Assuming 720 is a base screen size
-  return baseSize * scale;
-}
-
-double getResponsiveHeight(BuildContext context, double baseHeight) {
-  double screenHeight = MediaQuery.of(context).size.height;
-  return baseHeight *
-      (screenHeight / 720); // Assuming 720 is a base screen height
-}
-
-double getResponsiveWidth(BuildContext context, double baseWidth) {
-  double screenWidth = MediaQuery.of(context).size.width;
-  return baseWidth * (screenWidth / 360); // Assuming 360 is a base screen width
-}
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -57,31 +36,35 @@ class _SignUpState extends State<SignUp> {
   TextEditingController phoneController = TextEditingController();
 
   PhoneNumber? phoneNumber;
+
   Widget backIcon() {
-    final languageProvider = Provider.of<LanguageProvider>(context);
     return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       IconButton(
-        padding: EdgeInsets.only(
-          right: languageProvider.language == 'en' ? 30.0 : 0.0,
-          left: languageProvider.language == 'ar' ? 30.0 : 0.0,
-        ),
         onPressed: () {
           Navigator.pop(context);
         },
         icon: Icon(
           Icons.arrow_back,
-          size: getResponsiveFontSize(context, 35),
+          size: 30.r,
         ),
       ),
     ]);
   }
 
   Widget titelText() {
-    return Text(
-      S.of(context).signUpTitel,
-      style: TextStyle(
-        fontFamily: 'AbhayaLibre',
-        fontSize: getResponsiveFontSize(context, 40),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            S.of(context).signUpTitel,
+            style: TextStyle(
+              fontFamily: 'AbhayaLibre',
+              fontSize: 40.sp,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -91,7 +74,7 @@ class _SignUpState extends State<SignUp> {
       S.of(context).signUpHint,
       style: TextStyle(
         fontFamily: 'AbhayaLibre',
-        fontSize: getResponsiveFontSize(context, 20),
+        fontSize: 20.sp,
         color: MyColors.myGrey,
       ),
     );
@@ -110,56 +93,72 @@ class _SignUpState extends State<SignUp> {
         return null;
       },
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 20.r),
+     
+        labelStyle: TextStyle(
+          fontFamily: 'AbhayaLibre',
+          fontSize: 15.sp,
+          color: MyColors.myGrey,
+        ),
+        prefixIcon: Icon(
+          Icons.person,
+          color: MyColors.myGrey,
+          size: 25.r,
+        ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.r),
         ),
         filled: true,
         fillColor: MyColors.myWhite,
         labelText: S.of(context).labelName,
-        labelStyle: TextStyle(
-          fontFamily: 'AbhayaLibre',
-          fontSize: getResponsiveFontSize(context, 17),
-          color: MyColors.myGrey,
-        ),
       ),
     );
   }
 
   Widget phoneNumberForm() {
-    return SizedBox(
-      height: 65,
-      child: InternationalPhoneNumberInput(
-        onInputChanged: (PhoneNumber number) {
-          phoneNumber = number;
-        },
-        onInputValidated: (bool value) {
-          // Handle input validation if needed
-        },
-        selectorConfig: const SelectorConfig(
-          selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-          showFlags: true,
-        ),
-        ignoreBlank: false,
-        autoValidateMode: AutovalidateMode.onUserInteraction,
-        textFieldController: phoneController,
-        formatInput: false,
-        keyboardType:
-            const TextInputType.numberWithOptions(signed: true, decimal: true),
-        inputDecoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          filled: true,
-          fillColor: Colors.white70,
-          labelText: S.of(context).labelPhone,
-        ),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return S.of(context).emptyPhone;
-          }
-          return null;
-        },
+    return InternationalPhoneNumberInput(
+      onInputChanged: (PhoneNumber number) {
+        phoneNumber = number;
+      },
+      onInputValidated: (bool value) {
+        // Handle input validation if needed
+      },
+      selectorConfig: const SelectorConfig(
+        selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+        showFlags: true,
       ),
+      ignoreBlank: false,
+      autoValidateMode: AutovalidateMode.onUserInteraction,
+      textFieldController: phoneController,
+      formatInput: false,
+      keyboardType:
+          const TextInputType.numberWithOptions(signed: true, decimal: true),
+      inputDecoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 20.r),
+      
+        labelStyle: TextStyle(
+          fontFamily: 'AbhayaLibre',
+          fontSize: 15.sp,
+          color: MyColors.myGrey,
+        ),
+        prefixIcon: Icon(
+          Icons.phone,
+          color: MyColors.myGrey,
+          size: 25.r,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+        ),
+        filled: true,
+        fillColor: MyColors.myWhite,
+        labelText: S.of(context).labelPhone,
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return S.of(context).emptyPhone;
+        }
+        return null;
+      },
     );
   }
 
@@ -175,15 +174,23 @@ class _SignUpState extends State<SignUp> {
         return null;
       },
       decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        labelText: S.of(context).labelEmail,
+         contentPadding: EdgeInsets.symmetric(vertical: 20.r),
+       
         labelStyle: TextStyle(
           fontFamily: 'AbhayaLibre',
-          fontSize: getResponsiveFontSize(context, 17),
+          fontSize: 15.sp,
           color: MyColors.myGrey,
         ),
+        prefixIcon: Icon(
+          Icons.email,
+          color: MyColors.myGrey,
+          size: 25.r,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+        ),
+        labelText: S.of(context).labelEmail,
+        
         filled: true,
         fillColor: MyColors.myWhite,
       ),
@@ -203,19 +210,26 @@ class _SignUpState extends State<SignUp> {
           return null;
         }
       },
-      obscureText: true,
-      decoration: InputDecoration(
+     
+      decoration: InputDecoration( contentPadding: EdgeInsets.symmetric(vertical: 20.r),
+       
+        labelStyle: TextStyle(
+          fontFamily: 'AbhayaLibre',
+          fontSize: 15.sp,
+          color: MyColors.myGrey,
+        ),
+        prefixIcon: Icon(
+           Iconsax.lock_15,
+          color: MyColors.myGrey,
+          size: 25.r,
+        ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.r),
         ),
         filled: true,
         fillColor: MyColors.myWhite,
         labelText: S.of(context).labelPassword,
-        labelStyle: TextStyle(
-          fontFamily: 'AbhayaLibre',
-          fontSize: getResponsiveFontSize(context, 17),
-          color: MyColors.myGrey,
-        ),
+        
       ),
     );
   }
@@ -231,19 +245,27 @@ class _SignUpState extends State<SignUp> {
         }
         return null;
       },
-      obscureText: true,
+     
       decoration: InputDecoration(
+         contentPadding: EdgeInsets.symmetric(vertical: 20.r),
+       
+        labelStyle: TextStyle(
+          fontFamily: 'AbhayaLibre',
+          fontSize: 15.sp,
+          color: MyColors.myGrey,
+        ),
+        prefixIcon: Icon(
+           Iconsax.lock_15,
+          color: MyColors.myGrey,
+          size: 25.r,
+        ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.r),
         ),
         filled: true,
         fillColor: MyColors.myWhite,
         labelText: S.of(context).labelConfirm,
-        labelStyle: TextStyle(
-          fontFamily: 'AbhayaLibre',
-          fontSize: getResponsiveFontSize(context, 17),
-          color: MyColors.myGrey,
-        ),
+        
       ),
     );
   }
@@ -257,41 +279,49 @@ class _SignUpState extends State<SignUp> {
             if (formKey.currentState!.validate()) {
               await authProvider.signUp(email.text, phoneController.text,
                   password.text, fullName.text);
-           
               Provider.of<AuthProviderOS>(context, listen: false)
                   .verifyAccount();
               showMessage(context,
                   title: S.of(context).verifyTitel,
                   desText: S.of(context).verifyDes,
                   icon: Iconsax.info_circle,
-                  iconColor: Colors.blue,backgroundColor: MyColors.myYellow,textColor: Colors.black,alignment: Alignment.topLeft);
-              Navigator.pushNamed(context, SignIn.id);
+                  iconColor: Colors.blue,
+                  backgroundColor: MyColors.myYellow,
+                  textColor: Colors.black,
+                                    titelColor: Colors.black,
+
+                  alignment: Alignment.bottomCenter);
             }
-          }  catch (e) {
-           
-              //  errorMessage(context,
-              //     title: S.of(context).Error,
-              //     desText: S.of(context).exists,
-              //     icon: Iconsax.info_circle,
-              //     iconColor: Colors.blue);
+          } catch (e) {
+            showMessage(context,
+                title: S.of(context).Error,
+                desText: S.of(context).ErrorDes,
+                icon: Iconsax.danger,
+                iconColor: Colors.red,
+                backgroundColor: MyColors.myYellow,
+                textColor: Colors.black,
+                titelColor: Colors.black,
+
+                alignment: Alignment.bottomCenter);
           }
         },
         child: Container(
-          decoration: const BoxDecoration(
+          height: 35.h,
+          decoration: BoxDecoration(
             color: MyColors.myYellow,
-            borderRadius: BorderRadius.all(Radius.circular(30)),
+            borderRadius: BorderRadius.circular(15.r),
           ),
-          height: getResponsiveHeight(context, 40),
-          width: double.infinity,
           child: Center(
             child: authProvider.isLoading
-                ? const CircularProgressIndicator()
+                ? LoadingAnimationWidget.threeArchedCircle(
+                    color: MyColors.myWhite,
+                    size: 30.r,
+                  )
                 : Text(
                     S.of(context).signUpText,
-                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'AbhayaLibre',
-                      fontSize: getResponsiveFontSize(context, 30),
+                      fontSize: 25.sp,
                       color: Colors.black,
                     ),
                   ),
@@ -305,45 +335,53 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProviderOS>(context);
     final bookingProvider = Provider.of<BookingProvider>(context);
-
     return Scaffold(
-      backgroundColor: const Color(0xffF0F0F0),
+      backgroundColor: MyColors.myWhite,
       body: Form(
         key: formKey,
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: getResponsiveWidth(context, 20),
-          ),
-          child: ListView(
-            padding: EdgeInsets.zero,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Gap(getResponsiveHeight(context, 30)),
+              Gap(30.h),
               backIcon(),
-              Gap(getResponsiveHeight(context, 40)),
               titelText(),
-              Gap(getResponsiveHeight(context, 10)),
-              hintText(),
-              Gap(getResponsiveHeight(context, 30)),
-              fullNameField(),
-              Gap(getResponsiveHeight(context, 10)),
-              phoneNumberForm(),
-              Gap(getResponsiveHeight(context, 10)),
-              emailField(),
-              Gap(getResponsiveHeight(context, 10)),
-              passwordField(),
-              Gap(getResponsiveHeight(context, 10)),
-              confirmField(),
-              Gap(getResponsiveHeight(context, 40)),
-              if (authProvider.isLoading)
-                Center(
-                  child: LoadingAnimationWidget.threeArchedCircle(
-                    color: Colors.black,
-                    size: 30,
-                  ),
-                )
-              else
-                signUpButton(authProvider, bookingProvider),
-              SizedBox(height: getResponsiveHeight(context, 10)),
+              Gap(10.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+                child: hintText(),
+              ),
+              Gap(20.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+                child: fullNameField(),
+              ),
+              Gap(10.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+                child: phoneNumberForm(),
+              ),
+              Gap(10.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+                child: emailField(),
+              ),
+              Gap(10.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+                child: passwordField(),
+              ),
+              Gap(10.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+                child: confirmField(),
+              ),
+              Gap(40.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+                child: signUpButton(authProvider, bookingProvider),
+              ),
+              Gap(30.h),
             ],
           ),
         ),

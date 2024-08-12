@@ -39,6 +39,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Dubbing": MessageLookupByLibrary.simpleMessage("الدبلجة"),
         "Editing": MessageLookupByLibrary.simpleMessage("التحرير"),
         "Error": MessageLookupByLibrary.simpleMessage("خطأ"),
+        "ErrorDes":
+            MessageLookupByLibrary.simpleMessage("حدث خطأ أثناء إنشاء الحساب"),
         "GetStarted": MessageLookupByLibrary.simpleMessage("ابدأ الآن"),
         "GraphicDesigns": MessageLookupByLibrary.simpleMessage(
             "تصاميم الجرافيك ثلاثية وثنائية الأبعاد"),
@@ -93,13 +95,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "Warning": MessageLookupByLibrary.simpleMessage("تحذير"),
         "WeekendText": MessageLookupByLibrary.simpleMessage(
             "عطلة غير متاح، يرجى اختيار تاريخ آخر"),
+        "account": MessageLookupByLibrary.simpleMessage("الحساب"),
+        "accountDetails": MessageLookupByLibrary.simpleMessage("تفاصيل الحساب"),
         "appBarHint": MessageLookupByLibrary.simpleMessage(
             "!الموجة الذهبية جاهزة لاستقبالكم في أي وقت"),
         "askForSignUp": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
+        "askToLogOut":
+            MessageLookupByLibrary.simpleMessage("هل تريد تسجيل الخروج"),
         "booked": MessageLookupByLibrary.simpleMessage("تم حجز الموعد بنجاح"),
         "bookingDate": MessageLookupByLibrary.simpleMessage("معاد الحجز"),
         "bookingHistory":
             MessageLookupByLibrary.simpleMessage("تاريخ الحجوزات"),
+        "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+        "changesDone":
+            MessageLookupByLibrary.simpleMessage("تم حفظ التغييرات بنجاح"),
         "emailNotFoundDes": MessageLookupByLibrary.simpleMessage(
             "البريد الإلكتروني غير موجود. يرجى التحقق من عنوان بريدك الإلكتروني والمحاولة مرة أخرى"),
         "emptyConfirm":
@@ -121,6 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotScreenTitel":
             MessageLookupByLibrary.simpleMessage("نسيت\nكلمة المرور"),
         "forgotText": MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
+        "help": MessageLookupByLibrary.simpleMessage("مساعدة"),
         "hi": MessageLookupByLibrary.simpleMessage("مرحبا"),
         "hintEmail":
             MessageLookupByLibrary.simpleMessage("أدخل بريدك الإلكتروني"),
@@ -141,20 +151,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "labelName": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
         "labelPassword": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "labelPhone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "loginHint": MessageLookupByLibrary.simpleMessage(
             "يرجى تسجيل الدخول لاستخدام التطبيق"),
+        "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "notFound":
             MessageLookupByLibrary.simpleMessage("البريد الإلكتروني غير موجود"),
         "notMatchConfirm": MessageLookupByLibrary.simpleMessage("غير متطابقة"),
+        "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
+        "ok": MessageLookupByLibrary.simpleMessage("نعم"),
         "overviewHint": MessageLookupByLibrary.simpleMessage(
             "انطلقنا من مدينة الدمام في 13/4/1440، عازمين على تقديم مستوى عالٍ من الجودة والتميز في إنتاج المحتوى الإعلامي المرئي والمسموع من خلال فريق نخبة من الفنانين والفنيين المتخصصين في مختلف صناعات الأعمال الفنية، باستخدام أحدث الوسائل التكنولوجية لتوفير وعاء مبتكر وتنفيذ المشاريع الإعلامية بطريقة أمانة. وتلبية احتياجات الجمهور المستهدف، التي تعكسها مشاريعنا."),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
-        "profile": MessageLookupByLibrary.simpleMessage("الحساب"),
+        "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "selectTime": MessageLookupByLibrary.simpleMessage("اختر وقت الحجز"),
         "sendLink": MessageLookupByLibrary.simpleMessage(
             "تم إرسال رابط إعادة تعيين كلمة المرور! تحقق من بريدك الإلكتروني"),
         "sendText": MessageLookupByLibrary.simpleMessage("إرسال"),
         "serviceName": MessageLookupByLibrary.simpleMessage("اسم الخدمة"),
+        "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "signInButton": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "signInErrorDes": MessageLookupByLibrary.simpleMessage(
             "البريد الإلكتروني أو كلمة المرور خاطئة"),
@@ -177,6 +192,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "يرجى التوجه الي رسائل البريد الالكتروني لتأكيد حسابك"),
         "verifyTitel": MessageLookupByLibrary.simpleMessage("!تحقق من الحساب"),
         "voiceover": MessageLookupByLibrary.simpleMessage("التعليق الصوتي"),
+        "writingHint": MessageLookupByLibrary.simpleMessage(
+            "نحن نسعى جاهدين لتقديم محتوى مميز وجذاب يوصل الرسالة المقصودة بشكل فعال إلى الجمهور المستهدف. تشمل خدمات الكتابة الإبداعية لدينا تأليف الشعر والنثر، وكتابة السيناريو، وكتابة القصة والرواية، وكتابة السيرة الذاتية، وكتابة الإعلانات."),
         "writingTitel":
             MessageLookupByLibrary.simpleMessage("الكتابة الإبداعية")
       };

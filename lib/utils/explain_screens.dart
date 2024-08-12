@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/presentation/screens/onBording/overview.dart';
 import 'package:golden_wave/provider/language_provider.dart';
@@ -20,26 +22,23 @@ class ExplainScreens extends StatelessWidget {
   static final PageController _controller = PageController();
 
   Widget scrollingCircles() {
-    return Container(
-      alignment: const Alignment(0, .65),
-      child: SmoothPageIndicator(
-        controller: _controller,
-        count: 6,
-        effect: CustomizableEffect(
-          activeDotDecoration: DotDecoration(
-            width: 26,
-            height: 16,
-            color: MyColors.myYellow,
-            borderRadius: BorderRadius.circular(4),
-          ),
-          dotDecoration: DotDecoration(
-            width: 26,
-            height: 10,
-            color: MyColors.myWhite,
-            borderRadius: BorderRadius.circular(4),
-          ),
-          spacing: 8.0,
+    return SmoothPageIndicator(
+      controller: _controller,
+      count: 6,
+      effect: CustomizableEffect(
+        activeDotDecoration: DotDecoration(
+          width: 12.0.sp,
+          height: 10.0.sp,
+          color: MyColors.myYellow,
+          borderRadius: BorderRadius.circular(4.0.sp),
         ),
+        dotDecoration: DotDecoration(
+          width: 25.0.sp,
+          height: 7.0.sp,
+          color: MyColors.myWhite,
+          borderRadius: BorderRadius.circular(4.0.sp),
+        ),
+        spacing: 8.0.sp,
       ),
     );
   }
@@ -48,30 +47,25 @@ class ExplainScreens extends StatelessWidget {
     return Consumer<PageIndexProvider>(
       builder: (context, pageIndexProvider, child) {
         int currentPageIndex = pageIndexProvider.currentPageIndex;
-        return AnimatedPositioned(
-          bottom: currentPageIndex == 5 ? 40.0 : 30.0,
-          left: 0,
-          right: 0,
-          duration: const Duration(milliseconds: 300),
-          child: Center(
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, SignIn.id);
-              },
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all<Color>(
-                  const Color(0xffD2B555),
-                ),
+        return SizedBox(
+          height: 30.h,
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, SignIn.id);
+            },
+            style: ButtonStyle(
+              backgroundColor: WidgetStateProperty.all<Color>(
+                const Color(0xffD2B555),
               ),
-              child: Text(
-                currentPageIndex == 5
-                    ? S.of(context).GetStarted
-                    : S.of(context).Skip,
-                style: const TextStyle(
-                  fontSize: 25,
-                  color: Colors.black,
-                  fontFamily: 'inter',
-                ),
+            ),
+            child: Text(
+              currentPageIndex == 5
+                  ? S.of(context).GetStarted
+                  : S.of(context).Skip,
+              style: TextStyle(
+                fontSize: 15.0.sp,
+                color: Colors.black,
+                fontFamily: 'inter',
               ),
             ),
           ),
@@ -106,11 +100,12 @@ class ExplainScreens extends StatelessWidget {
                 Center(
                   child: LoadingAnimationWidget.hexagonDots(
                     color: Colors.red,
-                    size: 50,
+                    size: 50.0.sp,
                   ),
                 ),
               Padding(
-                padding: const EdgeInsets.only(top: 40, left: 10, right: 10),
+                padding: EdgeInsets.only(
+                    top: 25.0.sp, left: 10.0.sp, right: 10.0.sp),
                 child: Column(
                   children: [
                     IconButton(
@@ -121,26 +116,41 @@ class ExplainScreens extends StatelessWidget {
                           languageProvider.setLanguageEn();
                         }
                       },
-                      icon: const Icon(
+                      icon: Icon(
                         Iconsax.language_square,
                         color: MyColors.myYellow,
-                        size: 35,
+                        size: 30.0.sp,
                       ),
                     ),
                     Text(
                       languageProvider.language,
-                      style: const TextStyle(
-                        fontSize: 30,
+                      style: TextStyle(
+                        fontSize: 20.0.sp,
                         color: MyColors.myYellow,
                         fontFamily: 'abhayaLibre',
-                        height: .3,
+                        height: .2,
                       ),
                     ),
                   ],
                 ),
               ),
-              scrollingCircles(),
-              elevatedButton(),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Spacer(),
+                      scrollingCircles(),
+                      const Spacer(),
+                      elevatedButton(),
+                      const Spacer(),
+
+                    ],
+                  ),
+                  Gap(30.h)
+                ],
+              ),
             ],
           ),
         );

@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:golden_wave/stripe_payment/payment_manager.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:golden_wave/constants/my_colors.dart';
@@ -23,6 +25,160 @@ class BookingScreen extends StatefulWidget {
 class _BookingScreenState extends State<BookingScreen> {
   bool _initialized = false;
   bool _loading = true;
+
+  Widget _buildShimmer() {
+    return ListView(
+      children: [
+        Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            height: 200.h,
+            color: Colors.white,
+          ),
+        ),
+        Gap(20.h),
+        Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            height: 50.h,
+            color: Colors.white,
+          ),
+        ),
+        Gap(20.h),
+        Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            height: 50.h,
+            color: Colors.white,
+          ),
+        ),
+      ],
+    );
+  }
+
+  String _formatTime(DateTime dateTime, String language) {
+    if (language == 'en') {
+      return '${dateTime.hour % 12 == 0 ? 12 : dateTime.hour % 12}:00 ${dateTime.hour >= 12 ? 'PM' : 'AM'}';
+    } else if (language == 'ar') {
+      return '${dateTime.hour % 12 == 0 ? 12 : dateTime.hour % 12}:00 ${dateTime.hour >= 12 ? 'م' : 'ص'}';
+    }
+    return '${dateTime.hour % 12 == 0 ? 12 : dateTime.hour % 12}:00 ${dateTime.hour >= 12 ? 'PM' : 'AM'}';
+  }
+
+  Widget _tableCalendar(BookingProvider bookingProvider) {
+    final now = DateTime.now();
+
+    return TableCalendar(
+      focusedDay: bookingProvider.focusDay.isBefore(now)
+          ? now
+          : bookingProvider.focusDay,
+      firstDay: now,
+      lastDay: now.add(const Duration(days: 365 * 2)),
+      calendarFormat: bookingProvider.format,
+      currentDay: bookingProvider.currentDay,
+      rowHeight: 45.h,
+      daysOfWeekHeight: 20.h,
+      headerStyle: HeaderStyle(
+        titleTextStyle: TextStyle(fontFamily: 'inter', fontSize: 20.sp),
+        leftChevronIcon: Icon(
+          Icons.arrow_back_ios,
+          size: 17.r,
+        ),
+        rightChevronIcon: Icon(
+          Icons.arrow_forward_ios,
+          size: 17.r,
+        ),
+      ),
+      daysOfWeekStyle: DaysOfWeekStyle(
+        weekdayStyle: TextStyle(
+          fontFamily: 'inter',
+          fontSize: 15.sp,
+          color: Colors.black,
+        ),
+        weekendStyle: TextStyle(
+          fontFamily: 'inter',
+          fontSize: 15.sp,
+          color: Colors.black,
+        ),
+      ),
+      calendarStyle: CalendarStyle(
+        todayDecoration: const BoxDecoration(
+          color: MyColors.myYellow,
+          shape: BoxShape.circle,
+        ),
+        todayTextStyle: TextStyle(
+          fontFamily: 'inter',
+          fontSize: 15.sp,
+          color: Colors.black,
+        ),
+        selectedDecoration: const BoxDecoration(
+          color: MyColors.myYellow,
+          shape: BoxShape.circle,
+        ),
+        selectedTextStyle: TextStyle(
+          fontFamily: 'inter',
+          fontSize: 15.sp,
+          color: Colors.black,
+        ),
+        disabledTextStyle: TextStyle(
+          fontFamily: 'inter',
+          fontSize: 13.sp,
+          color: Colors.grey,
+        ),
+      ),
+      availableCalendarFormats: const {
+        CalendarFormat.month: 'Month',
+      },
+      onFormatChanged: (format) {
+        bookingProvider.updateFormat(format);
+      },
+      onDaySelected: (selectedDay, focusedDay) {
+        bookingProvider.updateFocusDay(focusedDay);
+        bookingProvider.updateCurrentDay(selectedDay);
+
+        if (_initialized) {
+          bookingProvider.updateCurrentIndex(null);
+        }
+      },
+      onPageChanged: (focusedDay) {
+        final now = DateTime.now();
+        if (focusedDay.isBefore(now)) {
+          bookingProvider.updateFocusDay(focusedDay);
+        } else {
+          bookingProvider.updateFocusDay(focusedDay);
+        }
+      },
+      calendarBuilders: CalendarBuilders(
+        defaultBuilder: (context, date, focusedDay) {
+          final bool isAllSlotsBooked = bookingProvider.isAllSlotsBooked(date);
+
+          return Container(
+            margin: EdgeInsets.all(4.0.r),
+            decoration: BoxDecoration(
+              color: isAllSlotsBooked ? Colors.grey : null,
+              borderRadius: BorderRadius.circular(8.0.r),
+            ),
+            child: Center(
+              child: Text(
+                '${date.day}',
+                style: TextStyle(
+                  fontFamily: 'inter',
+                  fontSize: 15.sp,
+                  color: isAllSlotsBooked ? Colors.white : Colors.black,
+                  decoration: isAllSlotsBooked
+                      ? TextDecoration.lineThrough
+                      : TextDecoration.none,
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
 
   @override
   void initState() {
@@ -54,7 +210,10 @@ class _BookingScreenState extends State<BookingScreen> {
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [MyColors.myGrey,MyColors.myYellow, ],
+              colors: [
+                Color(0xffC9C9C9),
+                MyColors.myYellow,
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -66,9 +225,9 @@ class _BookingScreenState extends State<BookingScreen> {
               const Spacer(),
               Text(
                 value.title,
-                style: const TextStyle(
+                style: TextStyle(
                     color: Colors.black,
-                    fontSize: 23,
+                    fontSize: 23.sp,
                     fontFamily: 'inter',
                     fontWeight: FontWeight.bold),
               ),
@@ -80,7 +239,7 @@ class _BookingScreenState extends State<BookingScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        padding: EdgeInsets.symmetric(horizontal: 10.0.w),
         child: _loading
             ? _buildShimmer()
             : CustomScrollView(
@@ -88,17 +247,17 @@ class _BookingScreenState extends State<BookingScreen> {
                   SliverToBoxAdapter(
                     child: Column(
                       children: [
-                        const SizedBox(height: 20),
+                        Gap(20.h),
                         _tableCalendar(bookingProvider),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 25),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 25.h),
                           child: Center(
                             child: Text(
                               S.of(context).selectTime,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                                fontSize: 20.sp,
                               ),
                             ),
                           ),
@@ -109,15 +268,15 @@ class _BookingScreenState extends State<BookingScreen> {
                   bookingProvider.isWeekend
                       ? SliverToBoxAdapter(
                           child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 30,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 10.w,
+                              vertical: 30.h,
                             ),
                             alignment: Alignment.center,
                             child: Text(
                               S.of(context).WeekendText,
-                              style: const TextStyle(
-                                fontSize: 18,
+                              style: TextStyle(
+                                fontSize: 18.sp,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.grey,
                               ),
@@ -158,7 +317,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                             .updateCurrentIndex(index);
                                       },
                                 child: Container(
-                                  margin: const EdgeInsets.all(5),
+                                  margin: EdgeInsets.all(5.r),
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                       color:
@@ -166,7 +325,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                               ? Colors.white
                                               : MyColors.myYellow,
                                     ),
-                                    borderRadius: BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(15.r),
                                     color: isReserved || isPastHour
                                         ? Colors.grey
                                         : (bookingProvider.currentIndex == index
@@ -179,6 +338,8 @@ class _BookingScreenState extends State<BookingScreen> {
                                         time, languageProvider.language),
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
+                                      fontFamily: 'inter',
+                                      fontSize: 15.sp,
                                       color:
                                           bookingProvider.currentIndex == index
                                               ? Colors.white
@@ -203,8 +364,8 @@ class _BookingScreenState extends State<BookingScreen> {
                         ),
                   SliverToBoxAdapter(
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 40),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 10.w, vertical: 40.h),
                       child: Button(
                         width: double.infinity,
                         title: S.of(context).AppointmentButton,
@@ -217,12 +378,12 @@ class _BookingScreenState extends State<BookingScreen> {
                                 bookingProvider.currentIndex! + 9);
 
                             try {
-                              await PaymentManager.makePayment(100,
-                                  'SAR');
+                              await PaymentManager.makePayment(100, 'SAR');
 
                               await bookingProvider.bookAppointment(
                                   FirebaseAuth.instance.currentUser!.uid,
-                                  selectedTime);
+                                  selectedTime,
+                                  context);
 
                               showMessage(context,
                                   title: S.of(context).Success,
@@ -231,6 +392,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                   iconColor: Colors.green,
                                   backgroundColor: MyColors.myWhite,
                                   textColor: Colors.black,
+                                  titelColor: Colors.black,
                                   alignment: Alignment.topLeft);
 
                               Navigator.pushNamed(context, NavBar.id);
@@ -242,6 +404,7 @@ class _BookingScreenState extends State<BookingScreen> {
                                   iconColor: Colors.red,
                                   backgroundColor: MyColors.myGrey,
                                   textColor: Colors.black,
+                                  titelColor: Colors.black,
                                   alignment: Alignment.topCenter);
                             }
                           } else {
@@ -252,143 +415,17 @@ class _BookingScreenState extends State<BookingScreen> {
                                 iconColor: Colors.black,
                                 backgroundColor: MyColors.myYellow,
                                 textColor: Colors.black,
+                                titelColor: Colors.black,
                                 alignment: Alignment.topCenter);
                           }
                         },
-                        height: 50,
+                        height: 50.h.toInt(),
                         text: S.of(context).AppointmentButton,
                       ),
                     ),
                   ),
                 ],
               ),
-      ),
-    );
-  }
-
-  Widget _buildShimmer() {
-    return ListView(
-      children: [
-        Shimmer.fromColors(
-          baseColor: Colors.grey[300]!,
-          highlightColor: Colors.grey[100]!,
-          child: Container(
-            height: 200,
-            color: Colors.white,
-          ),
-        ),
-        const SizedBox(height: 20),
-        Shimmer.fromColors(
-          baseColor: Colors.grey[300]!,
-          highlightColor: Colors.grey[100]!,
-          child: Container(
-            height: 50,
-            color: Colors.white,
-          ),
-        ),
-        const SizedBox(height: 20),
-        Shimmer.fromColors(
-          baseColor: Colors.grey[300]!,
-          highlightColor: Colors.grey[100]!,
-          child: Container(
-            height: 50,
-            color: Colors.white,
-          ),
-        ),
-      ],
-    );
-  }
-
-  String _formatTime(DateTime dateTime, String language) {
-    if (language == 'en') {
-      return '${dateTime.hour % 12 == 0 ? 12 : dateTime.hour % 12}:00 ${dateTime.hour >= 12 ? 'PM' : 'AM'}';
-    } else if (language == 'ar') {
-      return '${dateTime.hour % 12 == 0 ? 12 : dateTime.hour % 12}:00 ${dateTime.hour >= 12 ? 'م' : 'ص'}';
-    }
-    return '${dateTime.hour % 12 == 0 ? 12 : dateTime.hour % 12}:00 ${dateTime.hour >= 12 ? 'PM' : 'AM'}'; // Default to 'en' if language is unknown
-  }
-
-  Widget _tableCalendar(BookingProvider bookingProvider) {
-    final now = DateTime.now();
-
-    return TableCalendar(
-      focusedDay: bookingProvider.focusDay.isBefore(now)
-          ? now
-          : bookingProvider.focusDay,
-      firstDay: now,
-      lastDay: now.add(const Duration(days: 365 * 2)),
-      calendarFormat: bookingProvider.format,
-      currentDay: bookingProvider.currentDay,
-      rowHeight: 48,
-      calendarStyle: const CalendarStyle(
-        todayDecoration: BoxDecoration(
-          color: MyColors.myYellow,
-          shape: BoxShape.circle,
-        ),
-        todayTextStyle: TextStyle(
-          color: Colors.black,
-        ),
-        selectedDecoration: BoxDecoration(
-          color: MyColors.myYellow,
-          shape: BoxShape.circle,
-        ),
-        selectedTextStyle: TextStyle(
-          color: Colors.black,
-        ),
-        weekendTextStyle: TextStyle(
-          color: Colors.black,
-        ),
-        defaultTextStyle: TextStyle(
-          color: Colors.black,
-        ),
-      ),
-      availableCalendarFormats: const {
-        CalendarFormat.month: 'Month',
-      },
-      onFormatChanged: (format) {
-        bookingProvider.updateFormat(format);
-      },
-      onDaySelected: (selectedDay, focusedDay) {
-        bookingProvider.updateFocusDay(focusedDay);
-        bookingProvider.updateCurrentDay(selectedDay);
-        // Reset selected index only if it is not initialized
-        if (_initialized) {
-          bookingProvider.updateCurrentIndex(null);
-        }
-      },
-      onPageChanged: (focusedDay) {
-        final now = DateTime.now();
-        if (focusedDay.isBefore(now)) {
-          // Allow navigating to previous months
-          bookingProvider.updateFocusDay(focusedDay);
-        } else {
-          // Allow navigating to future months
-          bookingProvider.updateFocusDay(focusedDay);
-        }
-      },
-      calendarBuilders: CalendarBuilders(
-        defaultBuilder: (context, date, focusedDay) {
-          final bool isAllSlotsBooked = bookingProvider.isAllSlotsBooked(date);
-
-          return Container(
-            margin: const EdgeInsets.all(4.0),
-            decoration: BoxDecoration(
-              color: isAllSlotsBooked ? Colors.grey : null,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: Center(
-              child: Text(
-                '${date.day}',
-                style: TextStyle(
-                  color: isAllSlotsBooked ? Colors.white : Colors.black,
-                  decoration: isAllSlotsBooked
-                      ? TextDecoration.lineThrough
-                      : TextDecoration.none,
-                ),
-              ),
-            ),
-          );
-        },
       ),
     );
   }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/presentation/widgets/section_tabs.dart';
 import 'package:golden_wave/presentation/widgets/service_list.dart';
+import 'package:golden_wave/provider/fetch_data_provider.dart';
 import 'package:golden_wave/provider/home_provider.dart';
 import 'package:golden_wave/provider/language_provider.dart';
 import 'package:golden_wave/utils/user_const.dart';
@@ -52,33 +54,34 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-
   Widget lineSections() {
     return Row(
       children: [
         Container(
-          height: 1.5,
-          width: 50,
+          height: 1.5.h,
+          width: 50.w,
           color: Colors.black,
         ),
         Text(
           S.of(context).Sections,
-          style: const TextStyle(
-              fontSize: 14,
+          style: TextStyle(
+              fontSize: 14.sp,
               fontWeight: FontWeight.bold,
               color: MyColors.myYellow),
         ),
         Expanded(
           child: Container(
-            height: 1.5,
-            width: 0,
+            height: 1.5.h,
             color: Colors.black,
           ),
         ),
-        const Icon(Icons.code),
+        Icon(
+          Icons.code,
+          size: 23.r,
+        ),
         Container(
-          height: 1.5,
-          width: 20,
+          height: 1.5.h,
+          width: 20.w,
           color: Colors.black,
         ),
       ],
@@ -87,21 +90,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   Widget services() {
     return Container(
-      constraints: BoxConstraints(
-        minHeight: MediaQuery.of(context).size.height * 0.3,
-        maxHeight: MediaQuery.of(context).size.height * 0.63,
-      ),
+      constraints: BoxConstraints(minHeight: 500.h, maxHeight: 550.h),
       decoration: BoxDecoration(
         color: const Color(0xffEEEEEE),
         border: Border.all(color: MyColors.myGrey),
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20.r),
+          topRight: Radius.circular(20.r),
         ),
       ),
       child: Column(
         children: [
-          const Gap(20),
+          Gap(20.h),
           Consumer<HomeProvider>(
             builder: (context, provider, child) {
               return Center(
@@ -109,30 +109,30 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   provider.selectedSectionIndex == -1
                       ? S.of(context).titelForSelectSection
                       : '${S.of(context).ServicesWithin} ${provider.selectedSectionName}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontFamily: 'inter',
-                    fontSize: 17,
+                    fontSize: 17.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               );
             },
           ),
-          const Gap(10),
-          const Divider(
-            thickness: 1.5,
-            color: Color(0xff818181),
+          Gap(10.h),
+          Divider(
+            thickness: 1.5.r,
+            color: const Color(0xff818181),
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
+              padding: EdgeInsets.only(top: 40.h, left: 20.w, right: 20.w),
               child: Consumer<HomeProvider>(
                 builder: (context, provider, child) {
                   if (provider.isLoading) {
                     return Center(
                       child: LoadingAnimationWidget.threeArchedCircle(
                         color: Colors.black,
-                        size: 30,
+                        size: 30.r,
                       ),
                     );
                   }
@@ -140,9 +140,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       ? Center(
                           child: Text(
                             S.of(context).hintForSelectSection,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontFamily: 'inter',
-                              fontSize: 17,
+                              fontSize: 17.sp,
                               fontWeight: FontWeight.bold,
                             ),
                             textAlign: TextAlign.center,
@@ -162,42 +162,47 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(103),
+        preferredSize: Size.fromHeight(103.h),
         child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(20),
-            bottomRight: Radius.circular(20),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(20.r),
+            bottomRight: Radius.circular(20.r),
           ),
           child: AppBar(
-           automaticallyImplyLeading: false,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [MyColors.myGrey,MyColors.myYellow, ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+            automaticallyImplyLeading: false,
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xffC9C9C9),
+                    MyColors.myYellow,
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
             ),
-          ),
-        ),
-            toolbarHeight: 103,
+            toolbarHeight: 1000.h,
             title: FadeTransition(
               opacity: _animation,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '${S.of(context).hi}, ${UserConst.fullName.split(' ').first} 🎶',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontFamily: 'inter',
+                  Consumer<FetchDataProvider>(
+                    builder: (context, value, child) => Text(
+                      '${S.of(context).hi}, ${value.fullName.split(' ').first} 🎶',
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontFamily: 'inter',
+                      ),
                     ),
                   ),
                   Text(
                     S.of(context).appBarHint,
-                    style: const TextStyle(
-                        fontSize: 14,
+                    style: TextStyle(
+                        fontSize: 14.sp,
                         color: MyColors.myGrey,
                         fontFamily: 'inter',
                         fontWeight: FontWeight.bold),
@@ -209,7 +214,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               IconButton(
                 icon: const Icon(Icons.notifications),
                 color: Colors.black,
-                iconSize: 30,
+                iconSize: 30.r,
                 onPressed: () {},
               ),
             ],
@@ -219,11 +224,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       backgroundColor: Colors.white,
       body: ListView(
         children: [
-          const Gap(20),
+          Gap(20.h),
           lineSections(),
-          const Gap(10),
+          Gap(10.h),
           const SectionTabs(),
-          const Gap(20),
+          Gap(20.h),
           services(),
         ],
       ),

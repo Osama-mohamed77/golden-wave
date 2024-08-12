@@ -44,6 +44,11 @@ dependencies:
   intl_utils: ^2.8.7
   animate_gradient: ^0.0.3
   animated_background: ^2.0.0
+  flutter_screenutil: ^5.9.3
+  ionicons: ^0.2.2
+  syncfusion_flutter_pdfviewer: ^26.2.8
+  device_info_plus: ^10.1.2
+  
 
 dev_dependencies:
   flutter_test:
@@ -56,7 +61,7 @@ flutter:
 
   assets:
     - assets/images/
-
+    - assets/pdf/
   fonts:
     - family: Inter
       fonts:

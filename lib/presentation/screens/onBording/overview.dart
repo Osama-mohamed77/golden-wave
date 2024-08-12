@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
 
@@ -6,55 +8,35 @@ class Overview extends StatelessWidget {
   const Overview({super.key});
 
   Widget title(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 100.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          LayoutBuilder(
-            builder: (context, constraints) {
-              double screenWidth = MediaQuery.of(context).size.width;
-              double responsiveFontSize =
-                  screenWidth * 0.08; // Adjust this factor as needed
-
-              return Text(
-                S.of(context).Overview,
-                style: TextStyle(
-                  fontSize: responsiveFontSize,
-                  fontFamily: 'inter',
-                  color: MyColors.myYellow,
-                ),
-              );
-            },
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          S.of(context).Overview,
+          style: TextStyle(
+            fontSize: 25.0.sp, // Static font size
+            fontFamily: 'inter',
+            color: MyColors.myYellow,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
   Widget details(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 100.0),
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          double screenWidth = MediaQuery.of(context).size.width;
-          double responsiveFontSize =
-              screenWidth * 0.05; // Adjust this factor as needed
-
-          return Center(
-            child: SizedBox(
-              width: screenWidth, // Adjust the width as needed
-              child: Text(
-                S.of(context).overviewHint,
-                style: TextStyle(
-                  fontSize: responsiveFontSize,
-                  fontFamily: 'inter',
-                  color: MyColors.myWhite,
-                ),
-              ),
+      padding: EdgeInsets.symmetric(horizontal: 16.0.sp),
+      child: Center(
+        child: SizedBox(
+          child: Text(
+            S.of(context).overviewHint,
+            style: TextStyle(
+              fontSize: 17.0.sp,
+              fontFamily: 'inter',
+              color: MyColors.myWhite,
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }
@@ -79,10 +61,13 @@ class Overview extends StatelessWidget {
           backgroundImage(),
           Column(
             children: [
+             Gap(150.h),
               title(context),
-              details(context),
+             Gap(20.h),
+
+              details(context), 
             ],
-          )
+          ),
         ],
       ),
     );

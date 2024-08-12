@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/provider/history_provider.dart';
@@ -18,18 +20,15 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    
+
     // Initialize the AnimationController
     _controller = AnimationController(
       duration: const Duration(milliseconds: 500),
       vsync: this, // Corrected this line
     );
 
-    // Define the slide animation from right to left
-
-    // Fetch booking data
-    Future.microtask(() =>
-        Provider.of<HistoryProvider>(context, listen: false).fetchBookingDate());
+    Future.microtask(() => Provider.of<HistoryProvider>(context, listen: false)
+        .fetchBookingDate());
   }
 
   @override
@@ -44,10 +43,13 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
       backgroundColor: const Color(0xffF0F0F0),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-       flexibleSpace: Container(
+        flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [MyColors.myGrey,MyColors.myYellow, ],
+              colors: [
+                Color(0xffC9C9C9),
+                MyColors.myYellow,
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -56,16 +58,16 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
         title: Center(
           child: Text(
             S.of(context).bookingHistory,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'alata',
-              fontSize: 23,
+              fontSize: 23.sp,
               color: Colors.black,
             ),
           ),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
+        padding: EdgeInsets.only(top: 20.0.h, left: 20.w, right: 20.w),
         child: Consumer<HistoryProvider>(
           builder: (context, historyProvider, child) {
             // Start the animation when the widget builds
@@ -80,7 +82,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
 
                 // Create an animation for each item
                 final itemAnimation = Tween<Offset>(
-                  begin: const Offset(1.0, 0.0),
+                  begin: Offset(1.0.r, 0.0),
                   end: Offset.zero,
                 ).animate(CurvedAnimation(
                   parent: _controller,
@@ -100,69 +102,73 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                     );
                   },
                   child: Container(
-                    margin: const EdgeInsets.only(bottom: 15),
+                    margin: EdgeInsets.only(bottom: 15.h),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       gradient: const LinearGradient(
-                        colors: [Colors.brown,MyColors.myGrey],
+                        colors: [Colors.brown, MyColors.myGrey],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
+                          spreadRadius: 2.r,
+                          blurRadius: 5.r,
                           offset: const Offset(0, 5),
                         ),
                       ],
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 15.0),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20.0.w, vertical: 15.0.h),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
-                              const Icon(Icons.date_range_sharp,
-                                  color: MyColors.myWhite),
-                              const SizedBox(width: 10),
+                              Icon(
+                                Icons.date_range_sharp,
+                                color: MyColors.myWhite,
+                                size: 25.r,
+                              ),
+                              Gap(10.w),
                               Text(
                                 '${S.of(context).bookingDate}: ${booking.bookingDate}',
-                                style: const TextStyle(
-                                  fontSize: 16,
+                                style: TextStyle(
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.bold,
                                   color: MyColors.myWhite,
                                 ),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 10),
+                          Gap(10.h),
                           Row(
                             children: [
-                              const Icon(Icons.music_note,
-                                  color: MyColors.myWhite),
-                              const SizedBox(width: 10),
+                              Icon(Icons.music_note,
+                                  color: MyColors.myWhite, size: 25.r),
+                              Gap(10.w),
                               Text(
                                 '${S.of(context).serviceName}: ${booking.serviceName}',
-                                style: const TextStyle(
-                                  fontSize: 16,
+                                style: TextStyle(
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.bold,
                                   color: MyColors.myWhite,
                                 ),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 10),
+                          Gap(10.h),
                           Row(
                             children: [
-                              const Icon(Icons.phone, color: MyColors.myWhite),
-                              const SizedBox(width: 10),
+                              Icon(Icons.phone,
+                                  color: MyColors.myWhite, size: 25.r),
+                              Gap(10.w),
                               Text(
                                 '${S.of(context).phoneNumber}: ${booking.phoneNumber}',
-                                style: const TextStyle(
-                                  fontSize: 16,
+                                style: TextStyle(
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.bold,
                                   color: MyColors.myWhite,
                                 ),

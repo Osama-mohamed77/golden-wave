@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
@@ -32,6 +33,8 @@ class _SignInState extends State<SignIn> {
       RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
   GlobalKey<FormState> formKey = GlobalKey();
   bool _formSubmitted = false;
+  final ValueNotifier<bool> _obscurePasswordNotifier =
+      ValueNotifier<bool>(true);
 
   Widget languageIcon(languageProvider) {
     return Row(
@@ -46,19 +49,19 @@ class _SignInState extends State<SignIn> {
                   languageProvider.setLanguageEn();
                 }
               },
-              icon: const Icon(
+              icon: Icon(
                 Iconsax.language_square,
                 color: MyColors.myYellow,
-                size: 35,
+                size: 30.r,
               ),
             ),
             Text(
               languageProvider.language,
-              style: const TextStyle(
-                fontSize: 30,
+              style: TextStyle(
+                fontSize: 25.sp,
                 color: MyColors.myYellow,
                 fontFamily: 'abhayaLibre',
-                height: .3,
+                height: -.01.h,
               ),
             ),
           ],
@@ -67,29 +70,29 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  Widget logo(double screenWidth) {
+  Widget logo() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          width: screenWidth * 0.2,
-          height: screenWidth * 0.25,
+          width: 70.w,
+          height: 85.h,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(15.r),
             image: const DecorationImage(
-              image: AssetImage('assets/images/logo.png'),
+              image: AssetImage('assets/images/sign_in_logo.png'),
               fit: BoxFit.cover,
             ),
           ),
         ),
-        const Gap(5),
+        Gap(5.w),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               S.of(context).LogoTitel,
               style: TextStyle(
-                fontSize: screenWidth * 0.075,
+                fontSize: 20.sp,
                 fontFamily: 'AbhayaLibre',
                 color: Colors.black,
               ),
@@ -97,10 +100,10 @@ class _SignInState extends State<SignIn> {
             Text(
               S.of(context).LogoHint,
               style: TextStyle(
-                fontSize: screenWidth * 0.05,
+                fontSize: 17.sp,
                 fontFamily: 'AbhayaLibre',
                 color: MyColors.myGrey,
-                height: .6,
+                height: .6.h,
               ),
             ),
           ],
@@ -109,95 +112,115 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  Widget textForLogin(double screenWidth) {
+  Widget textForLogin() {
     return Text(
       S.of(context).loginHint,
       style: TextStyle(
         fontFamily: 'AbhayaLibre',
         color: MyColors.myGrey,
-        fontSize: screenWidth * 0.04,
+        fontSize: 15.sp,
       ),
     );
   }
 
-  Widget emailTextFormField(double screenWidth) {
-    return SizedBox(
-      child: TextFormField(
-        validator: (value) {
-          if (_formSubmitted) {
-            if (value!.isEmpty) {
-              return S.of(context).emptyEmail;
-            } else if (!regexEmail.hasMatch(value)) {
-              return S.of(context).validEmail;
-            }
+  Widget emailTextFormField() {
+    return TextFormField(
+      validator: (value) {
+        if (_formSubmitted) {
+          if (value!.isEmpty) {
+            return S.of(context).emptyEmail;
+          } else if (!regexEmail.hasMatch(value)) {
+            return S.of(context).validEmail;
           }
-          return null;
-        },
-        controller: _emailController,
-        decoration: InputDecoration(
-          hintText: S.of(context).hintEmail,
-          labelText: S.of(context).labelEmail,
-          filled: true,
-          fillColor: Colors.white70,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(
-              color: MyColors.myGrey,
-            ),
+        }
+        return null;
+      },
+      controller: _emailController,
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 20.r),
+        hintStyle: TextStyle(fontFamily: 'AbhayaLibre', fontSize: 15.sp),
+        labelStyle: TextStyle(fontFamily: 'AbhayaLibre', fontSize: 15.sp),
+        prefixIcon: Icon(Icons.email, color: MyColors.myGrey, size: 25.r),
+        hintText: S.of(context).hintEmail,
+        labelText: S.of(context).labelEmail,
+        filled: true,
+        fillColor: Colors.white70,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: const BorderSide(
+            color: MyColors.myGrey,
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: MyColors.myGrey),
-          ),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: const BorderSide(color: MyColors.myYellow),
-              gapPadding: 5),
         ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: const BorderSide(color: MyColors.myGrey),
+        ),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15.r),
+            borderSide: const BorderSide(color: MyColors.myYellow),
+            gapPadding: 5.r),
       ),
     );
   }
 
-  Widget passwordTextFormField(double screenWidth) {
-    return SizedBox(
-      child: TextFormField(
-        validator: (value) {
-          if (_formSubmitted) {
-            if (value!.isEmpty) {
-              return S.of(context).emptyPassword;
-            } else {
-              if (!regex.hasMatch(value)) {
-                return S.of(context).validPassword;
+  Widget passwordTextFormField() {
+    return ValueListenableBuilder<bool>(
+      valueListenable: _obscurePasswordNotifier,
+      builder: (context, obscurePassword, child) {
+        return TextFormField(
+          validator: (value) {
+            if (_formSubmitted) {
+              if (value!.isEmpty) {
+                return S.of(context).emptyPassword;
+              } else {
+                if (!regex.hasMatch(value)) {
+                  return S.of(context).validPassword;
+                }
               }
             }
-          }
-          return null;
-        },
-        obscureText: true,
-        controller: _passwordController,
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(
+            return null;
+          },
+          obscureText: obscurePassword,
+          controller: _passwordController,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 20.r),
+            hintStyle: TextStyle(fontFamily: 'AbhayaLibre', fontSize: 15.sp),
+            labelStyle: TextStyle(fontFamily: 'AbhayaLibre', fontSize: 15.sp),
+            prefixIcon: Icon(
+              Iconsax.lock_15,
               color: MyColors.myGrey,
+              size: 25.r,
             ),
+            suffixIcon: IconButton(
+              icon: Icon(obscurePassword ? Iconsax.eye_slash5 : Iconsax.eye4,
+                  color: MyColors.myGrey, size: 25.r),
+              onPressed: () {
+                _obscurePasswordNotifier.value = !obscurePassword;
+              },
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r),
+              borderSide: const BorderSide(
+                color: MyColors.myGrey,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.r),
+              borderSide: const BorderSide(color: MyColors.myGrey),
+            ),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15.r),
+                borderSide: const BorderSide(color: MyColors.myYellow),
+                gapPadding: 5.r),
+            hintText: S.of(context).hintPassword,
+            labelText: S.of(context).labelPassword,
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: MyColors.myGrey),
-          ),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: const BorderSide(color: MyColors.myYellow),
-              gapPadding: 5),
-          hintText: S.of(context).hintPassword,
-          labelText: S.of(context).labelPassword,
-        ),
-      ),
+        );
+      },
     );
   }
 
-  Widget forgotPassword(double screenWidth) {
+  Widget forgotPassword() {
     return Align(
       alignment: Alignment.topRight,
       child: TextButton(
@@ -207,68 +230,74 @@ class _SignInState extends State<SignIn> {
         child: Text(
           S.of(context).forgotText,
           style: TextStyle(
-            color: Colors.red,
+              color: Colors.red, fontFamily: 'AbhayaLibre', fontSize: 15.sp),
+        ),
+      ),
+    );
+  }
+
+  Widget signInButton(BuildContext context) {
+    final authProvider = Provider.of<AuthProviderOS>(context);
+    return SizedBox(
+      height: 35.h,
+      child: ElevatedButton(
+        onPressed: () async {
+          _formSubmitted = true;
+
+          if (formKey.currentState != null &&
+              formKey.currentState!.validate()) {
+            try {
+              await authProvider.signIn(
+                  _emailController.text, _passwordController.text);
+
+              final user = FirebaseAuth.instance.currentUser;
+              if (user != null) {
+                if (user.emailVerified) {
+                  Navigator.pushNamed(context, NavBar.id);
+                } else {
+                  showMessage(context,
+                      title: S.of(context).verifyTitel,
+                      desText: S.of(context).verifyDes,
+                      icon: Iconsax.info_circle,
+                      iconColor: Colors.blue,
+                      backgroundColor: MyColors.myYellow,
+                      textColor: Colors.black,
+                      titelColor: Colors.black,
+                      alignment: Alignment.topLeft);
+                }
+              } else {}
+            } catch (e) {
+              if (authProvider.errorMessage.isNotEmpty) {
+                showMessage(context,
+                    title: S.of(context).signInErrorTitel,
+                    desText: S.of(context).signInErrorDes,
+                    icon: Iconsax.close_circle,
+                    iconColor: Colors.red,
+                    backgroundColor: MyColors.myWhite,
+                    textColor: Colors.red,
+                    titelColor: Colors.red,
+                    alignment: Alignment.topLeft);
+              }
+            }
+          }
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: MyColors.myYellow,
+        ),
+        child: Text(
+          textAlign: TextAlign.center,
+          S.of(context).signInButton,
+          style: TextStyle(
+            fontSize: 25.sp,
+            color: Colors.black,
             fontFamily: 'AbhayaLibre',
-            fontSize: screenWidth * 0.04,
           ),
         ),
       ),
     );
   }
 
-  Widget signInButton(double screenWidth, BuildContext context) {
-    final authProvider = Provider.of<AuthProviderOS>(context);
-    return ElevatedButton(
-      onPressed: () async {
-        _formSubmitted = true;
-
-        if (formKey.currentState != null && formKey.currentState!.validate()) {
-          try {
-            // Attempt to sign in
-            await authProvider.signIn(
-                _emailController.text, _passwordController.text);
-
-            // Check if the email is verified
-            final user = FirebaseAuth.instance.currentUser;
-            if (user != null) {
-              if (user.emailVerified) {
-                Navigator.pushNamed(context, NavBar.id);
-              } else {
-                showMessage(context,
-                    title: S.of(context).verifyTitel,
-                    desText: S.of(context).verifyDes,
-                    icon: Iconsax.info_circle,
-                    iconColor: Colors.blue,backgroundColor: MyColors.myYellow ,textColor: Colors.black,alignment: Alignment.topLeft);
-              }
-            } else {
-            }
-          } catch (e) {
-            if (authProvider.errorMessage.isNotEmpty) {
-              showMessage(context,
-                  title: S.of(context).signInErrorTitel,
-                  desText: S.of(context).signInErrorDes,
-                  icon: Iconsax.close_circle,
-                  iconColor: Colors.red,backgroundColor: MyColors.myGrey,textColor: Colors.red,alignment: Alignment.topLeft);
-            }
-          }
-        }
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: MyColors.myYellow, // Golden color
-      ),
-      child: Text(
-        textAlign: TextAlign.center,
-        S.of(context).signInButton,
-        style: TextStyle(
-          fontSize: screenWidth * 0.06,
-          color: Colors.black,
-          fontFamily: 'AbhayaLibre',
-        ),
-      ),
-    );
-  }
-
-  Widget signUpButton(double screenWidth) {
+  Widget signUpButton() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -276,7 +305,7 @@ class _SignInState extends State<SignIn> {
           S.of(context).askForSignUp,
           style: TextStyle(
             fontFamily: 'AbhayaLibre',
-            fontSize: screenWidth * 0.04,
+            fontSize: 15.sp,
             color: Colors.black,
           ),
         ),
@@ -288,7 +317,7 @@ class _SignInState extends State<SignIn> {
             S.of(context).signUpText,
             style: TextStyle(
               fontFamily: 'AbhayaLibre',
-              fontSize: screenWidth * 0.04,
+              fontSize: 16.sp,
               color: Colors.red,
             ),
           ),
@@ -299,7 +328,6 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
     final authProvider = Provider.of<AuthProviderOS>(context);
     return Consumer<LanguageProvider>(
         builder: (context, languageProvider, child) {
@@ -308,42 +336,55 @@ class _SignInState extends State<SignIn> {
         body: Stack(children: [
           Form(
             key: formKey,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ListView(
-                children: [
-                  languageIcon(languageProvider),
-                  Gap(screenWidth * 0.1),
-                  logo(screenWidth),
-                  Gap(screenWidth * 0.2),
-                  textForLogin(screenWidth),
-                  Gap(screenWidth * 0.04),
-                  emailTextFormField(screenWidth),
-                  Gap(screenWidth * 0.04),
-                  passwordTextFormField(screenWidth),
-                  Gap(screenWidth * 0.04),
-                  forgotPassword(screenWidth),
-                  Gap(screenWidth * 0.05),
-                  if (authProvider.isLoading)
-                    Center(
-                      child: LoadingAnimationWidget.threeArchedCircle(
-                        color: Colors.black,
-                        size: 30,
-                      ),
-                    )
-                  else
-                    signInButton(screenWidth, context),
-                  Gap(screenWidth * 0.05),
-                  signUpButton(screenWidth),
-                ],
-              ),
+            child: ListView(
+              children: [
+                languageIcon(languageProvider),
+                Gap(50.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+                  child: logo(),
+                ),
+                Gap(50.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+                  child: textForLogin(),
+                ),
+                Gap(10.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+                  child: emailTextFormField(),
+                ),
+                Gap(10.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+                  child: passwordTextFormField(),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+                  child: forgotPassword(),
+                ),
+                Gap(20.h),
+                if (authProvider.isLoading)
+                  Center(
+                    child: LoadingAnimationWidget.threeArchedCircle(
+                      color: Colors.black,
+                      size: 30.r,
+                    ),
+                  )
+                else
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+                    child: signInButton(context),
+                  ),
+                signUpButton(),
+              ],
             ),
           ),
           if (languageProvider.isLoading)
             Center(
               child: LoadingAnimationWidget.hexagonDots(
                 color: Colors.red,
-                size: 50,
+                size: 50.r,
               ),
             ),
         ]),

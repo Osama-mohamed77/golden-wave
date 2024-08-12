@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
@@ -36,12 +37,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     if (!formKey.currentState!.validate()) {
       return;
     }
-   
-      isLoading = true;
-  
+
+    isLoading = true;
 
     try {
-      // Check if the email exists in Firestore
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
           .collection('Users')
           .where('email', isEqualTo: emailController.text.trim())
@@ -52,7 +51,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         throw Exception(S.of(context).notFound);
       }
 
-      // Send password reset email
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: emailController.text.trim());
 
@@ -94,13 +92,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         IconButton(
-          padding: const EdgeInsets.only(right: 30),
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
-            size: 30,
+            size: 30.r,
           ),
         ),
       ],
@@ -110,9 +107,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   Widget titleText() {
     return Text(
       S.of(context).forgotScreenTitel,
-      style: const TextStyle(
+      style: TextStyle(
         fontFamily: 'AbhayaLibre',
-        fontSize: 40,
+        fontSize: 40.sp,
       ),
     );
   }
@@ -120,45 +117,51 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   Widget hintText() {
     return Text(
       S.of(context).fogotScreenDes,
-      style: const TextStyle(
+      style: TextStyle(
         fontFamily: 'AbhayaLibre',
-        fontSize: 20,
+        fontSize: 20.sp,
         color: MyColors.myGrey,
       ),
     );
   }
 
   Widget emailTextFormField(RegExp forgotpassword) {
-    return SizedBox(
-      child: TextFormField(
-        validator: (value) {
-          if (value!.isEmpty) {
-            return S.of(context).emptyEmail;
-          } else if (!forgotpassword.hasMatch(value)) {
-            return S.of(context).validEmail;
-          }
-          return null;
-        },
-        controller: emailController,
-        decoration: InputDecoration(
-          hintText: S.of(context).hintEmail,
-          labelText: S.of(context).labelEmail,
-          filled: true,
-          fillColor: Colors.white70,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(
-              color: MyColors.myGrey,
-            ),
+    return TextFormField(
+      validator: (value) {
+        if (value!.isEmpty) {
+          return S.of(context).emptyEmail;
+        } else if (!forgotpassword.hasMatch(value)) {
+          return S.of(context).validEmail;
+        }
+        return null;
+      },
+      controller: emailController,
+      decoration: InputDecoration(
+        hintText: S.of(context).hintEmail,
+        contentPadding: EdgeInsets.symmetric(vertical: 20.r),
+        hintStyle: TextStyle(fontFamily: 'AbhayaLibre', fontSize: 15.sp),
+        labelStyle: TextStyle(fontFamily: 'AbhayaLibre', fontSize: 15.sp),
+        labelText: S.of(context).labelEmail,
+        filled: true,
+        fillColor: Colors.white70,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: const BorderSide(
+            color: MyColors.myGrey,
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: MyColors.myGrey),
-          ),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: const BorderSide(color: MyColors.myYellow),
-              gapPadding: 5),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: const BorderSide(color: MyColors.myGrey),
+        ),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15.r),
+            borderSide: const BorderSide(color: MyColors.myYellow),
+            gapPadding: 5.r),
+        prefixIcon: Icon(
+          Icons.email,
+          color: MyColors.myGrey,
+          size: 25.r,
         ),
       ),
     );
@@ -170,21 +173,20 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         await passwordReset();
       },
       child: Container(
-        decoration: const BoxDecoration(
+        height: 35.h,
+        decoration: BoxDecoration(
           color: MyColors.myYellow,
           borderRadius: BorderRadius.all(
-            Radius.circular(10),
+            Radius.circular(10.r),
           ),
         ),
-        height: 50,
-        width: 234,
         child: Center(
           child: Text(
             S.of(context).sendText,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: 'AbhayaLibre',
               fontWeight: FontWeight.bold,
-              fontSize: 32,
+              fontSize: 25.sp,
               color: Colors.black,
             ),
           ),
@@ -199,28 +201,40 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     final authProvider = Provider.of<AuthProviderOS>(context);
 
     return Scaffold(
-      backgroundColor: const Color(0xffF0F0F0),
+      backgroundColor: MyColors.myWhite,
       body: Form(
         key: formKey,
         child: ListView(
-          padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
           children: [
             backIcon(),
-            const Gap(60),
-            titleText(),
-            const Gap(30),
-            hintText(),
-            const Gap(60),
-            emailTextFormField(forgotpassword),
+            Gap(60.w),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+              child: titleText(),
+            ),
+            Gap(30.w),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+              child: hintText(),
+            ),
+            Gap(60.w),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+              child: emailTextFormField(forgotpassword),
+            ),
             if (authProvider.isLoading)
               Center(
                 child: LoadingAnimationWidget.threeArchedCircle(
                   color: Colors.black,
-                  size: 30,
+                  size: 30.r,
                 ),
               ),
-            const Gap(60),
-            sendButton()
+            Gap(60.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+              child: sendButton(),
+            ),
+            Gap(40.h),
           ],
         ),
       ),

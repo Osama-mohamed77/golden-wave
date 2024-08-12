@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/presentation/screens/booking_screen.dart';
 import 'package:golden_wave/provider/booking_provider.dart';
@@ -17,21 +18,25 @@ class ServiceCard extends StatelessWidget {
 
         Navigator.pushNamed(context, BookingScreen.id);
       },
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: MyColors.myYellow),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Center(
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              fontFamily: 'inter',
+      child: Padding(
+        padding:  EdgeInsets.all(5.0.r),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: MyColors.myYellow),
+            borderRadius: BorderRadius.circular(10.r),
+          ),
+          child: Center(
+            child: Text(
+              title,
+              style:  TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                fontFamily: 'inter',
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
           ),
         ),
       ),

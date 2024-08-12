@@ -32,7 +32,7 @@ class HomeProvider with ChangeNotifier {
   }
 
   Future<void> fetchServices() async {
-    // Simulate a delay for fetching services
+    
     await Future.delayed(const Duration(seconds: 1));
     hideLoading();
   }

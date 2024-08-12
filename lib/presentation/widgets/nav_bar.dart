@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/presentation/screens/history.dart';
 import 'package:golden_wave/presentation/screens/home.dart';
-import 'package:golden_wave/presentation/screens/profile.dart';
+import 'package:golden_wave/presentation/screens/settings.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class NavBar extends StatefulWidget {
@@ -18,7 +19,7 @@ class _NavBarState extends State<NavBar> {
   final List<Widget> listoption = <Widget>[
     const Home(),
     const History(),
-    const Profile(),
+    const Settings(),
   ];
 
   @override
@@ -28,7 +29,7 @@ class _NavBarState extends State<NavBar> {
       bottomNavigationBar: Container(
         color: Colors.black,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+          padding:  EdgeInsets.symmetric(horizontal: 30.w, vertical: 8.h),
           child: GNav(
             selectedIndex: _currenIndex,
             onTabChange: (value) {
@@ -41,26 +42,26 @@ class _NavBarState extends State<NavBar> {
             color: Colors.white,
             activeColor: MyColors.myYellow,
             tabBackgroundColor: const Color(0xff424242),
-            gap: 5,
-            padding: const EdgeInsets.all(11),
+            gap: 5.r,
+            padding:  EdgeInsets.all(11.r),
             tabs:  [
               GButton(
                 icon: Icons.home,
                 iconColor: MyColors.myWhite,
-                iconSize: 25,
-                text: S.of(context).home,
+                iconSize: 25.r,
+                text: S.of(context).home,textStyle: TextStyle(fontFamily: 'inter',fontSize: 14.sp,color: MyColors.myYellow),
               ),
               GButton(
                 icon: Icons.history,
                 iconColor: MyColors.myWhite,
-                iconSize: 25,
-                text: S.of(context).bookingHistory,
+                iconSize: 25.r,
+                text: S.of(context).bookingHistory,textStyle: TextStyle(fontFamily: 'inter',fontSize: 14.sp,color: MyColors.myYellow),
               ),
               GButton(
                 icon: Icons.person,
                 iconColor: MyColors.myWhite,
-                iconSize: 25,
-                text: S.of(context).profile,
+                iconSize: 25.r,
+                text: S.of(context).settings,textStyle: TextStyle(fontFamily: 'inter',fontSize: 14.sp,color: MyColors.myYellow),
               ),
             ],
           ),
