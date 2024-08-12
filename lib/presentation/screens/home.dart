@@ -92,7 +92,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return Container(
       constraints: BoxConstraints(minHeight: 500.h, maxHeight: 550.h),
       decoration: BoxDecoration(
-        color: const Color(0xffEEEEEE),
+        gradient: const LinearGradient(
+          colors: [
+            Color(0xffD2D2D2),
+            MyColors.myGrey,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
         border: Border.all(color: MyColors.myGrey),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20.r),
@@ -130,9 +137,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 builder: (context, provider, child) {
                   if (provider.isLoading) {
                     return Center(
-                      child: LoadingAnimationWidget.threeArchedCircle(
-                        color: Colors.black,
-                        size: 30.r,
+                      child: LoadingAnimationWidget.staggeredDotsWave(
+                        color: MyColors.myYellow,
+                        size: 40.r,
                       ),
                     );
                   }
@@ -221,14 +228,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
         ),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: MyColors.myWhite,
       body: ListView(
         children: [
           Gap(20.h),
           lineSections(),
-          Gap(10.h),
-          const SectionTabs(),
           Gap(20.h),
+          const SectionTabs(),
+          Gap(30.h),
           services(),
         ],
       ),
