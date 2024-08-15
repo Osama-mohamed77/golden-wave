@@ -159,15 +159,11 @@
     "ScenarioWriting": "Writing the scenario",
     "@ScenarioWriting": {},
     "StoryCrafting": "Story crafting",
-    "exists": "Email already exists",
-    "@exists": {},
     "@StoryCrafting": {},
     "PoetryAndThoughts": "Poetry and thoughts",
     "@PoetryAndThoughts": {},
     "Autobiographies": "Writing autobiographies",
     "@Autobiographies": {},
-    "ServicesWithin": "Services within",
-    "@ServicesWithin": {},
     "AdWriting": "Writing advertisements",
     "@AdWriting": {},
     "Preparation": "Preparation",
@@ -182,6 +178,8 @@
     "@SoundEngineering": {},
     "Directing": "Directing",
     "@Directing": {},
+    "ServicesWithin": "Services within",
+    "@ServicesWithin": {},
     "titelForSelectSection": "Please select the section to view our services",
     "@titelForSelectSection": {},
     "hintForSelectSection": "Please select a section above",
@@ -228,7 +226,7 @@
     "@accountDetails": {},
     "logout": "log out",
     "@logout": {},
-    "askToLogOut":"Do you want to log out",
+    "askToLogOut": "Do you want to log out",
     "@askToLogOut": {},
     "cancel": "Cancel",
     "@cancel": {},
@@ -237,5 +235,8 @@
     "save": "Save",
     "@save": {},
     "changesDone": "Changes have been saved successfully",
-    "@changesDone": {}
+    "@changesDone": {},
+    "exists": "Email already exists",
+    "@exists": {}
+   
 }

@@ -69,8 +69,8 @@ class ServiceList extends StatelessWidget {
 
     return GridView.builder(
       shrinkWrap: true,
-      physics:  const NeverScrollableScrollPhysics(),
-      gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 3.r,
         crossAxisSpacing: 10.r,

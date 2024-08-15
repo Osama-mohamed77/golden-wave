@@ -19,8 +19,8 @@ dependencies:
   provider: ^6.1.2
   firebase_core: ^3.2.0
   firebase_auth: ^5.1.2
-  firebase_messaging: ^15.0.3
-  cloud_firestore: ^5.1.0
+  firebase_messaging: ^15.0.4
+  cloud_firestore: ^5.2.1
   modal_progress_hud_nsn: ^0.5.1
   awesome_dialog: ^3.2.1
   iconsax: ^0.0.8
@@ -37,7 +37,7 @@ dependencies:
   flutter_inappwebview: ^6.0.0
   flutter_stripe: ^10.2.0
   intl_phone_number_input: ^0.7.4
-  shared_preferences: ^2.2.3
+  shared_preferences: ^2.3.1
   stripe_android: ^10.2.1
   toastification: ^2.1.0
   shimmer: ^3.0.0
@@ -48,6 +48,7 @@ dependencies:
   ionicons: ^0.2.2
   syncfusion_flutter_pdfviewer: ^26.2.8
   device_info_plus: ^10.1.2
+  awesome_notifications: ^0.9.3+1
   
 
 dev_dependencies:

@@ -18,11 +18,11 @@ class FetchDataProvider with ChangeNotifier {
         fullName = documentSnapshot['fullName'];
         email = documentSnapshot['email'];
         phoneNumber = documentSnapshot['phoneNumber'];
+        notifyListeners();
       }
     } catch (e) {
-      return;
+      // Handle error
     }
-    notifyListeners();
   }
 
   Future<void> updateFullname(String newFullName) async {

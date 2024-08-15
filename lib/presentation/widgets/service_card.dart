@@ -19,7 +19,7 @@ class ServiceCard extends StatelessWidget {
         Navigator.pushNamed(context, BookingScreen.id);
       },
       child: Padding(
-        padding:  EdgeInsets.all(5.0.r),
+        padding: EdgeInsets.all(5.0.r),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
@@ -29,7 +29,7 @@ class ServiceCard extends StatelessWidget {
           child: Center(
             child: Text(
               title,
-              style:  TextStyle(
+              style: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,

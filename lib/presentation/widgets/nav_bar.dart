@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_wave/constants/my_colors.dart';
@@ -24,46 +26,63 @@ class _NavBarState extends State<NavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: listoption[_currenIndex],
-      bottomNavigationBar: Container(
-        color: Colors.black,
-        child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 30.w, vertical: 8.h),
-          child: GNav(
-            selectedIndex: _currenIndex,
-            onTabChange: (value) {
-              setState(() {
-                _currenIndex = value;
-              });
-            },
-            haptic: true,
-            backgroundColor: Colors.black,
-            color: Colors.white,
-            activeColor: MyColors.myYellow,
-            tabBackgroundColor: const Color(0xff424242),
-            gap: 5.r,
-            padding:  EdgeInsets.all(11.r),
-            tabs:  [
-              GButton(
-                icon: Icons.home,
-                iconColor: MyColors.myWhite,
-                iconSize: 25.r,
-                text: S.of(context).home,textStyle: TextStyle(fontFamily: 'inter',fontSize: 14.sp,color: MyColors.myYellow),
-              ),
-              GButton(
-                icon: Icons.history,
-                iconColor: MyColors.myWhite,
-                iconSize: 25.r,
-                text: S.of(context).bookingHistory,textStyle: TextStyle(fontFamily: 'inter',fontSize: 14.sp,color: MyColors.myYellow),
-              ),
-              GButton(
-                icon: Icons.person,
-                iconColor: MyColors.myWhite,
-                iconSize: 25.r,
-                text: S.of(context).settings,textStyle: TextStyle(fontFamily: 'inter',fontSize: 14.sp,color: MyColors.myYellow),
-              ),
-            ],
+    return WillPopScope(
+      onWillPop: () async {
+        exit(0);
+      },
+      child: Scaffold(
+        body: listoption[_currenIndex],
+        bottomNavigationBar: Container(
+          color: Colors.black,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 8.h),
+            child: GNav(
+              selectedIndex: _currenIndex,
+              onTabChange: (value) {
+                setState(() {
+                  _currenIndex = value;
+                });
+              },
+              haptic: true,
+              backgroundColor: Colors.black,
+              color: Colors.white,
+              activeColor: MyColors.myYellow,
+              tabBackgroundColor: const Color(0xff424242),
+              gap: 5.r,
+              padding: EdgeInsets.all(11.r),
+              tabs: [
+                GButton(
+                  icon: Icons.home,
+                  iconColor: MyColors.myWhite,
+                  iconSize: 25.r,
+                  text: S.of(context).home,
+                  textStyle: TextStyle(
+                      fontFamily: 'inter',
+                      fontSize: 14.sp,
+                      color: MyColors.myYellow),
+                ),
+                GButton(
+                  icon: Icons.history,
+                  iconColor: MyColors.myWhite,
+                  iconSize: 25.r,
+                  text: S.of(context).bookingHistory,
+                  textStyle: TextStyle(
+                      fontFamily: 'inter',
+                      fontSize: 14.sp,
+                      color: MyColors.myYellow),
+                ),
+                GButton(
+                  icon: Icons.settings,
+                  iconColor: MyColors.myWhite,
+                  iconSize: 25.r,
+                  text: S.of(context).settings,
+                  textStyle: TextStyle(
+                      fontFamily: 'inter',
+                      fontSize: 14.sp,
+                      color: MyColors.myYellow),
+                ),
+              ],
+            ),
           ),
         ),
       ),

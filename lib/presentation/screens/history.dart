@@ -59,7 +59,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
           child: Text(
             S.of(context).bookingHistory,
             style: TextStyle(
-              fontFamily: 'alata',
+              fontFamily: 'inter',
               fontSize: 23.sp,
               color: Colors.black,
             ),
@@ -102,23 +102,11 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                     );
                   },
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 15.h),
+                    margin: const EdgeInsets.only(top: 20),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      gradient: const LinearGradient(
-                        colors: [Colors.brown, MyColors.myGrey],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2.r,
-                          blurRadius: 5.r,
-                          offset: const Offset(0, 5),
-                        ),
-                      ],
-                    ),
+                        border: Border.all(color: Colors.grey),
+                        color: const Color(0xffE4E4E4),
+                        borderRadius: BorderRadius.circular(20)),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
                           horizontal: 20.0.w, vertical: 15.0.h),
@@ -129,7 +117,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                             children: [
                               Icon(
                                 Icons.date_range_sharp,
-                                color: MyColors.myWhite,
+                                color: Colors.black,
                                 size: 25.r,
                               ),
                               Gap(10.w),
@@ -138,7 +126,7 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                                 style: TextStyle(
                                   fontSize: 15.sp,
                                   fontWeight: FontWeight.bold,
-                                  color: MyColors.myWhite,
+                                  color: Colors.black,
                                 ),
                               ),
                             ],
@@ -147,14 +135,14 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                           Row(
                             children: [
                               Icon(Icons.music_note,
-                                  color: MyColors.myWhite, size: 25.r),
+                                  color: Colors.black, size: 25.r),
                               Gap(10.w),
                               Text(
                                 '${S.of(context).serviceName}: ${booking.serviceName}',
                                 style: TextStyle(
                                   fontSize: 15.sp,
                                   fontWeight: FontWeight.bold,
-                                  color: MyColors.myWhite,
+                                  color: Colors.black,
                                 ),
                               ),
                             ],
@@ -163,14 +151,14 @@ class _HistoryState extends State<History> with SingleTickerProviderStateMixin {
                           Row(
                             children: [
                               Icon(Icons.phone,
-                                  color: MyColors.myWhite, size: 25.r),
+                                  color: Colors.black, size: 25.r),
                               Gap(10.w),
                               Text(
                                 '${S.of(context).phoneNumber}: ${booking.phoneNumber}',
                                 style: TextStyle(
                                   fontSize: 15.sp,
                                   fontWeight: FontWeight.bold,
-                                  color: MyColors.myWhite,
+                                  color: Colors.black,
                                 ),
                               ),
                             ],

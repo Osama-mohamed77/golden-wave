@@ -6,7 +6,9 @@ import 'package:gap/gap.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/presentation/AuthManagement/sign_in.dart';
+import 'package:golden_wave/presentation/widgets/error_message.dart';
 import 'package:golden_wave/provider/auth_provider.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -54,16 +56,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: emailController.text.trim());
 
-      AwesomeDialog(
-        context: context,
-        dialogType: DialogType.success,
-        animType: AnimType.rightSlide,
-        title: S.of(context).Success,
-        desc: S.of(context).sendLink,
-        btnOkOnPress: () {
-          Navigator.pushNamed(context, SignIn.id);
-        },
-      ).show();
+      showMessage(context,
+          title: S.of(context).Success,
+          desText: S.of(context).sendLink,
+          icon: Icons.done_all_sharp,
+          iconColor: Colors.black,
+          backgroundColor: MyColors.myYellow,
+          textColor: Colors.black,
+          titelColor: Colors.black,
+          alignment: Alignment.topLeft);
+
+      Navigator.pop(context);
     } catch (e) {
       String errorMessage;
       if (e.toString().contains('Email not found')) {
@@ -71,15 +74,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       } else {
         errorMessage = S.of(context).failedSendLink;
       }
-      AwesomeDialog(
-        context: context,
-        dialogType: DialogType.error,
-        animType: AnimType.rightSlide,
-        title: S.of(context).Error,
-        desc: errorMessage,
-        btnOkOnPress: () {},
-      ).show();
-      return;
+      showMessage(context,
+          title: S.of(context).Error,
+          desText: errorMessage,
+          icon: Iconsax.close_circle,
+          iconColor: Colors.black,
+          backgroundColor: MyColors.myYellow,
+          textColor: Colors.black,
+          titelColor: Colors.black,
+          alignment: Alignment.topLeft);
     } finally {
       setState(() {
         isLoading = false;

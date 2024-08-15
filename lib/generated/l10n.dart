@@ -850,16 +850,6 @@ class S {
     );
   }
 
-  /// `Email already exists`
-  String get exists {
-    return Intl.message(
-      'Email already exists',
-      name: 'exists',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Poetry and thoughts`
   String get PoetryAndThoughts {
     return Intl.message(
@@ -875,16 +865,6 @@ class S {
     return Intl.message(
       'Writing autobiographies',
       name: 'Autobiographies',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Services within`
-  String get ServicesWithin {
-    return Intl.message(
-      'Services within',
-      name: 'ServicesWithin',
       desc: '',
       args: [],
     );
@@ -955,6 +935,16 @@ class S {
     return Intl.message(
       'Directing',
       name: 'Directing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Services within`
+  String get ServicesWithin {
+    return Intl.message(
+      'Services within',
+      name: 'ServicesWithin',
       desc: '',
       args: [],
     );
@@ -1239,6 +1229,30 @@ class S {
       args: [],
     );
   }
+
+  /// `Email already exists`
+  String get exists {
+    return Intl.message(
+      'Email already exists',
+      name: 'exists',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You haven’t received any notifications`
+  String get noNotifications {
+    return Intl.message(
+      'You haven’t received any notifications',
+      name: 'noNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  get existDes => null;
+
+  
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

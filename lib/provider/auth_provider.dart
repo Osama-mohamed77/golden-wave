@@ -1,7 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:golden_wave/constants/my_colors.dart';
+import 'package:golden_wave/generated/l10n.dart';
+import 'package:golden_wave/presentation/widgets/error_message.dart';
 import 'package:golden_wave/utils/my_user.dart';
+import 'package:iconsax/iconsax.dart';
 
 class AuthProviderOS with ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -42,7 +46,7 @@ class AuthProviderOS with ChangeNotifier {
   }
 
   Future<void> signUp(String email, String phoneNumber, String password,
-      String fullName) async {
+      String fullName, context) async {
     errorMessage = '';
     isLoading = true;
     notifyListeners();
@@ -60,10 +64,23 @@ class AuthProviderOS with ChangeNotifier {
         },
       );
     } on FirebaseAuthException catch (e) {
-      
+      if (e.code == 'email-already-in-use') {
+        // Display your custom message for email already in use
+        showMessage(
+          context,
+          title: S.of(context).exists,
+          desText: S.of(context).existDes,
+          icon: Iconsax.danger,
+          iconColor: Colors.red,
+          backgroundColor: MyColors.myYellow,
+          textColor: Colors.black,
+          titelColor: Colors.black,
+          alignment: Alignment.bottomCenter,
+        );
+      } else {
+        // Handle other FirebaseAuthException errors
         errorMessage = e.message ?? 'An error occurred. Please try again.';
-      
-      
+      }
     } finally {
       isLoading = false;
       notifyListeners();

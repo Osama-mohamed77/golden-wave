@@ -272,10 +272,10 @@ class _SignInState extends State<SignIn> {
                     title: S.of(context).signInErrorTitel,
                     desText: S.of(context).signInErrorDes,
                     icon: Iconsax.close_circle,
-                    iconColor: Colors.red,
-                    backgroundColor: MyColors.myWhite,
-                    textColor: Colors.red,
-                    titelColor: Colors.red,
+                    iconColor: Colors.black,
+                    backgroundColor: MyColors.myYellow,
+                    textColor: Colors.black,
+                    titelColor: Colors.black,
                     alignment: Alignment.topLeft);
               }
             }

@@ -1,14 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
+import 'package:golden_wave/presentation/screens/notifications.dart';
 import 'package:golden_wave/presentation/widgets/section_tabs.dart';
 import 'package:golden_wave/presentation/widgets/service_list.dart';
 import 'package:golden_wave/provider/fetch_data_provider.dart';
 import 'package:golden_wave/provider/home_provider.dart';
 import 'package:golden_wave/provider/language_provider.dart';
-import 'package:golden_wave/utils/user_const.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -41,11 +42,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     super.didChangeDependencies();
     final languageProvider = Provider.of<LanguageProvider>(context);
     final homeProvider = Provider.of<HomeProvider>(context);
+    final fetchDataProvider = Provider.of<FetchDataProvider>(context);
 
     // Reset selection on language change
     languageProvider.addListener(() {
       homeProvider.resetSelection();
     });
+
+    // Fetch user data when dependencies change (like when a user logs in)
+    fetchDataProvider.fetchData();
   }
 
   @override
@@ -88,6 +93,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     );
   }
 
+  Future<int> fetchNotificationCount() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      return await NotificationManager.getNotificationCount(user.uid);
+    }
+    return 0;
+  }
+
   Widget services() {
     return Container(
       constraints: BoxConstraints(minHeight: 500.h, maxHeight: 550.h),
@@ -95,7 +108,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         gradient: const LinearGradient(
           colors: [
             Color(0xffD2D2D2),
-            MyColors.myGrey,
+            MyColors.myWhite,
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -218,11 +231,45 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               ),
             ),
             actions: [
-              IconButton(
-                icon: const Icon(Icons.notifications),
-                color: Colors.black,
-                iconSize: 30.r,
-                onPressed: () {},
+              FutureBuilder<int>(
+                future: fetchNotificationCount(),
+                builder: (context, snapshot) {
+                  final count = snapshot.data ?? 0;
+                  return Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.notifications),
+                        color: Colors.black,
+                        iconSize: 30.r,
+                        onPressed: () {
+                          Navigator.pushNamed(context, NotificationsScreen.id);
+                        },
+                      ),
+                      if (count > 0)
+                        Positioned(
+                          right: 0,
+                          top: 0,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 6.w, vertical: 2.h),
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Text(
+                              count.toString(),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  );
+                },
               ),
             ],
           ),

@@ -99,6 +99,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountDetails": MessageLookupByLibrary.simpleMessage("تفاصيل الحساب"),
         "appBarHint": MessageLookupByLibrary.simpleMessage(
             "!الموجة الذهبية جاهزة لاستقبالكم في أي وقت"),
+        "appointmentConfirmed":
+            MessageLookupByLibrary.simpleMessage("تم تأكيد الموعد"),
         "askForSignUp": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
         "askToLogOut":
             MessageLookupByLibrary.simpleMessage("هل تريد تسجيل الخروج"),
@@ -145,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "homeVideo": MessageLookupByLibrary.simpleMessage("اﻹﻧﺘﺎج اﻟﻤﺮﺋﻲ"),
         "homewriting":
             MessageLookupByLibrary.simpleMessage("الكتابة الإبداعية"),
+        "isConfirmed": MessageLookupByLibrary.simpleMessage("تم تأكيده"),
         "labelConfirm":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "labelEmail": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
@@ -155,6 +158,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginHint": MessageLookupByLibrary.simpleMessage(
             "يرجى تسجيل الدخول لاستخدام التطبيق"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+        "noNotifications":
+            MessageLookupByLibrary.simpleMessage("لم تتلق أي إشعارات"),
         "notFound":
             MessageLookupByLibrary.simpleMessage("البريد الإلكتروني غير موجود"),
         "notMatchConfirm": MessageLookupByLibrary.simpleMessage("غير متطابقة"),
@@ -195,6 +200,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "writingHint": MessageLookupByLibrary.simpleMessage(
             "نحن نسعى جاهدين لتقديم محتوى مميز وجذاب يوصل الرسالة المقصودة بشكل فعال إلى الجمهور المستهدف. تشمل خدمات الكتابة الإبداعية لدينا تأليف الشعر والنثر، وكتابة السيناريو، وكتابة القصة والرواية، وكتابة السيرة الذاتية، وكتابة الإعلانات."),
         "writingTitel":
-            MessageLookupByLibrary.simpleMessage("الكتابة الإبداعية")
+            MessageLookupByLibrary.simpleMessage("الكتابة الإبداعية"),
+        "yourAppointmentOn": MessageLookupByLibrary.simpleMessage("موعدك في")
       };
 }

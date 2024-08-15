@@ -5,7 +5,6 @@ import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/presentation/widgets/error_message.dart';
 import 'package:golden_wave/provider/fetch_data_provider.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
 
@@ -26,8 +25,6 @@ class _AccountDetailsState extends State<AccountDetails> {
   @override
   void initState() {
     super.initState();
-
-    // Fetch data when the widget is initialized
     Provider.of<FetchDataProvider>(context, listen: false).fetchData();
   }
 

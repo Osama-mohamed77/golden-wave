@@ -5,7 +5,6 @@ import 'package:golden_wave/generated/l10n.dart';
 import 'package:golden_wave/presentation/widgets/error_message.dart';
 import 'package:golden_wave/provider/auth_provider.dart';
 import 'package:golden_wave/provider/booking_provider.dart';
-import 'package:golden_wave/provider/language_provider.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -94,7 +93,6 @@ class _SignUpState extends State<SignUp> {
       },
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 20.r),
-     
         labelStyle: TextStyle(
           fontFamily: 'AbhayaLibre',
           fontSize: 15.sp,
@@ -135,7 +133,6 @@ class _SignUpState extends State<SignUp> {
           const TextInputType.numberWithOptions(signed: true, decimal: true),
       inputDecoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 20.r),
-      
         labelStyle: TextStyle(
           fontFamily: 'AbhayaLibre',
           fontSize: 15.sp,
@@ -174,8 +171,7 @@ class _SignUpState extends State<SignUp> {
         return null;
       },
       decoration: InputDecoration(
-         contentPadding: EdgeInsets.symmetric(vertical: 20.r),
-       
+        contentPadding: EdgeInsets.symmetric(vertical: 20.r),
         labelStyle: TextStyle(
           fontFamily: 'AbhayaLibre',
           fontSize: 15.sp,
@@ -190,7 +186,6 @@ class _SignUpState extends State<SignUp> {
           borderRadius: BorderRadius.circular(10.r),
         ),
         labelText: S.of(context).labelEmail,
-        
         filled: true,
         fillColor: MyColors.myWhite,
       ),
@@ -210,16 +205,15 @@ class _SignUpState extends State<SignUp> {
           return null;
         }
       },
-     
-      decoration: InputDecoration( contentPadding: EdgeInsets.symmetric(vertical: 20.r),
-       
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 20.r),
         labelStyle: TextStyle(
           fontFamily: 'AbhayaLibre',
           fontSize: 15.sp,
           color: MyColors.myGrey,
         ),
         prefixIcon: Icon(
-           Iconsax.lock_15,
+          Iconsax.lock_15,
           color: MyColors.myGrey,
           size: 25.r,
         ),
@@ -229,7 +223,6 @@ class _SignUpState extends State<SignUp> {
         filled: true,
         fillColor: MyColors.myWhite,
         labelText: S.of(context).labelPassword,
-        
       ),
     );
   }
@@ -245,17 +238,15 @@ class _SignUpState extends State<SignUp> {
         }
         return null;
       },
-     
       decoration: InputDecoration(
-         contentPadding: EdgeInsets.symmetric(vertical: 20.r),
-       
+        contentPadding: EdgeInsets.symmetric(vertical: 20.r),
         labelStyle: TextStyle(
           fontFamily: 'AbhayaLibre',
           fontSize: 15.sp,
           color: MyColors.myGrey,
         ),
         prefixIcon: Icon(
-           Iconsax.lock_15,
+          Iconsax.lock_15,
           color: MyColors.myGrey,
           size: 25.r,
         ),
@@ -265,7 +256,6 @@ class _SignUpState extends State<SignUp> {
         filled: true,
         fillColor: MyColors.myWhite,
         labelText: S.of(context).labelConfirm,
-        
       ),
     );
   }
@@ -278,7 +268,7 @@ class _SignUpState extends State<SignUp> {
           try {
             if (formKey.currentState!.validate()) {
               await authProvider.signUp(email.text, phoneController.text,
-                  password.text, fullName.text);
+                  password.text, fullName.text, context);
               Provider.of<AuthProviderOS>(context, listen: false)
                   .verifyAccount();
               showMessage(context,
@@ -288,9 +278,9 @@ class _SignUpState extends State<SignUp> {
                   iconColor: Colors.blue,
                   backgroundColor: MyColors.myYellow,
                   textColor: Colors.black,
-                                    titelColor: Colors.black,
-
-                  alignment: Alignment.bottomCenter);
+                  titelColor: Colors.black,
+                  alignment: Alignment.topCenter);
+              Navigator.pop(context);
             }
           } catch (e) {
             showMessage(context,
@@ -301,8 +291,7 @@ class _SignUpState extends State<SignUp> {
                 backgroundColor: MyColors.myYellow,
                 textColor: Colors.black,
                 titelColor: Colors.black,
-
-                alignment: Alignment.bottomCenter);
+                alignment: Alignment.topCenter);
           }
         },
         child: Container(
@@ -314,7 +303,7 @@ class _SignUpState extends State<SignUp> {
           child: Center(
             child: authProvider.isLoading
                 ? LoadingAnimationWidget.threeArchedCircle(
-                    color: MyColors.myWhite,
+                    color: Colors.black,
                     size: 30.r,
                   )
                 : Text(
