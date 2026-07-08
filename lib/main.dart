@@ -43,7 +43,7 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   await AwesomeNotifications().initialize(
-    null, // Use null if you're not setting a custom icon
+    null,
     [
       NotificationChannel(
         channelKey: 'basic_channel',
@@ -174,14 +174,11 @@ class _GoldenWaveState extends State<GoldenWave> {
             .doc(appointmentId)
             .update({'status': false});
       }
-    } catch (e) {
-      print('Error fetching appointment status: $e');
-    }
+    } catch (e) {}
   }
 
   void sendNotification(int id, String title, String body) {
-    print(
-        'Sending notification: ID=$id, Title=$title, Body=$body'); // Debugging
+    // Debugging
 
     AwesomeNotifications().createNotification(
       content: NotificationContent(
@@ -221,6 +218,12 @@ class _GoldenWaveState extends State<GoldenWave> {
                 GlobalCupertinoLocalizations.delegate,
               ],
               supportedLocales: S.delegate.supportedLocales,
+              builder: (context, child) {
+                return PopScope(
+                  canPop: false,
+                  child: child!,
+                );
+              },
               routes: {
                 home.Home.id: (context) => const home.Home(),
                 SignIn.id: (context) => const SignIn(),
@@ -249,26 +252,18 @@ class NotificationController {
   static Future<void> onNotificationCreatedMethod(
       ReceivedNotification receivedNotification) async {
     // Handle when a notification is created
-    print('Notification Created: ${receivedNotification.title}');
   }
 
   static Future<void> onNotificationDisplayedMethod(
       ReceivedNotification receivedNotification) async {
     // Handle when a notification is displayed
-    print('Notification Displayed: ${receivedNotification.title}');
   }
 
   static Future<void> onDismissActionReceivedMethod(
       ReceivedAction receivedAction) async {
     // Handle when a notification is dismissed
-    print('Notification Dismissed: ${receivedAction.title}');
   }
 
   static Future<void> onActionReceivedMethod(
-      ReceivedAction receivedAction) async {
-    // Handle when a notification action is received (e.g., user taps on a notification)
-    print('Notification Action Received: ${receivedAction.title}');
-
-    // Perform actions based on the notification here
-  }
+      ReceivedAction receivedAction) async {}
 }

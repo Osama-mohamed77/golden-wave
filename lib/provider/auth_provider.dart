@@ -36,7 +36,6 @@ class AuthProviderOS with ChangeNotifier {
     } on FirebaseAuthException catch (e) {
       errorMessage =
           e.message ?? 'An unknown error occurred. Please try again later.';
-      print(e.message);
 
       throw Exception(errorMessage);
     } finally {
@@ -69,7 +68,7 @@ class AuthProviderOS with ChangeNotifier {
         showMessage(
           context,
           title: S.of(context).exists,
-          desText: S.of(context).existDes,
+          desText: S.of(context).existsDtls,
           icon: Iconsax.danger,
           iconColor: Colors.red,
           backgroundColor: MyColors.myYellow,

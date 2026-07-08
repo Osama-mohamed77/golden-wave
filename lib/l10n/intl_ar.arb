@@ -143,9 +143,11 @@
     "VideoRecording": "تسجيل الفيديو",
     "@VideoRecording": {},
     "Montage": "المونتاج",
-    "exists": "البريد الالكتروني موجود بالفعل",
-    "@exists": {},
     "@Montage": {},
+    "exists": "!البريد الالكتروني",
+    "@exists": {},
+    "existsDtls": "البريد الالكتروني موجود بالفعل",
+    "@existsDtls": {},
     "Lighting": "الإضاءة",
     "@Lighting": {},
     "MotionGraphics": "الرسوم المتحركة",
@@ -240,5 +242,4 @@
     "@save": {},
     "changesDone": "تم حفظ التغييرات بنجاح",
     "@changesDone": {}
-
 }

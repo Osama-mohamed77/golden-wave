@@ -125,14 +125,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           Consumer<HomeProvider>(
             builder: (context, provider, child) {
               return Center(
-                child: Text(
-                  provider.selectedSectionIndex == -1
-                      ? S.of(context).titelForSelectSection
-                      : '${S.of(context).ServicesWithin} ${provider.selectedSectionName}',
-                  style: TextStyle(
-                    fontFamily: 'inter',
-                    fontSize: 17.sp,
-                    fontWeight: FontWeight.bold,
+                child: Center(
+                  child: Text(
+                    provider.selectedSectionIndex == -1
+                        ? S.of(context).titelForSelectSection
+                        : '${S.of(context).ServicesWithin} ${provider.selectedSectionName}',
+                    style: TextStyle(
+                      fontFamily: 'inter',
+                      fontSize: 17.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               );
@@ -219,13 +221,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       ),
                     ),
                   ),
-                  Text(
-                    S.of(context).appBarHint,
-                    style: TextStyle(
-                        fontSize: 14.sp,
-                        color: MyColors.myGrey,
-                        fontFamily: 'inter',
-                        fontWeight: FontWeight.bold),
+                  FittedBox(
+                    child: Text(
+                      S.of(context).appBarHint,
+                      style: TextStyle(
+                          fontSize: 14.sp,
+                          color: MyColors.myGrey,
+                          fontFamily: 'inter',
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),

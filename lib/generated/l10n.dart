@@ -1230,29 +1230,25 @@ class S {
     );
   }
 
-  /// `Email already exists`
+  /// `Email!`
   String get exists {
     return Intl.message(
-      'Email already exists',
+      'Email!',
       name: 'exists',
       desc: '',
       args: [],
     );
   }
 
-  /// `You haven’t received any notifications`
-  String get noNotifications {
+  /// `Email already exists`
+  String get existsDtls {
     return Intl.message(
-      'You haven’t received any notifications',
-      name: 'noNotifications',
+      'Email already exists',
+      name: 'existsDtls',
       desc: '',
       args: [],
     );
   }
-
-  get existDes => null;
-
-  
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

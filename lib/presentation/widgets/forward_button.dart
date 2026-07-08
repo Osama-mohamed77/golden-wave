@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:golden_wave/provider/language_provider.dart';
-import 'package:ionicons/ionicons.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 
 class ForwardButton extends StatelessWidget {
@@ -25,7 +25,7 @@ class ForwardButton extends StatelessWidget {
                     color: Colors.grey.shade200,
                     borderRadius: BorderRadius.circular(15.r),
                   ),
-                  child: const Icon(Ionicons.chevron_forward_outline),
+                  child:  Icon(Iconsax.arrow_right_2),
                 )
               : Container(
                   width: 50.w,
@@ -34,7 +34,7 @@ class ForwardButton extends StatelessWidget {
                     color: Colors.grey.shade200,
                     borderRadius: BorderRadius.circular(15.r),
                   ),
-                  child: const Icon(Ionicons.chevron_back),
+                  child:  Icon(Iconsax.arrow_left_3),
                 );
         },
       ),

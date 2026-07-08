@@ -12,8 +12,6 @@ class MyUser {
     try {
       final currentUser = _auth.currentUser;
       if (currentUser == null) {
-        // Handle case when no user is signed in
-        print("No user is currently signed in.");
         return null;
       }
 
@@ -28,13 +26,11 @@ class MyUser {
         userModel = user;
         return user;
       } else {
-        // Handle case when the document does not exist
-        print("User document does not exist.");
+      
         return null;
       }
     } catch (e) {
-      // Handle any errors
-      print("Error fetching user profile: $e");
+      
       return null;
     }
   }

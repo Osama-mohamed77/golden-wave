@@ -1,11 +1,9 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:golden_wave/constants/my_colors.dart';
 import 'package:golden_wave/generated/l10n.dart';
-import 'package:golden_wave/presentation/AuthManagement/sign_in.dart';
 import 'package:golden_wave/presentation/widgets/error_message.dart';
 import 'package:golden_wave/provider/auth_provider.dart';
 import 'package:iconsax/iconsax.dart';

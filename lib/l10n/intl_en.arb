@@ -236,7 +236,9 @@
     "@save": {},
     "changesDone": "Changes have been saved successfully",
     "@changesDone": {},
-    "exists": "Email already exists",
-    "@exists": {}
+    "exists": "Email!",
+    "@exists": {},
+    "existsDtls": "Email already exists",
+    "@existsDtls": {}
    
 }

@@ -5,7 +5,8 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   awesome_notifications
   flutter_localization
-  rive_common
+  rive_native
+  syncfusion_pdfviewer_linux
   url_launcher_linux
 )
 

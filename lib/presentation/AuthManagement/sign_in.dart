@@ -36,7 +36,7 @@ class _SignInState extends State<SignIn> {
   final ValueNotifier<bool> _obscurePasswordNotifier =
       ValueNotifier<bool>(true);
 
-  Widget languageIcon(languageProvider) {
+  Widget languageIcon(LanguageProvider languageProvider) {
     return Row(
       children: [
         Column(

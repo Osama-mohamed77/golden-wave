@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 
-showMessage(context,
+void showMessage(BuildContext context,
     {required String title,
     required String desText,
     required IconData icon,

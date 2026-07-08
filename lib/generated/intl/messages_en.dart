@@ -100,8 +100,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Account details"),
         "appBarHint": MessageLookupByLibrary.simpleMessage(
             "Golden wave is ready to receive you at any time!"),
-        "appointmentConfirmed":
-            MessageLookupByLibrary.simpleMessage("Appointment Confirmed"),
         "askForSignUp":
             MessageLookupByLibrary.simpleMessage("Don’t have an account?"),
         "askToLogOut":
@@ -126,7 +124,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter Your Phone Number"),
         "errorWhenBooking": MessageLookupByLibrary.simpleMessage(
             "An error occurred while booking the appointment."),
-        "exists": MessageLookupByLibrary.simpleMessage("Email already exists"),
+        "exists": MessageLookupByLibrary.simpleMessage("Email!"),
+        "existsDtls":
+            MessageLookupByLibrary.simpleMessage("Email already exists"),
         "failedSendLink": MessageLookupByLibrary.simpleMessage(
             "Failed to send reset link. Please check your email address and try again."),
         "fogotScreenDes": MessageLookupByLibrary.simpleMessage(
@@ -148,7 +148,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "homeMusic": MessageLookupByLibrary.simpleMessage("Music workshop"),
         "homeVideo": MessageLookupByLibrary.simpleMessage("Video production"),
         "homewriting": MessageLookupByLibrary.simpleMessage("Creative writing"),
-        "isConfirmed": MessageLookupByLibrary.simpleMessage("is confirmed"),
         "labelConfirm":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "labelEmail": MessageLookupByLibrary.simpleMessage("Email"),
@@ -159,8 +158,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginHint":
             MessageLookupByLibrary.simpleMessage("Please login to use the app"),
         "logout": MessageLookupByLibrary.simpleMessage("log out"),
-        "noNotifications": MessageLookupByLibrary.simpleMessage(
-            "You haven’t received any notifications"),
         "notFound": MessageLookupByLibrary.simpleMessage("Email not found"),
         "notMatchConfirm": MessageLookupByLibrary.simpleMessage("Not match"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
@@ -201,9 +198,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "voiceover": MessageLookupByLibrary.simpleMessage("Voiceover"),
         "writingHint": MessageLookupByLibrary.simpleMessage(
             "We strive to provide distinguished and engaging content that effectively delivers the intended message to the target audience. Our creative writing services include poetry and prose composition, scriptwriting, story and novel writing, biography writing, and ad writing."),
-        "writingTitel":
-            MessageLookupByLibrary.simpleMessage("Creative writing"),
-        "yourAppointmentOn":
-            MessageLookupByLibrary.simpleMessage("Your appointment on")
+        "writingTitel": MessageLookupByLibrary.simpleMessage("Creative writing")
       };
 }

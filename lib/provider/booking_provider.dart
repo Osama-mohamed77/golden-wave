@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 class BookingProvider with ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   String title = '';
-  int? serviceNumber; // Add this field
+  int? serviceNumber; 
 
   CalendarFormat _format = CalendarFormat.month;
   DateTime _focusDay = DateTime.now();
@@ -18,7 +18,7 @@ class BookingProvider with ChangeNotifier {
 
   Set<DateTime> _reservedTimes = {};
 
-  // Map to link services with numbers
+
 
   CalendarFormat get format => _format;
   DateTime get focusDay => _focusDay;

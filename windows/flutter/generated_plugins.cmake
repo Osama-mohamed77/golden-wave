@@ -7,8 +7,9 @@ list(APPEND FLUTTER_PLUGIN_LIST
   cloud_firestore
   firebase_auth
   firebase_core
+  flutter_inappwebview_windows
   flutter_localization
-  rive_common
+  rive_native
   syncfusion_pdfviewer_windows
   url_launcher_windows
 )

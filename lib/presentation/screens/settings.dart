@@ -8,8 +8,8 @@ import 'package:golden_wave/presentation/screens/account_details.dart';
 import 'package:golden_wave/presentation/screens/help.dart';
 import 'package:golden_wave/presentation/widgets/forward_button.dart';
 import 'package:golden_wave/presentation/widgets/setting_item.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:golden_wave/provider/auth_provider.dart';
 import 'package:golden_wave/provider/fetch_data_provider.dart';
 import 'package:golden_wave/provider/language_provider.dart';
@@ -174,7 +174,7 @@ class _SettingsState extends State<Settings>
                     Gap(20.h),
                     SettingItem(
                       title: S.of(context).language,
-                      icon: Ionicons.earth,
+                      icon: Iconsax.global,
                       bgColor: Colors.orange.shade100,
                       iconColor: Colors.orange,
                       value: languageProvider.language == 'en'
@@ -185,7 +185,7 @@ class _SettingsState extends State<Settings>
                     Gap(20.h),
                     SettingItem(
                       title: S.of(context).help,
-                      icon: Ionicons.nuclear,
+                      icon: Iconsax.danger,
                       bgColor: Colors.green.shade100,
                       iconColor: Colors.green,
                       onTap: () {
@@ -205,7 +205,7 @@ class _SettingsState extends State<Settings>
                               color: Colors.red.shade100,
                             ),
                             child: const Icon(
-                              Ionicons.log_out,
+                              Iconsax.logout,
                               color: Colors.red,
                             ),
                           ),
@@ -251,7 +251,7 @@ class _SettingsState extends State<Settings>
                                 color: Colors.grey.shade200,
                                 borderRadius: BorderRadius.circular(15.r),
                               ),
-                              child: const Icon(Ionicons.log_out),
+                              child: const Icon(Iconsax.logout),
                             ),
                           ),
                         ],
