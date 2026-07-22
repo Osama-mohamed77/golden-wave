@@ -21,11 +21,25 @@ A sleek Flutter app for booking sessions at a music recording & video production
 
 ## 📱 Screenshots
 <!-- 
-ضيف صور الشاشات هنا، صورتين أو تلاتة جنب بعض بيبقوا شكلهم كويس في جدول
+الصور بتتحط في docs/screenshots/ بنفس الأسماء الموجودة تحت
 -->
-| Home Screen | Booking Screen | Payment | History | forgot password | login |logo |settings |sign up |
-|:---:|:---:|:---:|
-| ![Home](docs/screenshots/home.jpg) | ![Booking](docs/screenshots/booking.jpg) | ![Payment](docs/screenshots/payment.jpg) |![History](docs/screenshots/booking_history.jpg) |![forgot password](docs/screenshots/forgot.jpg) |![login](docs/screenshots/login.jpg) |![logo](docs/screenshots/logo.jpg) |![settings](docs/screenshots/settings.jpg) |![sign up](docs/screenshots/sign_up.jpg) |
+<table>
+  <tr>
+    <td align="center"><b>Home</b><br/><img src="docs/screenshots/home.jpg" width="200"/></td>
+    <td align="center"><b>Booking</b><br/><img src="docs/screenshots/booking.jpg" width="200"/></td>
+    <td align="center"><b>Payment</b><br/><img src="docs/screenshots/payment.jpg" width="200"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>History</b><br/><img src="docs/screenshots/booking_history.jpg" width="200"/></td>
+    <td align="center"><b>Login</b><br/><img src="docs/screenshots/login.jpg" width="200"/></td>
+    <td align="center"><b>Sign Up</b><br/><img src="docs/screenshots/sign_up.jpg" width="200"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Forgot Password</b><br/><img src="docs/screenshots/forgot.jpg" width="200"/></td>
+    <td align="center"><b>Settings</b><br/><img src="docs/screenshots/settings.jpg" width="200"/></td>
+    <td align="center"><b>Logo</b><br/><img src="docs/screenshots/logo.jpg" width="200"/></td>
+  </tr>
+</table>
 
 ## 🎥 Demo
 <!-- 
